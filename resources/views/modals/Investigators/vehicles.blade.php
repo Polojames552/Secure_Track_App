@@ -288,7 +288,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label id="headlabel" for="inputEmail4"><b>No. of Studs:</b></label>
-                <input type="text" class="form-control" name="no_studs" id="no_studs" placeholder="" value="" required>
+                <input type="number" class="form-control" name="no_studs" id="no_studs" placeholder="" value="" required>
             </div>
         </div>
         <div class="form-row">
@@ -309,11 +309,11 @@
               <tbody>
                 <tr>
                   <td>
-                    <input type="radio" name="option1" id="running">
+                    <input type="radio" name="option1" id="option1">
                     <label for="option1_1">Running</label>
                   </td>
                   <td>
-                    <input type="radio" name="option1" id="deadline">
+                    <input type="radio" name="option1" id="option1">
                     <label for="option2_1">Deadline</label>
                   </td>
                 </tr>
@@ -422,50 +422,50 @@
           </thead>
           <tbody>
               <tr>
-                <td><input type="checkbox" id="rear_bumper"> Steering Wheel</td>
-                <td><input type="checkbox" id="brand_emblem_marking"> Shifting Rod with Knob</td>
-                <td><input type="checkbox" id="window_glass_front_seat"> Hand Brake</td>
-                <td><input type="checkbox" id="spare_tire_mounting"> Ammeter</td>
-                <td><input type="checkbox" id="tools"> Oil Pressure Gauge</td>
-                <td><input type="checkbox" id="rear_bumper"> Temperature Gauge</td>
+                <td><input type="checkbox" id="steering_wheel"> Steering Wheel</td>
+                <td><input type="checkbox" id="shifting_rod_with_knob"> Shifting Rod with Knob</td>
+                <td><input type="checkbox" id="hand_break"> Hand Brake</td>
+                <td><input type="checkbox" id="ammeter"> Ammeter</td>
+                <td><input type="checkbox" id="oil_pressure_gauge"> Oil Pressure Gauge</td>
+                <td><input type="checkbox" id="temperature_gauge"> Temperature Gauge</td>
                
               </tr>
               <tr>
-              <td><input type="checkbox" id="brand_emblem_marking"> RPM Gauge</td>
-                <td><input type="checkbox" id="window_glass_front_seat"> Headlight Knob</td>
-                <td><input type="checkbox" id="spare_tire_mounting"> Parking/Hazard Knob</td>
-                <td><input type="checkbox" id="tools"> Wiper Knob</td>
-                <td><input type="checkbox" id="tools"> Dimmer Switch</td>
-                <td><input type="checkbox" id="rear_bumper"> Directional Level</td>
+              <td><input type="checkbox" id="rpm_gauge"> RPM Gauge</td>
+                <td><input type="checkbox" id="headlight_knob"> Headlight Knob</td>
+                <td><input type="checkbox" id="parking_hazard_knob"> Parking/Hazard Knob</td>
+                <td><input type="checkbox" id="wiper_knob"> Wiper Knob</td>
+                <td><input type="checkbox" id="dimmer_switch"> Dimmer Switch</td>
+                <td><input type="checkbox" id="directional_level"> Directional Level</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="brand_emblem_marking"> Speedometer</td>
-                <td><input type="checkbox" id="window_glass_front_seat"> Fuel Gauge</td>
-                <td><input type="checkbox" id="spare_tire_mounting"> Cars Seats Front</td>
-                <td><input type="checkbox" id="tools"> Car Seat Back</td>
-                <td><input type="checkbox" id="rear_bumper"> Car Seat Cover</td>
-                <td><input type="checkbox" id="brand_emblem_marking"> Floor Carpet</td>
+                <td><input type="checkbox" id="speedometer"> Speedometer</td>
+                <td><input type="checkbox" id="fuel_gauge"> Fuel Gauge</td>
+                <td><input type="checkbox" id="cars_seats_front"> Cars Seats Front</td>
+                <td><input type="checkbox" id="car_seat_back"> Car Seat Back</td>
+                <td><input type="checkbox" id="car_seat_cover"> Car Seat Cover</td>
+                <td><input type="checkbox" id="floor_carpet"> Floor Carpet</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="window_glass_front_seat"> Floor Matting</td>
-                <td><input type="checkbox" id="spare_tire_mounting"> Steering Wheel</td>
-                <td><input type="checkbox" id="tools"> Computer Box</td>
-                <td><input type="checkbox" id="tools"> Air-condition Unit</td>
-                <td><input type="checkbox" id="rear_bumper"> Car Stereo</td>
-                <td><input type="checkbox" id="brand_emblem_marking"> Interceptor Cable</td>
+                <td><input type="checkbox" id="floor_matting"> Floor Matting</td>
+                <td><input type="checkbox" id="steering_wheel"> Steering Wheel</td>
+                <td><input type="checkbox" id="computer_box"> Computer Box</td>
+                <td><input type="checkbox" id="air_condition_unit"> Air-condition Unit</td>
+                <td><input type="checkbox" id="car_stereo"> Car Stereo</td>
+                <td><input type="checkbox" id="interceptor_cable"> Interceptor Cable</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="rear_bumper"> Stereo Speakers</td>
-                <td><input type="checkbox" id="brand_emblem_marking"> Twitters</td>
-                <td><input type="checkbox" id="window_glass_front_seat"> Car Radio</td>
-                <td><input type="checkbox" id="spare_tire_mounting"> Equalizer</td>
-                <td><input type="checkbox" id="tools"> CD Charger</td>
-                <td><input type="checkbox" id="tools"> Lighter</td>
+                <td><input type="checkbox" id="stereo_speaker"> Stereo Speakers</td>
+                <td><input type="checkbox" id="twitter"> Twitters</td>
+                <td><input type="checkbox" id="car_radio"> Car Radio</td>
+                <td><input type="checkbox" id="equalizer"> Equalizer</td>
+                <td><input type="checkbox" id="cd_charger"> CD Charger</td>
+                <td><input type="checkbox" id="lighter"> Lighter</td>
               </tr>
               <tr>
-              <td><input type="checkbox" id="rear_bumper"> Barometer</td>
-                <td><input type="checkbox" id="brand_emblem_marking"> Fire Extinguisher</td>
-                <td><input type="checkbox" id="brand_emblem_marking"> Antennae</td>
+              <td><input type="checkbox" id="barometer"> Barometer</td>
+                <td><input type="checkbox" id="fire_extinguisher"> Fire Extinguisher</td>
+                <td><input type="checkbox" id="antennae"> Antennae</td>
               </tr>
             <!-- Add more rows here if needed -->
           </tbody>
@@ -483,65 +483,65 @@
           </thead>
           <tbody>
               <tr>
-                <td><input type="checkbox" id="tools"> Air-con Compressor</td>
-                <td><input type="checkbox" id="tools"> Radiator</td>
-                <td><input type="checkbox" id="tools"> Radiator Cover</td>
-                <td><input type="checkbox" id="tools"> Radiator Inlet Hose</td>
-                <td><input type="checkbox" id="tools"> Radiator Outlet Hose</td>
-                <td><input type="checkbox" id="tools"> Water Bypass Hose</td>
+                <td><input type="checkbox" id="air_con_compressor"> Air-con Compressor</td>
+                <td><input type="checkbox" id="radiator"> Radiator</td>
+                <td><input type="checkbox" id="radiator_cover"> Radiator Cover</td>
+                <td><input type="checkbox" id="radiator_inlet_hose"> Radiator Inlet Hose</td>
+                <td><input type="checkbox" id="radiator_outlet_hose"> Radiator Outlet Hose</td>
+                <td><input type="checkbox" id="water_bypass_hose"> Water Bypass Hose</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Ignition Coil</td>
-                <td><input type="checkbox" id="tools"> High Tension Wire</td>
-                <td><input type="checkbox" id="tools"> Distributor Cap</td>
-                <td><input type="checkbox" id="tools"> Distributor Assembly</td>
-                <td><input type="checkbox" id="tools"> Contact Point</td>
-                <td><input type="checkbox" id="tools"> Condenser</td>
+                <td><input type="checkbox" id="ignition_coil"> Ignition Coil</td>
+                <td><input type="checkbox" id="high_tension_wire"> High Tension Wire</td>
+                <td><input type="checkbox" id="distibutor_Cap"> Distributor Cap</td>
+                <td><input type="checkbox" id="distributor_assembly"> Distributor Assembly</td>
+                <td><input type="checkbox" id="contact_point"> Contact Point</td>
+                <td><input type="checkbox" id="condenser"> Condenser</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Air-con Condenser</td>
-                <td><input type="checkbox" id="tools"> Rotor</td>
-                <td><input type="checkbox" id="tools"> Advancer</td>
-                <td><input type="checkbox" id="tools"> Oil Dipstick</td>
-                <td><input type="checkbox" id="tools"> Air-con Driver Belt</td>
-                <td><input type="checkbox" id="tools"> Carburettor Assembly</td>
+                <td><input type="checkbox" id="air_con_condenser"> Air-con Condenser</td>
+                <td><input type="checkbox" id="rotor"> Rotor</td>
+                <td><input type="checkbox" id="advancer"> Advancer</td>
+                <td><input type="checkbox" id="oil_dipstick"> Oil Dipstick</td>
+                <td><input type="checkbox" id="air_con_driver_belt"> Air-con Driver Belt</td>
+                <td><input type="checkbox" id="carburettor_assembly"> Carburettor Assembly</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Alternator</td>
-                <td><input type="checkbox" id="tools"> Alternator Voltage Regulator</td>
-                <td><input type="checkbox" id="tools"> Oil filter</td>
-                <td><input type="checkbox" id="tools"> Steering Gear Box</td>
-                <td><input type="checkbox" id="tools"> Water Pump Assembly</td>
-                <td><input type="checkbox" id="tools"> Engine Fan</td>
+                <td><input type="checkbox" id="alternator"> Alternator</td>
+                <td><input type="checkbox" id="alternator_voltage_regulator"> Alternator Voltage Regulator</td>
+                <td><input type="checkbox" id="oil_filter"> Oil filter</td>
+                <td><input type="checkbox" id="steerin_gear_box"> Steering Gear Box</td>
+                <td><input type="checkbox" id="water_pump_assembly"> Water Pump Assembly</td>
+                <td><input type="checkbox" id="engine_fan"> Engine Fan</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Auxiliary Fan</td>
-                <td><input type="checkbox" id="tools"> Fan Belt</td>
-                <td><input type="checkbox" id="tools"> Spark Plugs</td>
-                <td><input type="checkbox" id="tools"> Battery</td>
-                <td><input type="checkbox" id="tools"> Battery Cable</td>
-                <td><input type="checkbox" id="tools"> Battery Terminal</td>
+                <td><input type="checkbox" id="auxiliary_fan"> Auxiliary Fan</td>
+                <td><input type="checkbox" id="fan_belt"> Fan Belt</td>
+                <td><input type="checkbox" id="spark_plugs"> Spark Plugs</td>
+                <td><input type="checkbox" id="battery"> Battery</td>
+                <td><input type="checkbox" id="battery_cable"> Battery Cable</td>
+                <td><input type="checkbox" id="battery_terminal"> Battery Terminal</td>
                
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Horn Assembly</td>
-                <td><input type="checkbox" id="tools"> Horn Relay</td>
-                <td><input type="checkbox" id="tools"> Accelerator Cable</td>
-                <td><input type="checkbox" id="tools"> Intake Manifold</td>
-                <td><input type="checkbox" id="tools"> Exhaust Manifold</td>
-                <td><input type="checkbox" id="tools"> Engine Mounting</td>
+                <td><input type="checkbox" id="horn_assembly"> Horn Assembly</td>
+                <td><input type="checkbox" id="horn_relay"> Horn Relay</td>
+                <td><input type="checkbox" id="accelerator_cable"> Accelerator Cable</td>
+                <td><input type="checkbox" id="intake_manifold"> Intake Manifold</td>
+                <td><input type="checkbox" id="exhaust_manifold"> Exhaust Manifold</td>
+                <td><input type="checkbox" id="engine_mounting"> Engine Mounting</td>
                 
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Ignition wiring</td>
-                <td><input type="checkbox" id="tools"> Transmission</td>
-                <td><input type="checkbox" id="tools"> Suspension Assembly</td>
-                <td><input type="checkbox" id="tools"> Tie Rod End</td>
-                <td><input type="checkbox" id="tools"> Idler Arm</td>
-                <td><input type="checkbox" id="tools"> Front Coil Spring</td>
+                <td><input type="checkbox" id="ignition_wiring"> Ignition wiring</td>
+                <td><input type="checkbox" id="transmission"> Transmission</td>
+                <td><input type="checkbox" id="suspension_assembly"> Suspension Assembly</td>
+                <td><input type="checkbox" id="tie_rod_end"> Tie Rod End</td>
+                <td><input type="checkbox" id="idler_arm"> Idler Arm</td>
+                <td><input type="checkbox" id="front_coil_spring"> Front Coil Spring</td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="tools"> Pitman Arm</td>
+                <td><input type="checkbox" id="pitman_arm"> Pitman Arm</td>
               </tr>
             <!-- Add more rows here if needed -->
           </tbody>
@@ -553,15 +553,15 @@
         <table>
           <tbody>
             <tr>
-              <td><input type="checkbox" id="bumper_front"> Newly Painted</td>
-              <td><input type="checkbox" id="fog_light"> Paint Discoloration</td>
-              <td><input type="checkbox" id="fog_light"> Good Body Shape</td>
-              <td><input type="checkbox" id="fog_light"> Body in Bad Shape</td>
-              <td><input type="checkbox" id="fog_light"> Body ongoing repair</td>
-              <td><input type="checkbox" id="fog_light"> For Repainting</td>
+              <td><input type="checkbox" id="newly_painted"> Newly Painted</td>
+              <td><input type="checkbox" id="paint_discoloration"> Paint Discoloration</td>
+              <td><input type="checkbox" id="good_body_shape"> Good Body Shape</td>
+              <td><input type="checkbox" id="body_in_bad_shape"> Body in Bad Shape</td>
+              <td><input type="checkbox" id="body_ongoing_repair"> Body ongoing repair</td>
+              <td><input type="checkbox" id="for_repainting"> For Repainting</td>
             </tr>
             <tr>
-            <td><input type="checkbox" id="fog_light"> Beyong Economical Repair and corrosion have set in, which requires a major body repair</td>
+            <td><input type="checkbox" id="beyond_economical_repair"> Beyond Economical Repair and corrosion have set in, which requires a major body repair</td>
             </tr>
             <!-- Add more rows here if needed -->
           </tbody>
@@ -570,20 +570,20 @@
         <section style="padding-top:30px;padding-bottom:10px;">
               <h4 style="color:#00A3BE;"><b>Remarks:</b></h4>
         </section>
-        <textarea class="form-control"  name="Remark" id="Remark" cols="10" rows="5"></textarea>
+        <textarea class="form-control"  name="remark" id="remark" cols="10" rows="5"></textarea>
         <br>
         <div class="form-row" >
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Recovering Personnel:</b></label>
-                <input type="text" class="form-control" name="make_type" id="make_type" placeholder="" value="" required>
+                <input type="text" class="form-control" name="recovering_personel" id="recovering_personel" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Witness/Owner/Barangay Official:</b></label>
-                <input type="text" class="form-control" name="plate_no" id="plate_no" placeholder="" value="" required>
+                <input type="text" class="form-control" name="witness_owner_barangay_official" id="witness_owner_barangay_official" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Noted by(Head of Office):</b></label>
-                <input type="text" class="form-control" name="engine_no" id="engine_no" placeholder="" value="" required>
+                <input type="text" class="form-control" name="noted_by" id="noted_by" placeholder="" value="" required>
             </div>
         </div>
       </div>

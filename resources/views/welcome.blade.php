@@ -31,7 +31,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 
 <body>
-
+<style>
+    @media only screen and (max-width: 600px) {
+        .blog-slider .slick-slide strong, .blog-slider .slick-slide p {
+            display: none;
+            /* font-size: 10px; */
+        }
+        .blog-slider .slick-slide{
+            margin-bottom: -400px;
+        }
+    }
+    
+</style>
 <!--TOP MENU-->
 <!-- <menu class="top_menu flex">
     <section class="flex_content">
@@ -292,8 +303,8 @@
                     </figure>
                     <article class="padding_1x">
                         <strong class="tag">Documentation</strong>
-                        <a href="#" class="title small">PNP in action</a>
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
+                        <a href="#" class="title small" id="docux_description1">PNP in action</a>
+                        <p id="docux_description2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
                         <!-- <aside class="fixed_flex">
                             <span class="flex-content">
                                 <a href="#"><i class="fa fa-calendar"></i> 12-08-2020</a>
@@ -308,8 +319,8 @@
                     </figure>
                     <article class="padding_1x">
                         <strong class="tag">Documentation</strong>
-                        <a href="#" class="title small">PNP in action</a>
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
+                       <a href="#" class="title small" id="docux_description1">PNP in action</a>
+                        <p id="docux_description2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
                         <!-- <aside class="fixed_flex">
                             <span class="flex-content">
                                 <a href="#"><i class="fa fa-calendar"></i> 12-08-2020</a>
@@ -324,8 +335,8 @@
                     </figure>
                     <article class="padding_1x">
                         <strong class="tag">Documentation</strong>
-                        <a href="#" class="title small">PNP in action</a>
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
+                       <a href="#" class="title small" id="docux_description1">PNP in action</a>
+                        <p id="docux_description2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
                         <!-- <aside class="fixed_flex">
                             <span class="flex-content">
                                 <a href="#"><i class="fa fa-calendar"></i> 12-08-2020</a>
@@ -340,8 +351,8 @@
                     </figure>
                     <article class="padding_1x">
                         <strong class="tag">Documentation</strong>
-                        <a href="#" class="title small">PNP in action</a>
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
+                       <a href="#" class="title small" id="docux_description1">PNP in action</a>
+                        <p id="docux_description2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
                         <!-- <aside class="fixed_flex">
                             <span class="flex-content">
                                 <a href="#"><i class="fa fa-calendar"></i> 12-08-2020</a>
@@ -356,8 +367,8 @@
                     </figure>
                     <article class="padding_1x">
                         <strong class="tag">Documentation</strong>
-                        <a href="#" class="title small">PNP in action</a>
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
+                       <a href="#" class="title small" id="docux_description1">PNP in action</a>
+                        <p id="docux_description2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical...</p>
                         <!-- <aside class="fixed_flex">
                             <span class="flex-content">
                                 <a href="#"><i class="fa fa-calendar"></i> 12-08-2020</a>
@@ -370,6 +381,7 @@
             </ul>
         </section>
     </div> 
+    <!--division_3-->
     
     <!--division_4-->
    <!-- <div class="divisions division_4" onmousemove="animate_balls(event)">

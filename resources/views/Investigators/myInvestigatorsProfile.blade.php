@@ -588,7 +588,7 @@ td, th {
            
       
         
-          <div class="container" style="margin-top:10px;">
+          <!-- <div class="container" style="margin-top:10px;">
           <h3>List of Evidences</h3>
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
@@ -617,7 +617,7 @@ td, th {
             </tr>
         </tbody>
     </table>
-</div>
+</div> -->
 </div>
         <!-- partial -->
       </div>
