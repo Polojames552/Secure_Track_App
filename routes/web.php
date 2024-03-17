@@ -93,9 +93,11 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
 
 //***Investigators Screens
     Route::middleware(['auth','isInvestigator'])->group(function(){
-    Route::get('myInvestigatorsProfile',[investigatorController::class ,'investigatorsProfile']);
     
-  
+    Route::get('myInvestigatorsProfile',[investigatorController::class ,'investigatorsProfile']);
+    // Route::post('addVehicles',[investigatorController::class ,'addEvidenceVehicle']);
+    Route::post('addEvidence_Vehicles',[investigatorController::class ,'add_vehicle_evidence'])->name('add_vehicle_evidence');
+    
     Route::get('/sample', function () {
         return view('Investigators/sample');
     });

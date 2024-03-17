@@ -34,7 +34,6 @@ class UserFactory extends Factory
             'status' => "Active",
             'role' => "1",   //1 = super_admin    2 = municipal_admin    3 = investigator
             'remember_token' => Str::random(10),
-          
             // 'name',
             // 'username',
             // 'password',

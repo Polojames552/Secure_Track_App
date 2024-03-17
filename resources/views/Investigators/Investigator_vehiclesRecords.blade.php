@@ -460,6 +460,22 @@ td{
        <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
+              <!-- message -->
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+              </div>
+              @endif
+              @if(session()->has('message'))
+              <div class="alert alert-success">
+                  {{ session()->get('message') }}
+              </div>
+              @endif
+          <!-- message -->
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -526,11 +542,12 @@ td{
     <form action="#">
       <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
     </form>
-    <form action="#">
+   
       <!-- <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task"> <i class="mdi mdi-car"></i> Add Records</button> -->
-      <button type="submit" data-toggle="modal" data-target="#vehicles" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
-                @include('modals/Investigators.vehicles')
-    </form>
+  
+      <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
+      @include('modals/Investigators.addEvidenceVehicle')
+  
     <form action="#">
       <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
     </form>
