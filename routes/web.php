@@ -110,9 +110,10 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     Route::get('/Investigator_weaponsRecords', function () {
         return view('Investigators/Investigator_weaponsRecords');
     });
-    Route::get('/Investigator_vehiclesRecords', function () {
-        return view('Investigators/Investigator_vehiclesRecords');
-    });
+    Route::get('Investigator_vehiclesRecords',[investigatorController::class ,'investigatorVehicleRecords']);
+    // Route::get('/Investigator_vehiclesRecords', function () {
+    //     return view('Investigators/Investigator_vehiclesRecords');
+    // });
     Route::get('/Investigator_otherRecords', function () {
         return view('Investigators/Investigator_otherRecords');
     });

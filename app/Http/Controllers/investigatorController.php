@@ -21,164 +21,17 @@ class investigatorController extends Controller
         //GET TOTAL NUMBER OF RECORDS
         return view('Investigators/myInvestigatorsProfile',['data'=>$data,'num_investigators'=>$num_investigators]);
     }
-    public function addEvidenceVehicle(Request $request)
+    public function investigatorVehicleRecords()
     {
-            // $request->validate([
-            //     'fog_light' => ['required'],
-            // ]);
-
-                $data = new Vehicle();
-                $data->user_id = Auth::user()->id;
-                $data->make_type = $request->input('make_type');
-                $data->plate_no = $request->input('plate_no');
-                $data->engine_no = $request->input('engine_no');
-                $data->fuel = $request->input('fuel');
-                $data->chasis_no = $request->input('chasis_no');
-                $data->color = $request->input('color');
-                $data->registered_owner = $request->input('registered_owner');
-                $data->owner_address = $request->input('owner_address');
-                $data->brand_make = $request->input('brand_make');
-                $data->size = $request->input('size');
-                $data->condition = $request->input('condition');
-                $data->type = $request->input('type');
-                $data->no_studs = $request->input('no_studs');
-                // $data->color_tire = $request->input('color_tire');
-                $data->general_condition = $request->input('general_condition');
-
-                $data->bumper_front = $request->input('bumper_front');
-                $data->fog_light = $request->input('fog_light');
-                $data->brand_marking_emblem = $request->input('brand_marking_emblem');
-                $data->headlights_lr = $request->input('headlights_lr');
-                $data->radiator_grill = $request->input('radiator_grill');
-                $data->windshield_wiper = $request->input('windshield_wiper');
-                $data->signal_lights_lr = $request->input('signal_lights_lr');
-                $data->windshield_glass = $request->input('windshield_glass');
-                $data->hazzard_lights_lr = $request->input('hazzard_lights_lr');
-                $data->windshield_wiper_blade = $request->input('windshield_wiper_blade');
-                $data->headlights_guard = $request->input('headlights_guard');
-                $data->windshield_wiper_motor = $request->input('windshield_wiper_motor');
-                $data->side_mirror_L = $request->input('side_mirror_L');
-                $data->wind_tunnel_glass_L = $request->input('wind_tunnel_glass_L');
-                $data->window_glass_front_seat_L = $request->input('window_glass_front_seat_L');
-                $data->weather_window_strip_L = $request->input('weather_window_strip_L');
-                $data->side_mirror_R = $request->input('side_mirror_R');
-                $data->wind_tunnel_glass_R = $request->input('wind_tunnel_glass_R');
-                $data->window_glass_front_seat_R = $request->input('window_glass_front_seat_R');
-                $data->weather_window_strip_R = $request->input('weather_window_strip_R');
-                $data->rear_bumper = $request->input('rear_bumper');
-                $data->brand_emblem_marking = $request->input('brand_emblem_marking');
-                $data->window_glass_front_seat = $request->input('window_glass_front_seat');
-                $data->spare_tire_mounting = $request->input('spare_tire_mounting');
-                $data->tools = $request->input('tools');
-
-
-
-
-                $data->steering_wheel = $request->input('steering_wheel');
-                $data->shifting_rod_with_knob = $request->input('shifting_rod_with_knob');
-                $data->hand_break = $request->input('hand_break');
-                $data->ammeter = $request->input('ammeter');
-                $data->oil_pressure_gauge = $request->input('oil_pressure_gauge');
-                $data->temperature_gauge = $request->input('temperature_gauge');
-                $data->rpm_gauge = $request->input('rpm_gauge');
-                $data->headlight_knob = $request->input('headlight_knob');
-                $data->parking_hazard_knob = $request->input('parking_hazard_knob');
-                $data->wiper_knob = $request->input('wiper_knob');
-                $data->dimmer_switch = $request->input('dimmer_switch');
-                $data->directional_level = $request->input('directional_level');
-                $data->speedometer = $request->input('speedometer');
-                $data->fuel_gauge = $request->input('fuel_gauge');
-                $data->cars_seats_front = $request->input('cars_seats_front');
-                $data->car_seat_back = $request->input('car_seat_back');
-                $data->car_seat_cover = $request->input('car_seat_cover');
-                $data->floor_carpet = $request->input('floor_carpet');
-                $data->floor_matting = $request->input('floor_matting');
-                $data->computer_box = $request->input('computer_box');
-                $data->air_condition_unit = $request->input('air_condition_unit');
-                $data->car_stereo = $request->input('car_stereo');
-                $data->interceptor_cable = $request->input('interceptor_cable');
-                $data->stereo_speaker = $request->input('stereo_speaker');
-                $data->twitter = $request->input('twitter');
-                $data->car_radio = $request->input('car_radio');
-                $data->equalizer = $request->input('equalizer');
-                $data->cd_charger = $request->input('cd_charger');
-                $data->lighter = $request->input('lighter');
-                $data->barometer = $request->input('barometer');
-                $data->fire_extinguisher = $request->input('fire_extinguisher');
-                $data->antennae = $request->input('antennae');
-                $data->air_con_compressor = $request->input('air_con_compressor');
-                $data->radiator = $request->input('radiator');
-                $data->radiator_cover = $request->input('radiator_cover');
-                $data->radiator_inlet_hose = $request->input('radiator_inlet_hose');
-                $data->radiator_outlet_hose = $request->input('radiator_outlet_hose');
-                $data->water_bypass_hose = $request->input('water_bypass_hose');
-                $data->ignition_coil = $request->input('ignition_coil');
-                $data->high_tension_wire = $request->input('high_tension_wire');
-                $data->distibutor_Cap = $request->input('distibutor_Cap');
-                $data->distributor_assembly = $request->input('distributor_assembly');
-                $data->contact_point = $request->input('contact_point');
-                $data->condenser = $request->input('condenser');
-                $data->air_con_condenser = $request->input('air_con_condenser');
-                $data->rotor = $request->input('rotor');
-                $data->advancer = $request->input('advancer');
-
-
-
-                $data->oil_dipstick = $request->input('oil_dipstick');
-                $data->air_con_driver_belt = $request->input('air_con_driver_belt');
-                $data->carburettor_assembly = $request->input('carburettor_assembly');
-                $data->alternator = $request->input('alternator');
-                $data->alternator_voltage_regulator = $request->input('alternator_voltage_regulator');
-                $data->oil_filter = $request->input('oil_filter');
-                $data->steering_gear_box = $request->input('steering_gear_box');
-                $data->water_pump_assembly = $request->input('water_pump_assembly');
-                $data->engine_fan = $request->input('engine_fan');
-                $data->auxiliary_fan = $request->input('auxiliary_fan');
-                $data->fan_belt = $request->input('fan_belt');
-                $data->spark_plugs = $request->input('spark_plugs');
-                $data->battery = $request->input('battery');
-                $data->battery_cable = $request->input('battery_cable');
-                $data->battery_terminal = $request->input('battery_terminal');
-                $data->horn_assembly = $request->input('horn_assembly');
-                $data->horn_relay = $request->input('horn_relay');
-                $data->accelerator_cable = $request->input('accelerator_cable');
-                $data->intake_manifold = $request->input('intake_manifold');
-                $data->exhaust_manifold = $request->input('exhaust_manifold');
-                $data->engine_mounting = $request->input('engine_mounting');
-                $data->ignition_wiring = $request->input('ignition_wiring');
-                $data->transmission = $request->input('transmission');
-                $data->suspension_assembly = $request->input('suspension_assembly');
-                $data->tie_rod_end = $request->input('tie_rod_end');
-                $data->idler_arm = $request->input('idler_arm');
-                $data->front_coil_spring = $request->input('front_coil_spring');
-                $data->pitman_arm = $request->input('pitman_arm');
-                $data->newly_painted = $request->input('newly_painted');
-                $data->paint_discoloration = $request->input('paint_discoloration');
-                $data->good_body_shape = $request->input('good_body_shape');
-                $data->body_in_bad_shape = $request->input('body_in_bad_shape');
-                $data->body_ongoing_repair = $request->input('body_ongoing_repair');
-                $data->for_repainting = $request->input('for_repainting');
-                $data->beyond_economical_repair = $request->input('beyond_economical_repair');
-                
-                
-                $data->remark = $request->input('remark');
-                $data->recovering_personel = $request->input('recovering_personel');
-                $data->witness_owner_barangay_official = $request->input('witness_owner_barangay_official');
-                $data->noted_by = $request->input('noted_by');
-                $data->date = $request->input('date');
-                $data->status = "Active";
-            $data->save();
-            return redirect('Investigator_vehiclesRecords')->with('message','Data added Successfully!');
-            // return redirect()->back()->with('message', 'Data added successfully!');
+        $data = DB::select('select * from evidence_vehicles where user_id = ?', [auth()->user()->id]);
+        return view('Investigators/Investigator_vehiclesRecords',['data'=>$data]);
     }
-
     public function add_vehicle_evidence(Request $request)
     {
         // $request->validate([
         //     'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
         // ]);
         $currentDate = Carbon::now();
-
       
             $data = new EvidenceVehicle();
                 $data->user_id = Auth::user()->id;

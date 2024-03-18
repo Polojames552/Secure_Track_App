@@ -523,20 +523,20 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-    <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-    </form>
-    <form action="#">
-      <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
-      <button type="submit" data-toggle="modal" data-target="#addrecord" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
-          @include('modals/Investigators.addRecord')
-    </form>
-    <form action="#">
-      <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-    </form>
-    <form action="#" id="form-download">
-      <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-    </form>
+                <div style="margin:5px;">
+                  <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
+                </div>
+                <div style="margin:5px;">
+                  <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
+                  <button type="submit" data-toggle="modal" data-target="#addrecord" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+                </div>
+                <div style="margin:5px;">
+                  <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                </div>
+                <div style="margin:3px;">
+                  <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
+                </div>
+              
   </div>
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">

@@ -539,48 +539,305 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-    <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-    </form>
-   
       <!-- <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task"> <i class="mdi mdi-car"></i> Add Records</button> -->
-  
-      <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
-      @include('modals/Investigators.addEvidenceVehicle')
-  
-    <form action="#">
-      <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-    </form>
-    <form action="#" id="form-download">
-      <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-    </form>
+                <div style="margin:5px;">
+                  <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
+                </div>
+                <div style="margin:5px;">
+                  <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
+                  <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
+                  @include('modals/Investigators.addEvidenceVehicle')
+                </div>
+                <div style="margin:5px;">
+                  <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                </div>
+                <div style="margin:3px;">
+                  <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
+                </div>
   </div>
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-                <th>Address</th>
-               
+              <th>ID</th>
+              <th>Edit</th>
+              <th>Make Type</th>
+              <th>Plate No</th>
+              <th>Engine No</th>
+              <th>Fuel</th>
+              <th>Chasis No</th>
+              <th>Color</th>
+              <th>Registered Owner</th>
+              <th>Owner Address</th>
+              <th>Brand Make</th>
+              <th>Size</th>
+              <th>Condition</th>
+              <th>Type</th>
+              <th>No Studs</th>
+              <th>General Condition</th>
+              <th>Bumper Front</th>
+              <th>Fog Light</th>
+              <th>Brand Marking Emblem</th>
+              <th>Headlights LR</th>
+              <th>Radiator Grill</th>
+              <th>Windshield Wiper</th>
+              <th>Signal Lights LR</th>
+              <th>Windshield Glass</th>
+              <th>Hazzard Lights LR</th>
+              <th>Windshield Wiper Blade</th>
+              <th>Headlights Guard</th>
+              <th>Windshield Wiper Motor</th>
+              <th>Side Mirror L</th>
+              <th>Wind Tunnel Glass L</th>
+              <th>Window Glass Front Seat L</th>
+              <th>Weather Window Strip L</th>
+              <th>Side Mirror R</th>
+              <th>Wind Tunnel Glass R</th>
+              <th>Window Glass Front Seat R</th>
+              <th>Weather Window Strip R</th>
+              <th>Rear Bumper</th>
+              <th>Brand Emblem Marking</th>
+              <th>Window Glass Front Seat</th>
+              <th>Spare Tire Mounting</th>
+              <th>Tools</th>
+              <th>Steering Wheel</th>
+              <th>Shifting Rod with Knob</th>
+              <th>Hand Break</th>
+              <th>Ammeter</th>
+              <th>Oil Pressure Gauge</th>
+              <th>Temperature Gauge</th>
+              <th>RPM Gauge</th>
+              <th>Headlight Knob</th>
+              <th>Parking Hazard Knob</th>
+              <th>Wiper Knob</th>
+              <th>Dimmer Switch</th>
+              <th>Directional Level</th>
+              <th>Speedometer</th>
+              <th>Fuel Gauge</th>
+              <th>Cars Seats Front</th>
+              <th>Car Seat Back</th>
+              <th>Car Seat Cover</th>
+              <th>Floor Carpet</th>
+              <th>Floor Matting</th>
+              <th>Computer Box</th>
+              <th>Air Condition Unit</th>
+              <th>Car Stereo</th>
+              <th>Interceptor Cable</th>
+              <th>Stereo Speaker</th>
+              <th>Twitter</th>
+              <th>Car Radio</th>
+              <th>Equalizer</th>
+              <th>CD Charger</th>
+              <th>Lighter</th>
+              <th>Barometer</th>
+              <th>Fire Extinguisher</th>
+              <th>Antennae</th>
+              <th>Air Con Compressor</th>
+              <th>Radiator</th>
+              <th>Radiator Cover</th>
+              <th>Radiator Inlet Hose</th>
+              <th>Radiator Outlet Hose</th>
+              <th>Water Bypass Hose</th>
+              <th>Ignition Coil</th>
+              <th>High Tension Wire</th>
+              <th>Distibutor Cap</th>
+              <th>Distributor Assembly</th>
+              <th>Contact Point</th>
+              <th>Condenser</th>
+              <th>Air Con Condenser</th>
+              <th>Rotor</th>
+              <th>Advancer</th>
+              <th>Oil Dipstick</th>
+              <th>Air Con Driver Belt</th>
+              <th>Carburettor Assembly</th>
+              <th>Alternator</th>
+              <th>Alternator Voltage Regulator</th>
+              <th>Oil Filter</th>
+              <th>Steering Gear Box</th>
+              <th>Water Pump Assembly</th>
+              <th>Engine Fan</th>
+              <th>Auxiliary Fan</th>
+              <th>Fan Belt</th>
+              <th>Spark Plugs</th>
+              <th>Battery</th>
+              <th>Battery Cable</th>
+              <th>Battery Terminal</th>
+              <th>Horn Assembly</th>
+              <th>Horn Relay</th>
+              <th>Accelerator Cable</th>
+              <th>Intake Manifold</th>
+              <th>Exhaust Manifold</th>
+              <th>Engine Mounting</th>
+              <th>Ignition Wiring</th>
+              <th>Transmission</th>
+              <th>Suspension Assembly</th>
+              <th>Tie Rod End</th>
+              <th>Idler Arm</th>
+              <th>Front Coil Spring</th>
+              <th>Pitman Arm</th>
+              <th>Newly Painted</th>
+              <th>Paint Discoloration</th>
+              <th>Good Body Shape</th>
+              <th>Body in Bad Shape</th>
+              <th>Body Ongoing Repair</th>
+              <th>For Repainting</th>
+              <th>Beyond Economical Repair</th>
+              <th>Remark</th>
+              <th>Recovering Personel</th>
+              <th>Witness Owner Barangay Official</th>
+              <th>Noted By</th>
+              <th>Date</th>
+              <th>Status</th>
+            
             </tr>
         </thead>
         <tbody>
+        @foreach($data as $data)
             <tr>
-                <td>1</td>
-                <td>Zorita Serrano</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td>56</td>
-                <td>2012/06/01</td>
-                <td>$115,000</td>
-                <td>San Julian Irosin Sorsogon</td>
+                <td>{{$data->id}}</td>
+                <td>Edit</td>
+                <td>{{$data->make_type}}</td>
+                <td>{{$data->plate_no}}</td>
+                <td>{{$data->engine_no}}</td>
+                <td>{{$data->fuel}}</td>
+                <td>{{$data->chasis_no}}</td>
+                <td>{{$data->color}}</td>
+                <td>{{$data->registered_owner}}</td>
+                <td>{{$data->owner_address}}</td>
+                <td>{{$data->brand_make}}</td>
+                <td>{{$data->size}}</td>
+                <td>{{$data->condition}}</td>
+                <td>{{$data->type}}</td>
+                <td>{{$data->no_studs}}</td>
+                <td>{{$data->general_condition}}</td>
+                
+                @if($data->bumper_front == 'true')
+                <td><i class="mdi mdi-checkbox-marked" style="color:blue; font-size: 25px;"></i> </td>
+                @else
+                <td></td>
+                @endif
+
+                @foreach(['fog_light',
+                  'brand_marking_emblem',
+                  'headlights_lr',
+                  'radiator_grill',
+                  'windshield_wiper',
+                  'signal_lights_lr',
+                  'windshield_glass',
+                  'hazzard_lights_lr',
+                  'windshield_wiper_blade',
+                  'headlights_guard',
+                  'windshield_wiper_motor',
+                  'side_mirror_L',
+                  'wind_tunnel_glass_L',
+                  'window_glass_front_seat_L',
+                  'weather_window_strip_L',
+                  'side_mirror_R',
+                  'wind_tunnel_glass_R',
+                  'window_glass_front_seat_R',
+                  'weather_window_strip_R',
+                  'rear_bumper',
+                  'brand_emblem_marking',
+                  'window_glass_front_seat',
+                  'spare_tire_mounting',
+                  'tools',
+                  'steering_wheel',
+                  'shifting_rod_with_knob',
+                  'hand_break',
+                  'ammeter',
+                  'oil_pressure_gauge',
+                  'temperature_gauge',
+                  'rpm_gauge',
+                  'headlight_knob',
+                  'parking_hazard_knob',
+                  'wiper_knob',
+                  'dimmer_switch',
+                  'directional_level',
+                  'speedometer',
+                  'fuel_gauge',
+                  'cars_seats_front',
+                  'car_seat_back',
+                  'car_seat_cover',
+                  'floor_carpet',
+                  'floor_matting',
+                  'computer_box',
+                  'air_condition_unit',
+                  'car_stereo',
+                  'interceptor_cable',
+                  'stereo_speaker',
+                  'twitter',
+                  'car_radio',
+                  'equalizer',
+                  'cd_charger',
+                  'lighter',
+                  'barometer',
+                  'fire_extinguisher',
+                  'antennae',
+                  'air_con_compressor',
+                  'radiator',
+                  'radiator_cover',
+                  'radiator_inlet_hose',
+                  'radiator_outlet_hose',
+                  'water_bypass_hose',
+                  'ignition_coil',
+                  'high_tension_wire',
+                  'distibutor_Cap',
+                  'distributor_assembly',
+                  'contact_point',
+                  'condenser',
+                  'air_con_condenser',
+                  'rotor',
+                  'advancer',
+                  'oil_dipstick',
+                  'air_con_driver_belt',
+                  'carburettor_assembly',
+                  'alternator',
+                  'alternator_voltage_regulator',
+                  'oil_filter',
+                  'steering_gear_box',
+                  'water_pump_assembly',
+                  'engine_fan',
+                  'auxiliary_fan',
+                  'fan_belt',
+                  'spark_plugs',
+                  'battery',
+                  'battery_cable',
+                  'battery_terminal',
+                  'horn_assembly',
+                  'horn_relay',
+                  'accelerator_cable',
+                  'intake_manifold',
+                  'exhaust_manifold',
+                  'engine_mounting',
+                  'ignition_wiring',
+                  'transmission',
+                  'suspension_assembly',
+                  'tie_rod_end',
+                  'idler_arm',
+                  'front_coil_spring',
+                  'pitman_arm',
+                  'newly_painted',
+                  'paint_discoloration',
+                  'good_body_shape',
+                  'body_in_bad_shape',
+                  'body_ongoing_repair',
+                  'for_repainting',
+                  'beyond_economical_repair'] as $word)
+              @if($data->$word == 'true')
+                  <td><i class="mdi mdi-checkbox-marked" style="color:blue; font-size: 25px;"></i> </td>
+              @else
+                  <td></td>
+              @endif
+              @endforeach
+                <td>{{$data->remark}}</td>
+                <td>{{$data->recovering_personel}}</td>
+                <td>{{$data->witness_owner_barangay_official}}</td>
+                <td>{{$data->noted_by}}</td>
+                <td>{{$data->date}}</td>
+                <td>{{$data->status}}</td>
+           
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
