@@ -528,7 +528,8 @@ td{
                 </div>
                 <div style="margin:5px;">
                   <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
-                  <button type="submit" data-toggle="modal" data-target="#addrecord" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+                  <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+                  @include('modals/Investigators.addEvidenceVehicle')
                 </div>
                 <div style="margin:5px;">
                   <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>

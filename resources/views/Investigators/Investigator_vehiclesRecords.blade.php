@@ -561,6 +561,7 @@ td{
             <tr>
               <th>ID</th>
               <th>Edit</th>
+              <th>Status</th>
               <th>Make Type</th>
               <th>Plate No</th>
               <th>Engine No</th>
@@ -687,15 +688,19 @@ td{
               <th>Witness Owner Barangay Official</th>
               <th>Noted By</th>
               <th>Date</th>
-              <th>Status</th>
-            
+         
             </tr>
         </thead>
         <tbody>
         @foreach($data as $data)
             <tr>
                 <td>{{$data->id}}</td>
-                <td>Edit</td>
+                <td><button type="button" class="btn btn-success"data-toggle="modal" data-target="#"><i class="mdi mdi-lead-pencil"></i></button></td>
+                @if($data->status == 'Active')
+                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
+                @else
+                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
+                @endif
                 <td>{{$data->make_type}}</td>
                 <td>{{$data->plate_no}}</td>
                 <td>{{$data->engine_no}}</td>
@@ -716,7 +721,7 @@ td{
                 @else
                 <td></td>
                 @endif
-
+                
                 @foreach(['fog_light',
                   'brand_marking_emblem',
                   'headlights_lr',
@@ -829,13 +834,12 @@ td{
                   <td></td>
               @endif
               @endforeach
+               
                 <td>{{$data->remark}}</td>
                 <td>{{$data->recovering_personel}}</td>
                 <td>{{$data->witness_owner_barangay_official}}</td>
                 <td>{{$data->noted_by}}</td>
                 <td>{{$data->date}}</td>
-                <td>{{$data->status}}</td>
-           
             </tr>
             @endforeach
         </tbody>
