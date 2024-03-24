@@ -539,28 +539,29 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-      <!-- <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task"> <i class="mdi mdi-car"></i> Add Records</button> -->
                 <div style="margin:5px;">
                   <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
                 </div>
                 <div style="margin:5px;">
-                  <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
                   <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
                   @include('modals/Investigators.addEvidenceVehicle')
                 </div>
                 <div style="margin:5px;">
-                  <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                  <button type="submit" data-toggle="modal" data-target="#scannerVehicle" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                  @include('modals/Investigators.scannerVehicle')
                 </div>
                 <div style="margin:3px;">
                   <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
                 </div>
   </div>
+
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-              <th>ID</th>
-              <th>Edit</th>
+              <!-- <th>ID</th> -->
+              <th>QR Code</th>
+              <th>Edit - Transfer</th>
               <th>Status</th>
               <th>Make Type</th>
               <th>Plate No</th>
@@ -692,16 +693,27 @@ td{
             </tr>
         </thead>
         <tbody>
+          
         @foreach($data as $data)
             <tr>
-                <td>{{$data->id}}</td>
-                <td><button type="button" class="btn btn-success"data-toggle="modal" data-target="#"><i class="mdi mdi-lead-pencil"></i></button></td>
+                <td>  
+                      {!! $data->qr_code_image !!}
+                </td>
+                <!-- <td>{{$data->id}}</td> -->
+                <td>
+                
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="mdi mdi-file-send"></i></button>
+                </td>
+           
+                
                 @if($data->status == 'Active')
                   <td style="color:#13870d;"><b>{{$data->status}}</b></td>
                 @else
                   <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
                 @endif
                 <td>{{$data->make_type}}</td>
+              
                 <td>{{$data->plate_no}}</td>
                 <td>{{$data->engine_no}}</td>
                 <td>{{$data->fuel}}</td>
@@ -846,6 +858,7 @@ td{
     </table>
 </div>
 </div>
+@include('modals/Investigators.editEvidenceVehicle')
         <!-- partial -->
       </div>
    

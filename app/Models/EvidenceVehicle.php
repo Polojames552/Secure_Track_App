@@ -153,5 +153,6 @@ class EvidenceVehicle extends Model
         'date',
         // Checkbox
         'status',
+        'qr_code_image',
         ];
 }

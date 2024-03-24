@@ -230,39 +230,39 @@
         <div class="form-row" >
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Make/Type:</b></label>
-                <input type="text" class="form-control" name="make_type" id="make_type" placeholder="" value="" >
+                <input type="text" class="form-control" name="make_type" id="make_type" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Plate No:</b></label>
-                <input type="text" class="form-control" name="plate_no" id="plate_no" placeholder="" value="" >
+                <input type="text" class="form-control" name="plate_no" id="plate_no" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Engine No:</b></label>
-                <input type="text" class="form-control" name="engine_no" id="engine_no" placeholder="" value="" >
+                <input type="text" class="form-control" name="engine_no" id="engine_no" placeholder="" value="" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Fuel:</b></label>
-                <input type="text" class="form-control" name="fuel" id="fuel" placeholder="" value="" >
+                <input type="text" class="form-control" name="fuel" id="fuel" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Chasis No:</b></label>
-                <input type="text" class="form-control" name="chasis_no" id="chasis_no" placeholder="" value="" >
+                <input type="text" class="form-control" name="chasis_no" id="chasis_no" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Color:</b></label>
-                <input type="text" class="form-control" name="color" id="color" placeholder="" value="" >
+                <input type="text" class="form-control" name="color" id="color" placeholder="" value="" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label id="headlabel" for="inputEmail4"><b>Registered Owner:</b></label>
-                <input type="text" class="form-control" name="registered_owner" id="registered_owner" placeholder="" value="" >
+                <input type="text" class="form-control" name="registered_owner" id="registered_owner" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-6">
                 <label id="headlabel" for="inputEmail4"><b>Owner's Addres:</b></label>
-                <input type="text" class="form-control" name="owner_address" id="owner_address" placeholder="" value="" >
+                <input type="text" class="form-control" name="owner_address" id="owner_address" placeholder="" value="" required>
             </div>
         </div>
 
@@ -289,7 +289,7 @@
         <div class="form-row" >
             <div class="form-group col-md-6">
                 <label id="headlabel" for="inputEmail4"><b>Brand/Make:</b></label>
-                <input type="text" class="form-control" name="brand_make" id="brand_make" placeholder="" value="" >
+                <input type="text" class="form-control" name="brand_make" id="brand_make" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-6">
             <label id="headlabel" for="inputEmail4"><b>General Condition of the MV:</b></label>
@@ -299,11 +299,11 @@
               <tbody>
                 <tr>
                   <td>
-                    <input type="radio" name="general_condition" id="general_condition" value="Running">
+                    <input type="radio" name="general_condition" id="general_condition" value="Running" required>
                     <label for="option1_1">Running</label>
                   </td>
                   <td>
-                    <input type="radio" name="general_condition" id="general_condition" value="Deadline">
+                    <input type="radio" name="general_condition" id="general_condition" value="Deadline" required>
                     <label for="option2_1">Deadline</label>
                   </td>
                 </tr>
@@ -317,19 +317,19 @@
         <div class="form-row">
         <div class="form-group col-md-3">
                 <label id="headlabel" for="inputEmail4"><b>Size:</b></label>
-                <input type="text" class="form-control" name="size" id="size" placeholder="" value="" >
+                <input type="text" class="form-control" name="size" id="size" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-3">
                 <label id="headlabel" for="inputEmail4"><b>Condition:</b></label>
-                <input type="text" class="form-control" name="condition" id="condition" placeholder="" value="" >
+                <input type="text" class="form-control" name="condition" id="condition" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-3">
                 <label id="headlabel" for="inputEmail4"><b>Type:</b></label>
-                <input type="text" class="form-control" name="type" id="type" placeholder="" value="" >
+                <input type="text" class="form-control" name="type" id="type" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-3">
                 <label id="headlabel" for="inputEmail4"><b>No. of Studs:</b></label>
-                <input type="number" class="form-control" name="no_studs" id="no_studs" placeholder="" value="" >
+                <input type="number" class="form-control" name="no_studs" id="no_studs" placeholder="" value="" required>
             </div>
             <!-- <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>General Condition of MV(running):</b></label>
@@ -572,15 +572,15 @@
         <div class="form-row" >
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Recovering Personnel:</b></label>
-                <input type="text" class="form-control" name="recovering_personel" id="recovering_personel" placeholder="" value="" >
+                <input type="text" class="form-control" name="recovering_personel" id="recovering_personel" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Witness/Owner/Barangay Official:</b></label>
-                <input type="text" class="form-control" name="witness_owner_barangay_official" id="witness_owner_barangay_official" placeholder="" value="" >
+                <input type="text" class="form-control" name="witness_owner_barangay_official" id="witness_owner_barangay_official" placeholder="" value="" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Noted by(Head of Office):</b></label>
-                <input type="text" class="form-control" name="noted_by" id="noted_by" placeholder="" value="" >
+                <input type="text" class="form-control" name="noted_by" id="noted_by" placeholder="" value="" required>
             </div>
         </div>
       </div>
