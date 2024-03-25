@@ -275,10 +275,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="otherRecords">Others</a></li>
+                <li class="nav-item"> <a class="nav-link" href="propertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="motorVehicleRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>

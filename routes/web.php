@@ -44,11 +44,11 @@ Route::get('/', function () {
     // Route::get('/superAdminRecords', function () {
     //     return view('SuperAdminPages/superAdminRecords');
     // });
-    Route::get('/forensicRecords', function () {
-        return view('SuperAdminPages/forensicRecords');
+    Route::get('/motorVehicleRecords', function () {
+        return view('SuperAdminPages/motorVehicleRecords');
     });
-    Route::get('/weaponsRecords', function () {
-        return view('SuperAdminPages/weaponsRecords');
+    Route::get('/propertyGoodsRecords', function () {
+        return view('SuperAdminPages/propertyGoodsRecords');
     });
     Route::get('/vehiclesRecords', function () {
         return view('SuperAdminPages/vehiclesRecords');
@@ -76,11 +76,11 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     // Route::get('/municipalRecords', function () {
     //     return view('MunicipalAdminPages/municipalRecords');
     // });
-    Route::get('/Municipal_forensicRecords', function () {
-        return view('MunicipalAdminPages/Municipal_forensicRecords');
+    Route::get('/Municipal_motorVehiclesRecords', function () {
+        return view('MunicipalAdminPages/Municipal_motorVehiclesRecords');
     });
-    Route::get('/Municipal_weaponsRecords', function () {
-        return view('MunicipalAdminPages/Municipal_weaponsRecords');
+    Route::get('/Municipal_propertyGoodsRecords', function () {
+        return view('MunicipalAdminPages/Municipal_propertyGoodsRecords');
     });
     Route::get('/Municipal_vehiclesRecords', function () {
         return view('MunicipalAdminPages/Municipal_vehiclesRecords');
@@ -93,27 +93,29 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
 
 //***Investigators Screens
     Route::middleware(['auth','isInvestigator'])->group(function(){
-   
+
     Route::get('myInvestigatorsProfile',[investigatorController::class ,'investigatorsProfile']);
+    Route::get('Investigator_PropertyGoodsRecords',[investigatorController::class ,'investigatorPropertyRecords']);
+    Route::get('Investigator_vehiclesRecords',[investigatorController::class ,'investigatorVehicleRecords']);
+    
     // Route::post('addVehicles',[investigatorController::class ,'addEvidenceVehicle']);
+    //adding Evidences
     Route::post('addEvidence_Vehicles',[investigatorController::class ,'add_vehicle_evidence'])->name('add_vehicle_evidence');
+    Route::post('addProperty_Evidence',[investigatorController::class ,'add_property_evidence'])->name('add_property_evidence');
     
     Route::get('/sample', function () {
         return view('Investigators/sample');
     });
   // Route::get('/myRecords', function () {
     //     return view('Investigators/myRecords');
+    // }); 
+    // Route::get('/Investigator_PropertyGoodsRecords', function () {
+    //     return view('Investigators/Investigator_PropertyGoodsRecords');
     // });
-  Route::get('/Investigator_forensicRecords', function () {
-        return view('Investigators/Investigator_forensicRecords');
+  
+    Route::get('/Investigator_MotorVehiclesRecords', function () {
+        return view('Investigators/Investigator_MotorVehiclesRecords');
     });
-    Route::get('/Investigator_weaponsRecords', function () {
-        return view('Investigators/Investigator_weaponsRecords');
-    });
-    Route::get('Investigator_vehiclesRecords',[investigatorController::class ,'investigatorVehicleRecords']);
-    // Route::get('/Investigator_vehiclesRecords', function () {
-    //     return view('Investigators/Investigator_vehiclesRecords');
-    // });
     Route::get('/Investigator_otherRecords', function () {
         return view('Investigators/Investigator_otherRecords');
     });

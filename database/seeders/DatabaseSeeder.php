@@ -30,5 +30,23 @@ class DatabaseSeeder extends Seeder
             'status' => 'Active',
             'role' => '1',
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Irosin',
+            'username' => 'IrosinMPS',
+            'password' => Hash::make('Irosin123'),
+            'municipality' => 'Irosin',
+            'municipal_director' => 'Irosin',
+            'status' => 'Active',
+            'role' => '2',
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'James Bond',
+            'username' => 'James-Bond',
+            'password' => Hash::make('James123'),
+            'municipality' => 'Irosin',
+            'municipal_director' => 'Gen. Luna',
+            'status' => 'Active',
+            'role' => '3',
+        ]);
     }
 }

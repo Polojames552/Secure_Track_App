@@ -8,42 +8,42 @@
 <body>
 
 
-<script src="js/mod.js"></script>
+
 <style>
-    td {
+    .modal-table td {
     /* color: blue; */
     font-size: 14px;
     /* font-weight: bold; */
     /* font-style: italic; */
     }
-    table {
+    .modal-table {
         width: 100%;
         border-collapse: collapse;
     }
-    th, td {
+    .modal-table th, .modal-table td {
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
     }
     @media only screen and (max-width: 600px) {
-        table, thead, tbody, th, td, tr {
+        .modal-table, .modal-table thead, .modal-table tbody, .modal-table th,.modal-table td,.modal-table tr {
             display: block;
         }
-        thead tr {
+        .modal-table thead,.modal-table tr {
             position: absolute;
             top: -9999px;
             left: -9999px;
         }
-        tr {
+        .modal-table tr {
             border: 1px solid #dddddd;
             margin-bottom: 10px;
         }
-        td {
+        .modal-table td {
             border: none;
             position: relative;
             /* padding-left: 50%; */
         }
-        td:before {
+        .modal-table td:before {
             position: absolute;
             left: 6px;
             content: attr(data-label);
@@ -293,7 +293,7 @@
             </div>
             <div class="form-group col-md-6">
             <label id="headlabel" for="inputEmail4"><b>General Condition of the MV:</b></label>
-            <table id="General-Condition-of-the-MV">
+            <table id="General-Condition-of-the-MV" name="modal-table">
               <thead>
               </thead>
               <tbody>
@@ -360,7 +360,7 @@
         <section style="padding-bottom:20px;">
               <h4 style="color:#EC5E50;"><b>Outside Features Front:</b></h4>
         </section>
-        <table>
+        <table name="modal-table">
           <tbody>
             <tr>
             @if($data->bumper_front == "true")
@@ -464,7 +464,7 @@
         </table>
        
         <br>
-        <table id="left-right-portion">
+        <table id="left-right-portion" name="modal-table">
           <thead>
             <tr>
               <th>Left Side Portion <i style="color:white;">_</i></th>
@@ -509,7 +509,7 @@
           </tbody>
         </table>
         <br>
-        <table id="left-right-portion">
+        <table id="left-right-portion" name="modal-table">
           <thead>
             <tr>
               <th>Right Side Portion</th>
@@ -556,7 +556,7 @@
         <section style="padding-top:30px;padding-bottom:10px;">
               <h4 style="color:#EC5E50;"><b>Rear Back Portion/Luggage Compartment:</b></h4>
         </section>
-        <table>
+        <table name="modal-table">
           <thead>
           </thead>
           <tbody>
@@ -608,7 +608,7 @@
         <section style="padding-top:30px;padding-bottom:10px;">
               <h4 style="color:#EC5E50;"><b>Inside Features:</b></h4>
         </section>
-        <table>
+        <table name="modal-table">
           <thead>
           </thead>
           <tbody>
@@ -888,7 +888,7 @@
         <section style="padding-top:30px;padding-bottom:10px;">
               <h4 style="color:#EC5E50;"><b>Engine Compartment:</b></h4>
         </section>
-        <table>
+        <table name="modal-table">
           <thead>
           </thead>
           <tbody>
@@ -1255,7 +1255,7 @@
         <section style="padding-bottom:20px;">
               <h4 style="color:#EC5E50;"><b>General Apperance:</b></h4>
         </section>
-        <table>
+        <table name="modal-table">
           <tbody>
             <tr>
               

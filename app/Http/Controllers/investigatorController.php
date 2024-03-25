@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehicle; 
+use App\Models\property; 
 use App\Models\EvidenceVehicle;
 use Carbon\Carbon;
 use DB;
@@ -24,8 +25,38 @@ class investigatorController extends Controller
     public function investigatorVehicleRecords()
     {
         $data = DB::select('select * from evidence_vehicles where user_id = ?', [auth()->user()->id]);
-        return view('Investigators/Investigator_vehiclesRecords',['data'=>$data]);
+        $count = count($data);
+        return view('Investigators/Investigator_vehiclesRecords',['data'=>$data,'count'=>$count]);
     }
+
+    public function investigatorPropertyRecords()
+    {
+        $data = DB::select('select * from properties where user_id = ?', [auth()->user()->id]);
+        $count = count($data);
+        return view('Investigators/Investigator_PropertyGoodsRecords',['data'=>$data,'count'=>$count]);
+    }
+
+    public function add_property_evidence(Request $request)
+    {
+        $currentDate = Carbon::now();
+        $sample_data = DB::select('select * from properties');
+        $count = count($sample_data);
+       
+        $data = new property();
+            $data->user_id = Auth::user()->id;
+            $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate($count +1);
+            $data->establishment = $request->input('establishment');
+            $data->address = $request->input('address');
+            $data->quantity = $request->input('quantity');
+            $data->description =  $request->input('description');
+            $data->seizing_officer =  $request->input('seizing_officer');
+            $data->witness =  $request->input('witness');
+            $data->date = $currentDate->format('F j, Y');
+            $data->status =  "Active";
+        $data->save();
+        return redirect('Investigator_PropertyGoodsRecords')->with('message','Evidence added Successfully!');
+    }
+
     public function updateEvidence_Vehicles(Request $request, $id)
     {
         DB::table('evidence_vehicles')
@@ -164,6 +195,7 @@ class investigatorController extends Controller
     {
         $sample_data = DB::select('select * from evidence_vehicles');
         $count = count($sample_data);
+        
         // $request->validate([
         //     'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
         // ]);
@@ -307,7 +339,7 @@ class investigatorController extends Controller
                 $data->recovering_personel = $request->input('recovering_personel');
                 $data->witness_owner_barangay_official = $request->input('witness_owner_barangay_official');
                 $data->noted_by = $request->input('noted_by');
-
+                
                 $data->date = $currentDate->format('F j, Y');
                 $data->status = "Active";
                 // $data->bumper_front = $request->filled('bumper_front') ? "true" : "false";

@@ -339,10 +339,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="otherRecords">Others</a></li>
+                <li class="nav-item"> <a class="nav-link" href="propertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="motorVehicleRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
@@ -483,7 +483,7 @@ td{
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold"><i class="mdi mdi-chemical-weapon"></i> List of all Forensic Records</h3>
+                  <h3 class="font-weight-bold"><i class="mdi mdi-dots-vertical"></i>List of all Property/Goods Records</h3>
                 </div>
               </div>
             </div>

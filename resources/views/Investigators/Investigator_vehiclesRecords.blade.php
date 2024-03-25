@@ -190,8 +190,8 @@ td{
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="municipalAdminDashboard"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>Municipal Admin</a>
-        <a class="navbar-brand brand-logo-mini" href="municipalAdminDashboard"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="myInvestigatorsProfile"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>{{Auth::user()->name}}</a>
+        <a class="navbar-brand brand-logo-mini" href="myInvestigatorsProfile"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -344,10 +344,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="Investigator_forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Investigator_weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Investigator_vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Investigator_otherRecords">Others</a></li>
+              <li class="nav-item"> <a class="nav-link" href="Investigator_PropertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_MotorVehiclesRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="Investigator_otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
@@ -479,7 +479,7 @@ td{
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold"><i class="mdi mdi-car"></i> List of all Vehicle Records - Station/Town</h3>
+                  <h3 class="font-weight-bold"><i class="mdi mdi-car"></i> List of all Car Records - {{auth::user()->municipality}}</h3>
                 </div>
               </div>
             </div>
@@ -693,7 +693,6 @@ td{
             </tr>
         </thead>
         <tbody>
-          
         @foreach($data as $data)
             <tr>
                 <td>  
@@ -701,8 +700,8 @@ td{
                 </td>
                 <!-- <td>{{$data->id}}</td> -->
                 <td>
-                
                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
+                 
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="mdi mdi-file-send"></i></button>
                 </td>
            
@@ -856,9 +855,12 @@ td{
             @endforeach
         </tbody>
     </table>
+    @if($count > 0)
+      @include('modals/Investigators.editEvidenceVehicle')
+    @endif
 </div>
 </div>
-@include('modals/Investigators.editEvidenceVehicle')
+
         <!-- partial -->
       </div>
    

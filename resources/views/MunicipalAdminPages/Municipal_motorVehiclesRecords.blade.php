@@ -178,9 +178,9 @@ td{
         width: calc(50% - 5px); /* Adjust the width to half minus the margins */
         min-width: 130px; /* Set a minimum width for the buttons */
     }
-    /* #form-download{
+    #form-download{
         margin-left: -12px;
-    } */
+    }
     }
 
 </style>
@@ -190,8 +190,8 @@ td{
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="superAdminDashboard"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>Super Admin</a>
-        <a class="navbar-brand brand-logo-mini" href="superAdminDashboard"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="municipalAdminDashboard"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>Municipal Admin</a>
+        <a class="navbar-brand brand-logo-mini" href="municipalAdminDashboard"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -258,7 +258,7 @@ td{
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="superAdminDashboard">
+            <a class="nav-link" href="municipalAdminDashboard">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -277,7 +277,7 @@ td{
             </a>
           </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="icon-head menu-icon"></i>
               <span class="menu-title">Manage Users</span>
@@ -285,12 +285,17 @@ td{
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="investigatorsPanel">Investigators</a></li>
                 <li class="nav-item"> <a class="nav-link" href="stationsPanel">Municipal Stations</a></li>
+                <li class="nav-item"> <a class="nav-link" href="investigatorsPanel">Investigators</a></li>
               </ul>
             </div>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="manageInvestigatorsPanel">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Manage Investigators</span>
+            </a>
           </li>
-
 
 
 
@@ -339,46 +344,21 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="otherRecords">Others</a></li>
+              <li class="nav-item"> <a class="nav-link" href="Municipal_propertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_motorVehiclesRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="Municipal_otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
           <!-- <li class="nav-item">
-            <a class="nav-link" href="superAdminRecords">
+            <a class="nav-link" href="municipalRecords">
               <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Data/Records</span>
             </a>
           </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-            <i class="icon-bar-graph menu-icon"></i>
-            <span class="menu-title">Data/Records</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="superAdminRecordsInvestigators">Investigators</a></li>
-                <li class="nav-item"> <a class="nav-link" href="superAdminRecordsStations">Municipal Stations</a></li>
-              </ul>
-            </div>
-          </li> -->
 
-       
-          <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Icons</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
-              </ul>
-            </div>
-          </li> -->
+         
 
           <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -476,14 +456,14 @@ td{
           </li> -->
         </ul>
       </nav>
-      <!-- partial -->
-      <div class="main-panel">
+       <!-- partial -->
+       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold"><i class="mdi mdi-sword"></i> List of all Weapon Records</h3>
+                  <h3 class="font-weight-bold"><i class="mdi mdi-motorbike"></i> List of all Motorcycle Records - {{Auth::user()->municipality}}</h3>
                 </div>
               </div>
             </div>
@@ -516,13 +496,13 @@ td{
           <option value="November">December</option>
         </select>
       </div>
-      <div class="col-md-3">
+      <!-- <div class="col-md-3">
         <label for="station">Station:</label>
         <select class="input--style-5 form-control" id="station" name="station">
           <option value="" selected="selected"></option>
           <option value="Santa Magdalena">Santa Magdalena</option>
         </select>
-      </div>
+      </div> -->
         <div class="col-md-1" style="padding-top: 20px;">
           <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
         </div>
@@ -530,13 +510,25 @@ td{
   </div>
 </form>
  
-<div class="button-container">
+          <div class="container" style="margin-top:10px;">
+            <!-- <div class="btn-group">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Small button
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Another action</a>
+              </div>
+            </div> -->
+           
+            <!-- <div class="container">
+                <div class="row"> -->
+                <div class="button-container">
     <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-items" onclick="clearSelect()"> <i class="mdi mdi-redo"></i> Clear</button>
+      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
     </form>
-    <!-- <form action="#">
+    <form action="#">
       <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
-    </form> -->
+    </form>
     <form action="#">
       <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
     </form>
@@ -544,58 +536,50 @@ td{
       <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
     </form>
   </div>
-              <div class="table-responsive">
-                    <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>Address</th>
-                            
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Zorita Serrano</td>
-                                <td>Software Engineer</td>
-                                <td>San Francisco</td>
-                                <td>56</td>
-                                <td>2012/06/01</td>
-                                <td>$115,000</td>
-                                <td>San Julian Irosin Sorsogon</td>
-                            </tr>
-                        </tbody>
-                    </table>
-              </div>
-        </div>
-        </div>
+    <div class="table-responsive">
+        <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+                <th>Address</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Zorita Serrano</td>
+                <td>Software Engineer</td>
+                <td>San Francisco</td>
+                <td>56</td>
+                <td>2012/06/01</td>
+                <td>$115,000</td>
+                <td>San Julian Irosin Sorsogon</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+        <!-- partial -->
       </div>
-     <!-- partial -->
+   
       <!-- main-panel ends -->
-      </div>
-      
+    </div>   
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
 <script>
-  function clearSelect() {
-  document.getElementById("year").selectedIndex = 0;
-  document.getElementById("month").selectedIndex = 0;
-  document.getElementById("station").selectedIndex = 0; // Selects the first option
-  }
 $(document).ready(function() {
     $('#ListTable').DataTable();
 } );
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -618,7 +602,6 @@ $(document).ready(function() {
   <script src="js/Chart.roundedBarCharts.js"></script>
   <script src="../../js/chart.js"></script>
   <!-- End custom js for this page-->
-  
 </body>
 
 </html>

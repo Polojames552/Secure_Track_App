@@ -190,8 +190,8 @@ td{
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="municipalAdminDashboard"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>Municipal Admin</a>
-        <a class="navbar-brand brand-logo-mini" href="municipalAdminDashboard"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="myInvestigatorsProfile"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>{{Auth::user()->name}}</a>
+        <a class="navbar-brand brand-logo-mini" href="myInvestigatorsProfile"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -258,7 +258,7 @@ td{
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="municipalAdminDashboard">
+            <a class="nav-link" href="myInvestigatorsProfile">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -290,12 +290,12 @@ td{
               </ul>
             </div>
           </li> -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="manageInvestigatorsPanel">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Manage Investigators</span>
             </a>
-          </li>
+          </li> -->
 
 
 
@@ -344,10 +344,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="Municipal_forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_otherRecords">Others</a></li>
+              <li class="nav-item"> <a class="nav-link" href="Investigator_PropertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_MotorVehiclesRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="Investigator_otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
@@ -460,10 +460,26 @@ td{
        <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
+            <!-- message -->
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+              </div>
+              @endif
+              @if(session()->has('message'))
+              <div class="alert alert-success">
+                  {{ session()->get('message') }}
+              </div>
+              @endif
+          <!-- message -->
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold"><i class="mdi mdi-sword"></i> List of all Weapon Records - Station/Town</h3>
+                  <h3 class="font-weight-bold"><i class="mdi mdi-motorbike"></i> List of all Motorcycle Records - {{Auth::user()->municipality}}</h3>
                 </div>  
               </div>
             </div>
@@ -527,7 +543,9 @@ td{
       <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
     </form>
     <form action="#">
-      <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+      <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
+      <button type="submit" data-toggle="modal" data-target="#addMotorVehicleEvidence" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+         
     </form>
     <form action="#">
       <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
@@ -564,6 +582,7 @@ td{
             </tr>
         </tbody>
     </table>
+    @include('modals/Investigators.addMotorVehicleEvidence')
 </div>
 </div>
         <!-- partial -->

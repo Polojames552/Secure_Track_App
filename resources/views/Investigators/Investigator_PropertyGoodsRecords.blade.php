@@ -190,8 +190,8 @@ td{
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="municipalAdminDashboard"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>Municipal Admin</a>
-        <a class="navbar-brand brand-logo-mini" href="municipalAdminDashboard"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="myInvestigatorsProfile"><img src="images/PNP.png" class="mr-2" alt="logo"  style="width:30px;height:40px;margin-left:8px;"/>{{Auth::user()->name}}</a>
+        <a class="navbar-brand brand-logo-mini" href="myInvestigatorsProfile"><img src="images/PNP.png" alt="logo" style="width:40px;height:50px;"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -344,10 +344,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="Investigator_forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Investigator_weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Investigator_vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Investigator_otherRecords">Others</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_PropertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_MotorVehiclesRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Investigator_vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="Investigator_otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
@@ -460,11 +460,27 @@ td{
        <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
+            <!-- message -->
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+              </div>
+              @endif
+              @if(session()->has('message'))
+              <div class="alert alert-success">
+                  {{ session()->get('message') }}
+              </div>
+              @endif
+          <!-- message -->
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold"><i class="mdi mdi-sword"></i> List of all Weapon Records - Station/Town</h3>
-                </div>  
+                  <h3 class="font-weight-bold"><i class="mdi mdi-dots-vertical"></i>List of all Property/Goods Records - {{Auth::user()->municipality}}</h3>
+                </div>
               </div>
             </div>
           </div>
@@ -523,49 +539,56 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-    <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-    </form>
-    <form action="#">
-      <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
-      <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
-          @include('modals/Investigators.addEvidenceVehicle')
-    </form>
-    <form action="#">
-      <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-    </form>
-    <form action="#" id="form-download">
-      <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-    </form>
+                <div style="margin:5px;">
+                  <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
+                </div>
+                <div style="margin:5px;">
+                  <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
+                  <button type="submit" data-toggle="modal" data-target="#addPropertyGoodsEvidence" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+               
+                </div>
+                <div style="margin:5px;">
+                  <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                </div>
+                <div style="margin:3px;">
+                  <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
+                </div>
+              
   </div>
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-                <th>Address</th>
-               
+                <th>QR Code</th>
+                <th>Action</th>
+                <th>establishment</th>
+                <th>address</th>
+                <th>quantity</th>
+                <th>description</th>
+                <th>seizing_officer</th>
+                <th>witness</th>
+                <th>status</th>
+                <th>date</th>
             </tr>
         </thead>
         <tbody>
+          @foreach($data as $data)
             <tr>
-                <td>1</td>
-                <td>Zorita Serrano</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td>56</td>
-                <td>2012/06/01</td>
-                <td>$115,000</td>
-                <td>San Julian Irosin Sorsogon</td>
+                <td>{!! $data->qr_code_image !!}</td>
+                <td> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#"><i class="mdi mdi-lead-pencil"></i></button></td>
+                <td>{{$data->establishment}}</td>
+                <td>{{$data->address}}</td>
+                <td>{{$data->quantity}}</td>
+                <td>{{$data->description}}</td>
+                <td>{{$data->seizing_officer}}</td>
+                <td>{{$data->witness}}</td>
+                <td>{{$data->status}}</td>
+                <td>{{$data->date}}</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
+    @include('modals/Investigators.addPropertyGoodsEvidence')
 </div>
 </div>
         <!-- partial -->

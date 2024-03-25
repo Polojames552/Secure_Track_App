@@ -280,10 +280,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="Municipal_forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_otherRecords">Others</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_propertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_motorVehiclesRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="Municipal_otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
@@ -417,7 +417,7 @@ td{
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">List of Investigators - Town</h3>
+                  <h3 class="font-weight-bold">List of Investigators - {{Auth::user()->municipality}}</h3>
                   <!-- <h6 class="font-weight-normal mb-0">The PESO aims to ensure prompt and efficient delivery of employment facilitation services as well as to provide timely information on labor market and DOLE Programs. <span class="text-primary">https://www.dole.gov.ph/public-employment-services-pes-contents/</span></h6> -->
                 </div>
 

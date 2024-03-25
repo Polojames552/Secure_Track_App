@@ -344,10 +344,10 @@ td{
             </a>
             <div class="collapse" id="ui-basic1">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="Municipal_forensicRecords">Forensics</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_weaponsRecords">Weapons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_vehiclesRecords">Vehicle</a></li>
-                <li class="nav-item"> <a class="nav-link" href="Municipal_otherRecords">Others</a></li>
+              <li class="nav-item"> <a class="nav-link" href="Municipal_propertyGoodsRecords">Property/Goods</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_motorVehiclesRecords">Motorcycle</a></li>
+                <li class="nav-item"> <a class="nav-link" href="Municipal_vehiclesRecords">Cars</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="Municipal_otherRecords">Others</a></li> -->
               </ul>
             </div>
           </li>
