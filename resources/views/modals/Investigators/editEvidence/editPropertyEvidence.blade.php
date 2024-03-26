@@ -198,17 +198,18 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="addMotorVehicleEvidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="editPropertyGoodsEvidence{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-motorbike"></i> <b>Add Motorcycle Evidences</b> </h4> 
-        <!-- Add Property/Goods Evidences -->
+        <h4 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-dots-vertical"></i> <b>Add Property/Goods Evidences</b> </h4> 
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="#" method="POST">
+      
+      <form action="{{ route ('editProperty_Evidence', $data->id) }}" method="POST">
       @csrf
       <div class="modal-body">
    
@@ -218,33 +219,48 @@
         <div class="form-row" >
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Place/Establishment:</b></label>
-                <input type="text" class="form-control" name="establishment" id="establishment" placeholder="" value="" required>
+                <input type="text" class="form-control" name="establishment" id="establishment" placeholder="" value="{{$data->establishment}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="" value="" required>
+                <input type="text" class="form-control" name="address" id="address" placeholder="" value="{{$data->address}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Quantity/Units:</b></label>
-                <input type="text" class="form-control" name="quantity" id="quantity" placeholder="" value="" required>
+                <input type="number" class="form-control" name="quantity" id="quantity" placeholder="" value="{{$data->quantity}}" required>
             </div>
         </div>
       
             <label id="headlabel" for="inputEmail4"><b>Description:</b></label>
-            <textarea class="form-control"  name="description" id="description" cols="10" rows="5"></textarea>
+            <textarea class="form-control"  name="description" id="description" cols="10" rows="5">{{$data->description}}</textarea>
             <br>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label id="headlabel" for="inputEmail4"><b>Seizing Officer:</b></label>
-                <input type="text" class="form-control" name="seizing_officer" id="seizing_officer" placeholder="" value="" required>
+                <input type="text" class="form-control" name="seizing_officer" id="seizing_officer" placeholder="" value="{{$data->seizing_officer}}" required>
             </div>
             <div class="form-group col-md-6">
                 <label id="headlabel" for="inputEmail4"><b>Witness:</b></label>
-                <input type="text" class="form-control" name="witness" id="witness" placeholder="" value="" required>
+                <input type="text" class="form-control" name="witness" id="witness" placeholder="" value="{{$data->witness}}" required>
             </div>
           
         </div>
-   
+        <div class="form-row">
+                <div class="form-group col-md-9">
+                </div>
+                <div class="form-group col-md-3">
+                    <label id="status_label" for="inputEmail4"><b>Status:</b></label>
+                        <select id="status" name="status" class="form-control" required>
+                            @if($data->status == 'Active')
+                                <option value="Active" selected>Active</option>
+                                <option value="Disposed">Disposed</option>
+                            @else		
+                            <option value="Active">Active</option>
+                                <option value="Disposed" selected>Disposed</option>
+                            @endif
+                        </select>
+                </div>
+            </div>
     <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">

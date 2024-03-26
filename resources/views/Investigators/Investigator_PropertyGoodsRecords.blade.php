@@ -561,34 +561,41 @@ td{
             <tr>
                 <th>QR Code</th>
                 <th>Action</th>
-                <th>establishment</th>
-                <th>address</th>
-                <th>quantity</th>
-                <th>description</th>
-                <th>seizing_officer</th>
-                <th>witness</th>
-                <th>status</th>
-                <th>date</th>
+                <th>Status</th>
+                <th>Establishment</th>
+                <th>Address</th>
+                <th>Quantity</th>
+                <th>Description</th>
+                <th>Seizing Officer</th>
+                <th>Witness</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
           @foreach($data as $data)
             <tr>
                 <td>{!! $data->qr_code_image !!}</td>
-                <td> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#"><i class="mdi mdi-lead-pencil"></i></button></td>
+                <td> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editPropertyGoodsEvidence{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button></td>
+                @if($count > 0)
+                      @include('modals/Investigators.editEvidence.editPropertyEvidence')
+                    @endif
+                @if($data->status == 'Active')
+                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
+                @else
+                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
+                @endif
                 <td>{{$data->establishment}}</td>
                 <td>{{$data->address}}</td>
                 <td>{{$data->quantity}}</td>
                 <td>{{$data->description}}</td>
                 <td>{{$data->seizing_officer}}</td>
                 <td>{{$data->witness}}</td>
-                <td>{{$data->status}}</td>
                 <td>{{$data->date}}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    @include('modals/Investigators.addPropertyGoodsEvidence')
+    @include('modals/Investigators.addEvidence.addPropertyGoodsEvidence')
 </div>
 </div>
         <!-- partial -->

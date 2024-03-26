@@ -544,11 +544,11 @@ td{
                 </div>
                 <div style="margin:5px;">
                   <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
-                  @include('modals/Investigators.addEvidenceVehicle')
+                  @include('modals/Investigators.addEvidence.addEvidenceVehicle')
                 </div>
                 <div style="margin:5px;">
                   <button type="submit" data-toggle="modal" data-target="#scannerVehicle" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-                  @include('modals/Investigators.scannerVehicle')
+                  @include('modals/Investigators.scanners.scannerVehicle')
                 </div>
                 <div style="margin:3px;">
                   <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
@@ -701,7 +701,9 @@ td{
                 <!-- <td>{{$data->id}}</td> -->
                 <td>
                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
-                 
+                    @if($count > 0)
+                      @include('modals/Investigators.editEvidence.editEvidenceVehicle')
+                    @endif
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="mdi mdi-file-send"></i></button>
                 </td>
            
@@ -855,9 +857,7 @@ td{
             @endforeach
         </tbody>
     </table>
-    @if($count > 0)
-      @include('modals/Investigators.editEvidenceVehicle')
-    @endif
+  
 </div>
 </div>
 

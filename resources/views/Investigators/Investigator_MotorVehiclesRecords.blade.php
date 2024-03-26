@@ -539,50 +539,73 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-    <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-    </form>
-    <form action="#">
-      <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
-      <button type="submit" data-toggle="modal" data-target="#addMotorVehicleEvidence" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
-         
-    </form>
-    <form action="#">
-      <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-    </form>
-    <form action="#" id="form-download">
-      <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-    </form>
-  </div>
+                 
+                  <div style="margin:5px;">
+                    <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
+                  </div>
+                  <div style="margin:5px;">
+                    <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
+                    <button type="submit" data-toggle="modal" data-target="#addMotorVehicleEvidence" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+                  
+                  </div>
+                  <div style="margin:5px;">
+                    <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                  </div>
+                  <div style="margin:3px;">
+                    <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
+                  </div>
+                </div>
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
+         
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>QR Code</th>
+                <th>Action</th>
+                <th>Status</th>
+                <th>Make Type</th>
+                <th>Chasis No.</th>
+                <th>Motor No.</th>
+                <th>Plate No.</th>
+                <th>Color</th>
+                <th>CR/OR No.</th>
+                <th>LTO File No.</th>
+                <th>Registered Owner</th>
                 <th>Address</th>
-               
+                <th>Violations</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
+          @foreach($data as $data)
             <tr>
-                <td>1</td>
-                <td>Zorita Serrano</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td>56</td>
-                <td>2012/06/01</td>
-                <td>$115,000</td>
-                <td>San Julian Irosin Sorsogon</td>
+                <td>{!! $data->qr_code_image !!}</td>
+                <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#editMotorVehicleEvidence{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button></td>
+                @if($count > 0)
+                  @include('modals/Investigators.editEvidence.editMotorcycleEvidence')
+                @endif
+                @if($data->status == 'Active')
+                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
+                @else
+                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
+                @endif
+                <td>{{$data->make_type}}</td>
+                <td>{{$data->chasis}}</td>
+                <td>{{$data->motor_no}}</td>
+                <td>{{$data->plate_no}}</td>
+                <td>{{$data->color}}</td>
+                <td>{{$data->ORCR_no}}</td>
+                <td>{{$data->LTO_File_no}}</td>
+                <td>{{$data->registered_owner}}</td>
+                <td>{{$data->address}}</td>
+                <td>{{$data->violations}}</td>
+                <td>{{$data->date}}</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
-    @include('modals/Investigators.addMotorVehicleEvidence')
+    @include('modals/Investigators.addEvidence.addMotorVehicleEvidence')
+   
 </div>
 </div>
         <!-- partial -->

@@ -15,6 +15,7 @@ class superAdminController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
+            'municipality' => ['required', 'string', 'max:255', 'unique:'.User::class],
         ]);
       
         if(Auth::user()->role =='1'){
@@ -27,7 +28,6 @@ class superAdminController extends Controller
             $data->municipal_director = $request->input('municipal_director');
             $data->status = "Active";
             $data->role = "2";
-           
             $data->save();
             return redirect('stationsPanel')->with('message','Station added Successfully!');
         }else{

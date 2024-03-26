@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vehicle; 
 use App\Models\property; 
+use App\Models\Motorcycle; 
 use App\Models\EvidenceVehicle;
 use Carbon\Carbon;
 use DB;
@@ -35,7 +36,12 @@ class investigatorController extends Controller
         $count = count($data);
         return view('Investigators/Investigator_PropertyGoodsRecords',['data'=>$data,'count'=>$count]);
     }
-
+    public function investigatorMotorcycleRecords()
+    {
+        $data = DB::select('select * from motorcycles where user_id = ?', [auth()->user()->id]);
+        $count = count($data);
+        return view('Investigators/Investigator_MotorVehiclesRecords',['data'=>$data,'count'=>$count]);
+    }
     public function add_property_evidence(Request $request)
     {
         $currentDate = Carbon::now();
@@ -44,7 +50,8 @@ class investigatorController extends Controller
        
         $data = new property();
             $data->user_id = Auth::user()->id;
-            $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate($count +1);
+            $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("property".$count +1);
+            $data->uuid = "property".($count +1);
             $data->establishment = $request->input('establishment');
             $data->address = $request->input('address');
             $data->quantity = $request->input('quantity');
@@ -57,6 +64,32 @@ class investigatorController extends Controller
         return redirect('Investigator_PropertyGoodsRecords')->with('message','Evidence added Successfully!');
     }
 
+    public function add_motorcycle_evidence(Request $request)
+    {
+        $currentDate = Carbon::now();
+        $sample_data = DB::select('select * from motorcycles');
+        $count = count($sample_data);
+       
+        $data = new Motorcycle();
+            $data->user_id = Auth::user()->id;
+            $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("motorcycle".$count +1);
+            $data->uuid = "motorcycle".($count +1);
+            $data->make_type = $request->input('make_type');
+            $data->chasis = $request->input('chasis');
+            $data->motor_no = $request->input('motor_no');
+            $data->plate_no =  $request->input('plate_no');
+            $data->color =  $request->input('color');
+            $data->ORCR_no =  $request->input('ORCR_no');
+            $data->LTO_File_no =  $request->input('LTO_File_no');
+            $data->registered_owner =  $request->input('registered_owner');
+            $data->address =  $request->input('address');
+            $data->violations =  $request->input('violations');
+            $data->date = $currentDate->format('F j, Y');
+            $data->status =  "Active";
+        $data->save();
+        return redirect('Investigator_MotorVehiclesRecords')->with('message','Evidence added Successfully!');
+    }
+ 
     public function updateEvidence_Vehicles(Request $request, $id)
     {
         DB::table('evidence_vehicles')
@@ -204,8 +237,8 @@ class investigatorController extends Controller
       
             $data = new EvidenceVehicle();
                 $data->user_id = Auth::user()->id;
-                $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate($count +1);
-                
+                $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("evidencevehicle".$count +1);
+                $data->uuid = "evidencevehicle".($count +1);
                 $data->make_type = $request->input('make_type');
                 $data->plate_no = $request->input('plate_no');
                 $data->engine_no = $request->input('engine_no');
@@ -354,6 +387,42 @@ class investigatorController extends Controller
             $data->save();
             return redirect('Investigator_vehiclesRecords')->with('message','Data added Successfully!');
        
+    }
+    public function updateMotorcycle_Evidence(Request $request, $id)
+    {
+        DB::table('motorcycles')
+        ->where('id', $id)
+        ->update(array(
+            'make_type' => $request->input('make_type'),
+            'chasis' => $request->input('chasis'),
+            'motor_no' => $request->input('motor_no'),
+            'plate_no' => $request->input('plate_no'),
+            'color' => $request->input('color'),
+            'ORCR_no' => $request->input('ORCR_no'),
+            'LTO_File_no' => $request->input('LTO_File_no'),
+            'registered_owner' => $request->input('registered_owner'),
+            'address' => $request->input('address'),
+            'violations' => $request->input('violations'),
+            'status' => $request->input('status'),
+        ));
+ 
+        return redirect('Investigator_MotorVehiclesRecords')->with('message','Details updated successfully!');
+    }
+    public function updateProperty_Evidence(Request $request, $id)
+    {
+        DB::table('properties')
+        ->where('id', $id)
+        ->update(array(
+            'establishment' => $request->input('establishment'),
+            'address' => $request->input('address'),
+            'quantity' => $request->input('quantity'),
+            'description' => $request->input('description'),
+            'seizing_officer' => $request->input('seizing_officer'),
+            'witness' => $request->input('witness'),
+            'status' => $request->input('status'),
+        ));
+ 
+        return redirect('Investigator_PropertyGoodsRecords')->with('message','Details updated successfully!');
     }
 
 }

@@ -97,12 +97,20 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     Route::get('myInvestigatorsProfile',[investigatorController::class ,'investigatorsProfile']);
     Route::get('Investigator_PropertyGoodsRecords',[investigatorController::class ,'investigatorPropertyRecords']);
     Route::get('Investigator_vehiclesRecords',[investigatorController::class ,'investigatorVehicleRecords']);
+    Route::get('Investigator_MotorVehiclesRecords',[investigatorController::class ,'investigatorMotorcycleRecords']);
     
     // Route::post('addVehicles',[investigatorController::class ,'addEvidenceVehicle']);
     //adding Evidences
-    Route::post('addEvidence_Vehicles',[investigatorController::class ,'add_vehicle_evidence'])->name('add_vehicle_evidence');
-    Route::post('addProperty_Evidence',[investigatorController::class ,'add_property_evidence'])->name('add_property_evidence');
-    
+    Route::post('addEvidence_Vehicles',[investigatorController::class ,'add_vehicle_evidence']);
+    Route::post('addProperty_Evidence',[investigatorController::class ,'add_property_evidence']);
+    Route::post('addMotorCycle_Evidence',[investigatorController::class ,'add_motorcycle_evidence']);
+    // Route::post('addMotorCycle_Evidence',[investigatorController::class ,'add_motorcycle_evidence'])->name('add_motorcycle_evidence');
+    //Edit
+    Route::post('editEvidence_Vehicles/{id}',[investigatorController::class ,'updateEvidence_Vehicles'])->name('editEvidence_Vehicles');
+    Route::post('editMotorCycle_Evidence/{id}',[investigatorController::class ,'updateMotorcycle_Evidence'])->name('editMotorCycle_Evidence');
+    Route::post('editProperty_Evidence/{id}',[investigatorController::class ,'updateProperty_Evidence'])->name('editProperty_Evidence');
+
+
     Route::get('/sample', function () {
         return view('Investigators/sample');
     });
@@ -113,9 +121,9 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     //     return view('Investigators/Investigator_PropertyGoodsRecords');
     // });
   
-    Route::get('/Investigator_MotorVehiclesRecords', function () {
-        return view('Investigators/Investigator_MotorVehiclesRecords');
-    });
+    // Route::get('/Investigator_MotorVehiclesRecords', function () {
+    //     return view('Investigators/Investigator_MotorVehiclesRecords');
+    // });
     Route::get('/Investigator_otherRecords', function () {
         return view('Investigators/Investigator_otherRecords');
     });
@@ -123,9 +131,7 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
 //    Route::get('/myInvestigatorsProfile', function () {
 //         return view('Investigators/myInvestigatorsProfile');
 //     });
-    //Edit
-    Route::post('editEvidence_Vehicles/{id}',[investigatorController::class ,'updateEvidence_Vehicles'])->name('editEvidence_Vehicles');
-    //Edit
+    
 });
 //***Investigators Screens
 

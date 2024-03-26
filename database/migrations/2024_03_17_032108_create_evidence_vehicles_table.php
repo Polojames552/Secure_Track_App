@@ -28,6 +28,7 @@ return new class extends Migration
             // $table->timestamps();
             $table->id();
             $table->text('qr_code_image');
+            $table->string('uuid');
             $table->string('user_id');
             $table->string('make_type');
             $table->string('plate_no');

@@ -24,6 +24,7 @@ class EvidenceVehicle extends Model
         //  'general_condition',
         // image for QR code 'image', 
         'user_id',
+        'uuid',
         'make_type',
         'plate_no',
         'engine_no',

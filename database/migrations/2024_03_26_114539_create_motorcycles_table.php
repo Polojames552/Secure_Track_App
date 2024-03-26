@@ -11,17 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('motorcycles', function (Blueprint $table) {
+       
+    
             $table->id();
             $table->text('qr_code_image');
             $table->string('uuid');
             $table->string('user_id');
-            $table->string('establishment');
+            $table->string('make_type');
+            $table->string('chasis');
+            $table->string('motor_no');
+            $table->string('plate_no');
+            $table->string('color');
+            $table->string('ORCR_no');
+            $table->string('LTO_File_no');
+            $table->string('registered_owner');
             $table->string('address');
-            $table->string('quantity');
-            $table->string('description');
-            $table->string('seizing_officer');
-            $table->string('witness');
+            $table->string('violations');
             $table->string('date');
             $table->string('status');
             $table->timestamps();
@@ -33,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('motorcycles');
     }
 };
