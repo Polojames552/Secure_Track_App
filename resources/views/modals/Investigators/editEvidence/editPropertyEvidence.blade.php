@@ -202,7 +202,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-dots-vertical"></i> <b>Add Property/Goods Evidences</b> </h4> 
+        <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-dots-vertical"></i> <b style="color:#79B650;">Add Property/Goods Evidences</b> </h3> 
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -265,10 +265,10 @@
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">
         <div class="col-md-6">
-            <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <button style="height:35px; width:100px;" type="submit" class="btn btn-primary btn-block">Save</button>
         </div>
         <div class="col-md-6" id="cancel-button">
-            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
+            <button style="height:35px; width:100px;" type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>

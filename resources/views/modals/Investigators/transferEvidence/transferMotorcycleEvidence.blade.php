@@ -198,62 +198,93 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="addPropertyGoodsEvidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="transferMotorVehicleEvidence{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-dots-vertical"></i> <b>Add Property/Goods Evidences</b> </h3> 
-
+        <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-motorbike"></i> <b style="color:#EC5E50;">Transfer Evidence - Motorcycle</b> </h3> 
+        <!-- Add Property/Goods Evidences -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
-      <form action="addProperty_Evidence" method="POST">
+      <form action="{{ route ('editMotorCycle_Evidence', $data->id) }}" method="POST">
       @csrf
       <div class="modal-body">
-   
     <!-- <section style="padding-bottom:10px;">
               <h4 style="color:#00A3BE;"><b>Motor Vehicle Description:</b></h4>
     </section> -->
         <div class="form-row" >
             <div class="form-group col-md-4">
-                <label id="headlabel" for="inputEmail4"><b>Place/Establishment:</b></label>
-                <input type="text" class="form-control" name="establishment" id="establishment" placeholder="" value="" required>
+                <label id="headlabel" for="inputEmail4"><b>Make/Type:</b></label>
+                <input type="text" class="form-control" name="make_type" id="make_type" placeholder="" value="{{$data->make_type}}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Chassis No.:</b></label>
+                <input type="text" class="form-control" name="chasis" id="chasis" placeholder="" value="{{$data->chasis}}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Motor No.:</b></label>
+                <input type="text" class="form-control" name="motor_no" id="motor_no" placeholder="" value="{{$data->motor_no}}" required>
+            </div>
+        </div>
+       
+        <div class="form-row">
+          <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Plate No.:</b></label>
+                <input type="text" class="form-control" name="plate_no" id="plate_no" placeholder="" value="{{$data->plate_no}}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Color:</b></label>
+                <input type="text" class="form-control" name="color" id="color" placeholder="" value="{{$data->color}}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>CR/OR No.:</b></label>
+                <input type="text" class="form-control" name="ORCR_no" id="ORCR_no" placeholder="" value="{{$data->ORCR_no}}" required>
+            </div>
+         
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>LTO FileN:</b></label>
+                <input type="text" class="form-control" name="LTO_File_no" id="LTO_File_no" placeholder="" value="{{$data->LTO_File_no}}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Registered Owner.:</b></label>
+                <input type="text" class="form-control" name="registered_owner" id="registered_owner" placeholder="" value="{{$data->registered_owner}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="" value="" required>
-            </div>
-            <div class="form-group col-md-4">
-                <label id="headlabel" for="inputEmail4"><b>Quantity/Units:</b></label>
-                <input type="number" class="form-control" name="quantity" id="quantity" placeholder="" value="" required>
+                <input type="text" class="form-control" name="address" id="address" placeholder="" value="{{$data->address}}" required>
             </div>
         </div>
-      
-            <label id="headlabel" for="inputEmail4"><b>Description:</b></label>
-            <textarea class="form-control"  name="description" id="description" cols="10" rows="5"></textarea>
+        <label id="headlabel" for="inputEmail4"><b>Violations:</b></label>
+            <textarea class="form-control"  name="violations" id="violations" cols="10" rows="5">{{$data->violations}}</textarea>
             <br>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label id="headlabel" for="inputEmail4"><b>Seizing Officer:</b></label>
-                <input type="text" class="form-control" name="seizing_officer" id="seizing_officer" placeholder="" value="" required>
+            <div class="form-row">
+                <div class="form-group col-md-9">
+                </div>
+                <div class="form-group col-md-3">
+                    <label id="status_label" for="inputEmail4"><b>Status:</b></label>
+                        <select id="status" name="status" class="form-control" required>
+                            @if($data->status == 'Active')
+                                <option value="Active" selected>Active</option>
+                                <option value="Disposed">Disposed</option>
+                            @else		
+                            <option value="Active">Active</option>
+                                <option value="Disposed" selected>Disposed</option>
+                            @endif
+                        </select>
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label id="headlabel" for="inputEmail4"><b>Witness:</b></label>
-                <input type="text" class="form-control" name="witness" id="witness" placeholder="" value="" required>
-            </div>
-          
-        </div>
-   
     <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">
         <div class="col-md-6">
-            <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <button style="height:35px; width:100px;" type="submit" class="btn btn-primary btn-block">Save</button>
         </div>
         <div class="col-md-6" id="cancel-button">
-            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
+            <button style="height:35px; width:100px;" type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>

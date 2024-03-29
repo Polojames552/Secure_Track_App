@@ -165,11 +165,11 @@
 <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 
 <!-- Add this code inside your blade template where you have the modal -->
-<div class="modal fade" id="scannerVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="scannerProperty" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Scan Car Records</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Scan Property & Goods Records</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -188,13 +188,12 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <input style="display: none; text-align:center; font-weight:bold; color:3AB830;" type="text" id="scannedValue" name="scannedValue" class="form-control" placeholder="Scanned Value" value="" disabled>
-                         
+                            <input style="display: none;" type="text" id="scannedValue" name="scannedValue" class="form-control" placeholder="Scanned Value" value="">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info">Proceed</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
@@ -202,46 +201,13 @@
 </div>
 
 <!-- JavaScript code for automatic QR code scanning -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="show-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-car"></i> <b style="color:#79B650;">Evidence History</b> </h3> 
-            <!-- Add Property/Goods Evidences -->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form action="#" method="POST">
-            @csrf
-            <div class="modal-body">
-    
-            </div>
-            <div class="modal-footer">
-              <div class="row">
-                  <div class="col-md-6">
-                      <button type="submit" class="btn btn-primary btn-block">Save</button>
-                  </div>
-                  <div class="col-md-6" id="cancel-button">
-                      <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
-                  </div>
-              </div>
-            </div>
-          </form>
-    </div>
-  </div>
-</div>
-
 <script>
     $(document).ready(function() {
         let video = document.getElementById('scannerVideo');
         let canvas = document.createElement('canvas');
         let stream;
 
-        $('#scannerVehicle').on('shown.bs.modal', function() {
+        $('#scannerProperty').on('shown.bs.modal', function() {
             // Activate camera when modal is opened
             $('#scannerVideo').show();
             $('#scannerCanvas').show();
@@ -249,7 +215,7 @@
             activateScanner();
         });
 
-        $('#scannerVehicle').on('hidden.bs.modal', function() {
+        $('#scannerProperty').on('hidden.bs.modal', function() {
             // Deactivate camera when modal is closed
             $('#scannedValue').val("");
             deactivateScanner();
@@ -279,6 +245,7 @@
                 });
             }
         }
+
         function scanQRCode() {
           // Continuously scan for QR codes in the video feed
           setInterval(function() {
@@ -293,15 +260,7 @@
               if (code) {
                 // if($('#scannedValue').val() == ""){
                   // QR code detected, display the scanned input
-                  // $('#scannedValue').val(code.data);
-                  $('#scannedValue').val("Scanning Successful");
-                  // $('#scannerVideo').hide();
-                  // $('#scannerCanvas').hide();
-                  // $('#scannedValue').hide();
-                  // deactivateScanner();
-                  // $('#scannerVehicle').modal('hide');
-                  // $('#show-details').modal('show');
-
+                  $('#scannedValue').val(code.data);
                   console.log("QR code detected: " + $('#scannedValue').val());
                 // }
                   // Optionally, you can submit the form or perform any other action here

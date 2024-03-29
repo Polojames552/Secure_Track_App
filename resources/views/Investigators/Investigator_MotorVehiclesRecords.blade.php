@@ -484,47 +484,41 @@ td{
               </div>
             </div>
           </div>
-          <form action="" id="filter_search">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="year">Year:</label>
-        <select class="input--style-5 form-control" id="year" name="year">
-          <option value="" selected="selected"></option>
-          <option value="2023">2023</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <label for="month">Month:</label>
-        <select class="input--style-5 form-control" id="month" name="month">
-          <option value="" selected="selected" disabled></option>
-          <option value="November">January</option>
-          <option value="November">Febuary</option>
-          <option value="November">March</option>
-          <option value="November">April</option>
-          <option value="November">May</option>
-          <option value="November">June</option>
-          <option value="November">July</option>
-          <option value="November">August</option>
-          <option value="November">September</option>
-          <option value="November">October</option>
-          <option value="November">November</option>
-          <option value="November">December</option>
-        </select>
-      </div>
-      <!-- <div class="col-md-3">
-        <label for="station">Station:</label>
-        <select class="input--style-5 form-control" id="station" name="station">
-          <option value="" selected="selected"></option>
-          <option value="Santa Magdalena">Santa Magdalena</option>
-        </select>
-      </div> -->
-        <div class="col-md-1" style="padding-top: 20px;">
-          <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
-        </div>
-    </div>
-  </div>
-</form>
+          <!-- <form action="" id="filter_search">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="year">Year:</label>
+                  <select class="input--style-5 form-control" id="year" name="year">
+                    <option value="" selected="selected"></option>
+                    <option value="2023">2023</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="month">Month:</label>
+                  <select class="input--style-5 form-control" id="month" name="month">
+                    <option value="" selected="selected" disabled></option>
+                    <option value="November">January</option>
+                    <option value="November">Febuary</option>
+                    <option value="November">March</option>
+                    <option value="November">April</option>
+                    <option value="November">May</option>
+                    <option value="November">June</option>
+                    <option value="November">July</option>
+                    <option value="November">August</option>
+                    <option value="November">September</option>
+                    <option value="November">October</option>
+                    <option value="November">November</option>
+                    <option value="November">December</option>
+                  </select>
+                </div>
+   
+                <div class="col-md-1" style="padding-top: 20px;">
+                  <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
+                </div>
+            </div>
+          </div>
+        </form> -->
  
           <div class="container" style="margin-top:10px;">
             <!-- <div class="btn-group">
@@ -539,71 +533,108 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-                 
-                  <div style="margin:5px;">
+                  <!-- <div style="margin:5px;">
                     <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-                  </div>
+                  </div> -->
                   <div style="margin:5px;">
                     <!-- <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button> -->
                     <button type="submit" data-toggle="modal" data-target="#addMotorVehicleEvidence" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
-                  
                   </div>
                   <div style="margin:5px;">
-                    <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                    <button type="submit" data-toggle="modal" data-target="#scannerMotorcycle" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                    @include('modals/Investigators.scanners.scannerMotorcycle')
                   </div>
-                  <div style="margin:3px;">
+                  <!-- <div style="margin:3px;">
                     <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-                  </div>
+                  </div> -->
                 </div>
     <div class="table-responsive">
-        <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-         
-            <tr>
-                <th>QR Code</th>
-                <th>Action</th>
-                <th>Status</th>
-                <th>Make Type</th>
-                <th>Chasis No.</th>
-                <th>Motor No.</th>
-                <th>Plate No.</th>
-                <th>Color</th>
-                <th>CR/OR No.</th>
-                <th>LTO File No.</th>
-                <th>Registered Owner</th>
-                <th>Address</th>
-                <th>Violations</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach($data as $data)
-            <tr>
-                <td>{!! $data->qr_code_image !!}</td>
-                <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#editMotorVehicleEvidence{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button></td>
+    <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th></th> <!-- Placeholder for QR Code -->
+            <th colspan="3" style="text-align: center;">Actions</th> <!-- colspan="2" indicates two separate columns -->
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th style="padding-bottom: 50px;">QR Code</th>
+            <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Edit</th>
+            <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Transfer</th>
+            <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Download</th>
+            <th style="padding-bottom: 50px;">Status</th>
+            <th style="padding-bottom: 50px;">Make Type</th>
+            <th style="padding-bottom: 50px;">Chasis No.</th>
+            <th style="padding-bottom: 50px;">Motor No.</th>
+            <th style="padding-bottom: 50px;">Plate No.</th>
+            <th style="padding-bottom: 50px;">Color</th>
+            <th style="padding-bottom: 50px;">CR/OR No.</th>
+            <th style="padding-bottom: 50px;">LTO File No.</th>
+            <th style="padding-bottom: 50px;">Registered Owner</th>
+            <th style="padding-bottom: 50px;">Address</th>
+            <th style="padding-bottom: 50px;">Violations</th>
+            <th style="padding-bottom: 50px;">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($data as $data)
+        <tr>
+            <td style="text-align: center;">{!! $data->qr_code_image !!}</td>
+            <td style="text-align: center;">
+                <button  style="width: 50px;height: 35px; " type="button" class="btn btn-success" data-toggle="modal" data-target="#editMotorVehicleEvidence{{$data->id}}">
+                    <i class="mdi mdi-lead-pencil" style="font-size: 15px;"></i>
+                </button>
                 @if($count > 0)
                   @include('modals/Investigators.editEvidence.editMotorcycleEvidence')
                 @endif
-                @if($data->status == 'Active')
-                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
-                @else
-                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
+            </td>
+            <td style="text-align: center;">
+                <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferMotorVehicleEvidence{{$data->id}}">
+                  <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
+                </button>
+                @if($count > 0)
+                  @include('modals/Investigators.transferEvidence.transferMotorcycleEvidence')
                 @endif
-                <td>{{$data->make_type}}</td>
-                <td>{{$data->chasis}}</td>
-                <td>{{$data->motor_no}}</td>
-                <td>{{$data->plate_no}}</td>
-                <td>{{$data->color}}</td>
-                <td>{{$data->ORCR_no}}</td>
-                <td>{{$data->LTO_File_no}}</td>
-                <td>{{$data->registered_owner}}</td>
-                <td>{{$data->address}}</td>
-                <td>{{$data->violations}}</td>
-                <td>{{$data->date}}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </td>
+            <td style="text-align: center;">
+              <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
+              <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
+            </td>
+
+          
+            <!-- Include your modal if needed -->
+          
+            <!-- Display status -->
+            <td style="color: {{$data->status == 'Active' ? '#13870d' : '#bc1515'}};">
+                <b>{{$data->status}}</b>
+            </td>
+            <!-- Display other columns -->
+            <td>{{$data->make_type}}</td>
+            <td>{{$data->chasis}}</td>
+            <td>{{$data->motor_no}}</td>
+            <td>{{$data->plate_no}}</td>
+            <td>{{$data->color}}</td>
+            <td>{{$data->ORCR_no}}</td>
+            <td>{{$data->LTO_File_no}}</td>
+            <td>{{$data->registered_owner}}</td>
+            <td>{{$data->address}}</td>
+            <td>{{$data->violations}}</td>
+            <td>{{$data->date}}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
     @include('modals/Investigators.addEvidence.addMotorVehicleEvidence')
    
 </div>

@@ -202,17 +202,17 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="editEvidenceVehicleModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="transferEvidenceVehicleModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-car"></i> <b style="color:#79B650;">Edit Evidence - Vehicles</b> </h4>
+        <h3 class="modal-title" id="exampleModalLongTitle" ><i class="mdi mdi-car"></i> <b style="color:#EC5E50;">Transfer Evidence - Car</b></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       
-      <form action="{{ route ('editEvidence_Vehicles', $data->id) }}" method="POST">
+      <form id="transfer-form" action="{{ route ('transferEvidence_Vehicles', $data->id) }}" method="POST">
       @csrf
       <div class="modal-body">
 	<!-- <center>
@@ -229,7 +229,7 @@
 	</center>  -->
    
     <section style="padding-bottom:10px;">
-              <h4 style="color:#79B650;"><b>Motor Vehicle Description:</b></h4>
+              <h4 style="color:#EC5E50;"><b>Motor Vehicle Description:</b></h4>
     </section>
         <div class="form-row" >
             <div class="form-group col-md-4">
@@ -288,7 +288,7 @@
         </div> -->
 
         <section style="padding-bottom:10px;">
-              <h4 style="color:#79B650;"><b>Tires:</b></h4>
+              <h4 style="color:#EC5E50;"><b>Tires:</b></h4>
     </section>
         <div class="form-row" >
             <div class="form-group col-md-6">
@@ -362,7 +362,7 @@
        
 
         <section style="padding-bottom:20px;">
-              <h4 style="color:#79B650;"><b>Outside Features Front:</b></h4>
+              <h4 style="color:#EC5E50;"><b>Outside Features Front:</b></h4>
         </section>
         <table name="modal-table">
           <tbody>
@@ -559,7 +559,7 @@
           </tbody>
         </table>
         <section style="padding-top:30px;padding-bottom:10px;">
-              <h4 style="color:#79B650;" id="Rear-Back-Portion"><b>Rear Back Portion/Luggage Compartment:</b></h4>
+              <h4 style="color:#EC5E50;" id="Rear-Back-Portion"><b>Rear Back Portion/Luggage Compartment:</b></h4>
         </section>
         <table name="modal-table">
           <thead>
@@ -611,7 +611,7 @@
         </table>
 
         <section style="padding-top:30px;padding-bottom:10px;">
-              <h4 style="color:#79B650;"><b>Inside Features:</b></h4>
+              <h4 style="color:#EC5E50;"><b>Inside Features:</b></h4>
         </section>
         <table name="modal-table">
           <thead>
@@ -891,7 +891,7 @@
 
 
         <section style="padding-top:30px;padding-bottom:10px;">
-              <h4 style="color:#79B650;"><b>Engine Compartment:</b></h4>
+              <h4 style="color:#EC5E50;"><b>Engine Compartment:</b></h4>
         </section>
         <table name="modal-table">
           <thead>
@@ -1258,7 +1258,7 @@
         </table>
         <br>
         <section style="padding-bottom:20px;">
-              <h4 style="color:#79B650;"><b>General Apperance:</b></h4>
+              <h4 style="color:#EC5E50;"><b>General Apperance:</b></h4>
         </section>
         <table name="modal-table" style="table-layout: responsive;">
           <tbody>
@@ -1333,7 +1333,7 @@
         </table>
         <br>
         <section style="padding-top:30px;padding-bottom:10px;">
-              <h4 style="color:#79B650;"><b>Remarks:</b></h4>
+              <h4 style="color:#EC5E50;"><b>Remarks:</b></h4>
         </section>
         <textarea class="form-control"  name="remark" id="remark" cols="10" rows="5" required>{{$data->remark}}</textarea>
         <br>
@@ -1354,11 +1354,11 @@
       </div>
   
    
-    <div class="modal-footer">
+      <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">
-        <div class="col-md-6" >
-            <button style="height:35px; width:100px;" type="submit" class="btn btn-primary btn-block">Save</button>
+        <div class="col-md-6">
+            <button style="height:35px; width:100px;" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmationModal">Transfer</button>
         </div>
         <div class="col-md-6" id="cancel-button">
             <button style="height:35px; width:100px;" type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
@@ -1369,7 +1369,40 @@
  
     </div>
   </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel"><b>Confirmation!</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to save?
+        <br>
+        <br>
+        <i style="color:#E00000;">(this action is irreversible)</i>
+      </div>
+     
+      <div class="modal-footer">
+        <button style="height:35px; width:80px;" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button style="height:35px; width:80px;" id="confirmSaveBtn" type="submit" class="btn btn-info">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <script>
+    document.getElementById('confirmSaveBtn').addEventListener('click', function() {
+        // Perform form submission or other actions here
+        // Example: document.getElementById('yourFormId').submit();
+        document.getElementById('transfer-form').submit();
+    });
+
     document.getElementById("showPasswordCheckbox").addEventListener("change", function() {
         if (this.checked) {
             document.getElementById("password").type = "text";
@@ -1378,7 +1411,6 @@
         }
     });
 </script>
-
 </div>
 </body>
 </html>

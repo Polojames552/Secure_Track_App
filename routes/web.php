@@ -109,7 +109,8 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     Route::post('editEvidence_Vehicles/{id}',[investigatorController::class ,'updateEvidence_Vehicles'])->name('editEvidence_Vehicles');
     Route::post('editMotorCycle_Evidence/{id}',[investigatorController::class ,'updateMotorcycle_Evidence'])->name('editMotorCycle_Evidence');
     Route::post('editProperty_Evidence/{id}',[investigatorController::class ,'updateProperty_Evidence'])->name('editProperty_Evidence');
-
+    //Transfer Evidence
+    Route::post('transferEvidence_Vehicles/{id}',[investigatorController::class ,'transferVehicles_Evidence'])->name('transferEvidence_Vehicles');
 
     Route::get('/sample', function () {
         return view('Investigators/sample');

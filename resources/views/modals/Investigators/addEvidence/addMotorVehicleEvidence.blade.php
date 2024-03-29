@@ -202,7 +202,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-motorbike"></i> <b>Add Motorcycle Evidences</b> </h4> 
+        <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-motorbike"></i> <b>Add Motorcycle Evidences</b> </h3> 
         <!-- Add Property/Goods Evidences -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

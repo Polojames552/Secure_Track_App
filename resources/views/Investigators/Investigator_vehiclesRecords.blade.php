@@ -484,47 +484,40 @@ td{
               </div>
             </div>
           </div>
-          <form action="" id="filter_search">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="year">Year:</label>
-        <select class="input--style-5 form-control" id="year" name="year">
-          <option value="" selected="selected"></option>
-          <option value="2023">2023</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <label for="month">Month:</label>
-        <select class="input--style-5 form-control" id="month" name="month">
-          <option value="" selected="selected" disabled></option>
-          <option value="November">January</option>
-          <option value="November">Febuary</option>
-          <option value="November">March</option>
-          <option value="November">April</option>
-          <option value="November">May</option>
-          <option value="November">June</option>
-          <option value="November">July</option>
-          <option value="November">August</option>
-          <option value="November">September</option>
-          <option value="November">October</option>
-          <option value="November">November</option>
-          <option value="November">December</option>
-        </select>
-      </div>
-      <!-- <div class="col-md-3">
-        <label for="station">Station:</label>
-        <select class="input--style-5 form-control" id="station" name="station">
-          <option value="" selected="selected"></option>
-          <option value="Santa Magdalena">Santa Magdalena</option>
-        </select>
-      </div> -->
-        <div class="col-md-1" style="padding-top: 20px;">
-          <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
-        </div>
-    </div>
-  </div>
-</form>
+          <!-- <form action="" id="filter_search">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="year">Year:</label>
+                  <select class="input--style-5 form-control" id="year" name="year">
+                    <option value="" selected="selected"></option>
+                    <option value="2023">2023</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="month">Month:</label>
+                  <select class="input--style-5 form-control" id="month" name="month">
+                    <option value="" selected="selected" disabled></option>
+                    <option value="November">January</option>
+                    <option value="November">Febuary</option>
+                    <option value="November">March</option>
+                    <option value="November">April</option>
+                    <option value="November">May</option>
+                    <option value="November">June</option>
+                    <option value="November">July</option>
+                    <option value="November">August</option>
+                    <option value="November">September</option>
+                    <option value="November">October</option>
+                    <option value="November">November</option>
+                    <option value="November">December</option>
+                  </select>
+                </div>
+                  <div class="col-md-1" style="padding-top: 20px;">
+                    <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
+                  </div>
+              </div>
+            </div>
+          </form> -->
  
           <div class="container" style="margin-top:10px;">
             <!-- <div class="btn-group">
@@ -539,9 +532,9 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-                <div style="margin:5px;">
+                <!-- <div style="margin:5px;">
                   <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-                </div>
+                </div> -->
                 <div style="margin:5px;">
                   <button type="submit" data-toggle="modal" data-target="#addEvidenceVehicleModal" class="add btn btn-info todo-list-add-btn" id="evidence-button">  <i class="fa fa-plus"></i> Add Records</button>
                   @include('modals/Investigators.addEvidence.addEvidenceVehicle')
@@ -550,34 +543,59 @@ td{
                   <button type="submit" data-toggle="modal" data-target="#scannerVehicle" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
                   @include('modals/Investigators.scanners.scannerVehicle')
                 </div>
-                <div style="margin:3px;">
+                <!-- <div style="margin:3px;">
                   <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-                </div>
+                </div> -->
   </div>
 
     <div class="table-responsive">
         <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
-            <tr>
-              <!-- <th>ID</th> -->
-              <th>QR Code</th>
-              <th>Edit - Transfer</th>
-              <th>Status</th>
-              <th>Make Type</th>
-              <th>Plate No</th>
-              <th>Engine No</th>
-              <th>Fuel</th>
-              <th>Chasis No</th>
-              <th>Color</th>
-              <th>Registered Owner</th>
-              <th>Owner Address</th>
-              <th>Brand Make</th>
-              <th>Size</th>
-              <th>Condition</th>
-              <th>Type</th>
-              <th>No Studs</th>
-              <th>General Condition</th>
-              <th>Bumper Front</th>
+        <tr>
+            <th></th> <!-- Placeholder for QR Code -->
+            <th colspan="3" style="text-align: center;">Actions</th> <!-- colspan="2" indicates two separate columns -->
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th style="padding-bottom: 50px;">QR Code</th>
+            <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Edit</th>
+            <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Transfer</th>
+            <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Download</th>
+            <th style="padding-bottom: 50px;">Status</th>
+            <th style="padding-bottom: 50px;">Make Type</th>
+            <th style="padding-bottom: 50px;">Plate No</th>
+            <th style="padding-bottom: 50px;">Engine No</th>
+            <th style="padding-bottom: 50px;">Fuel</th>
+            <th style="padding-bottom: 50px;">Chasis</th>
+            <th style="padding-bottom: 50px;">Color</th>
+            <th style="padding-bottom: 50px;">Registered Owner</th>
+            <th style="padding-bottom: 50px;">Owner Address</th>
+            <th style="padding-bottom: 50px;">Brand Make</th>
+            <th style="padding-bottom: 50px;">Size</th>
+            <th style="padding-bottom: 50px;">Condition</th>
+            <th style="padding-bottom: 50px;">Type</th>
+            <th style="padding-bottom: 50px;">No Studs</th>
+            <th style="padding-bottom: 50px;">General Condition</th>
+              <!-- <th>Bumper Front</th>
               <th>Fog Light</th>
               <th>Brand Marking Emblem</th>
               <th>Headlights LR</th>
@@ -683,13 +701,12 @@ td{
               <th>Body in Bad Shape</th>
               <th>Body Ongoing Repair</th>
               <th>For Repainting</th>
-              <th>Beyond Economical Repair</th>
-              <th>Remark</th>
-              <th>Recovering Personel</th>
-              <th>Witness Owner Barangay Official</th>
-              <th>Noted By</th>
-              <th>Date</th>
-         
+              <th>Beyond Economical Repair</th> -->
+              <th style="padding-bottom: 50px;">Remark</th>
+              <th style="padding-bottom: 50px;">Recovering Personel</th>
+              <th style="padding-bottom: 50px;">Witness Owner Barangay Official</th>
+              <th style="padding-bottom: 50px;">Noted By</th>
+              <th style="padding-bottom: 50px;">Date</th>
             </tr>
         </thead>
         <tbody>
@@ -700,21 +717,26 @@ td{
                 </td>
                 <!-- <td>{{$data->id}}</td> -->
                 <td>
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
+                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
                     @if($count > 0)
                       @include('modals/Investigators.editEvidence.editEvidenceVehicle')
                     @endif
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#"><i class="mdi mdi-file-send"></i></button>
                 </td>
-           
-                
+                <td>
+                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-file-send"></i></button>
+                    @if($count > 0)
+                      @include('modals/Investigators.transferEvidence.transferVehicleEvidence')
+                    @endif
+                </td>
+                <td>
+                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#"><i class="mdi mdi-download"></i></button>
+                </td>
                 @if($data->status == 'Active')
                   <td style="color:#13870d;"><b>{{$data->status}}</b></td>
                 @else
                   <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
                 @endif
                 <td>{{$data->make_type}}</td>
-              
                 <td>{{$data->plate_no}}</td>
                 <td>{{$data->engine_no}}</td>
                 <td>{{$data->fuel}}</td>
@@ -728,8 +750,7 @@ td{
                 <td>{{$data->type}}</td>
                 <td>{{$data->no_studs}}</td>
                 <td>{{$data->general_condition}}</td>
-                
-                @if($data->bumper_front == 'true')
+                <!-- @if($data->bumper_front == 'true')
                 <td><i class="mdi mdi-checkbox-marked" style="color:blue; font-size: 25px;"></i> </td>
                 @else
                 <td></td>
@@ -846,7 +867,7 @@ td{
               @else
                   <td></td>
               @endif
-              @endforeach
+              @endforeach -->
                
                 <td>{{$data->remark}}</td>
                 <td>{{$data->recovering_personel}}</td>
