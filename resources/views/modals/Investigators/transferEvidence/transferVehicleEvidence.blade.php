@@ -1351,6 +1351,28 @@
                 <input type="text" class="form-control" name="noted_by" id="noted_by" placeholder="" value="{{$data->noted_by}}" required>
             </div>
         </div>
+        <div class="form-row">
+                <div class="form-group col-md-9">
+                </div>
+                <div class="form-group col-md-3">
+                    <label id="status_label" for="inputEmail4"><b style="text-align:left;">Status:</b></label>
+                        <select id="status" name="status" class="form-control" required>
+                            @if($data->status == 'Active')
+                                <option value="Active" selected>Active</option>
+                                <option value="Disposed">Disposed</option>
+                                <option value="Released">Released</option>
+                            @elseif($data->status == 'Disposed')
+                                <option value="Active">Active</option>
+                                <option value="Disposed" selected>Disposed</option>
+                                <option value="Released">Released</option>
+                            @else		
+                                <option value="Active">Active</option>
+                                <option value="Disposed" >Disposed</option>
+                                <option value="Released" selected>Released</option>
+                            @endif
+                        </select>
+                </div>
+            </div>
       </div>
   
    

@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vehicle; 
 use App\Models\property; 
+use App\Models\property_history; 
 use App\Models\Motorcycle; 
 use App\Models\EvidenceVehicle;
 use App\Models\vehicle_history;
-use App\Models\motorcycle_history;
+use App\Models\motorcycle_history; 
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,48 @@ use Illuminate\Validation\Rules;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class investigatorController extends Controller
 {
+    //Get
     public function investigatorsProfile()
     {
         $data = DB::select('select * from users where id = ?', [auth()->user()->id]);
         $investigators = DB::select('select * from users where role = 3 and municipality = ?', [auth()->user()->municipality]);
         $num_investigators = count($investigators);
+
+        $property = property::where('user_id', auth()->user()->id)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $motorcycle = Motorcycle::where('user_id', auth()->user()->id)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $car = EvidenceVehicle::where('user_id', auth()->user()->id)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $active = ($property+$motorcycle+$car);
+
+        $property1 = property::where('user_id', auth()->user()->id)
+        ->where('status', 'Disposed' || 'Released')
+        ->get()
+        ->count();
+        $motorcycle1 = Motorcycle::where('user_id', auth()->user()->id)
+        ->where('status', 'Disposed' || 'Released')
+        ->get()
+        ->count();
+        $car1 = EvidenceVehicle::where('user_id', auth()->user()->id)
+        ->where('status', 'Disposed' || 'Released')
+        ->get()
+        ->count();
+        $disposed = ($property1+$motorcycle1+$car1);
+        $totel_record = ($active+$disposed);
         //GET TOTAL NUMBER OF RECORDS
-        return view('Investigators/myInvestigatorsProfile',['data'=>$data,'num_investigators'=>$num_investigators]);
+        return view('Investigators/myInvestigatorsProfile',['data'=>$data,
+            'num_investigators'=>$num_investigators,
+            'active'=>$active,
+            'disposed'=>$disposed,
+            'totel_record'=>$totel_record
+    ]);
     }
     public function investigatorVehicleRecords()
     {
@@ -44,6 +80,7 @@ class investigatorController extends Controller
         $count = count($data);
         return view('Investigators/Investigator_MotorVehiclesRecords',['data'=>$data,'count'=>$count]);
     }
+
     public function add_property_evidence(Request $request)
     {
         $currentDate = Carbon::now();
@@ -52,6 +89,7 @@ class investigatorController extends Controller
        
         $data = new property();
             $data->user_id = Auth::user()->id;
+            $data->municipality = Auth::user()->municipality;
             $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("property".$count +1);
             $data->uuid = "property".($count +1);
             $data->establishment = $request->input('establishment');
@@ -74,6 +112,7 @@ class investigatorController extends Controller
        
         $data = new Motorcycle();
             $data->user_id = Auth::user()->id;
+            $data->municipality = Auth::user()->municipality;
             $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("motorcycle".$count +1);
             $data->uuid = "motorcycle".($count +1);
             $data->make_type = $request->input('make_type');
@@ -91,141 +130,6 @@ class investigatorController extends Controller
         $data->save();
         return redirect('Investigator_MotorVehiclesRecords')->with('message','Evidence added Successfully!');
     }
- 
-    public function updateEvidence_Vehicles(Request $request, $id)
-    {
-        DB::table('evidence_vehicles')
-        ->where('id', $id)
-        ->update(array(
-            'make_type' => $request->input('make_type'),
-            'plate_no' => $request->input('plate_no'),
-            'engine_no' => $request->input('engine_no'),
-            'fuel' => $request->input('fuel'),
-            'chasis_no' => $request->input('chasis_no'),
-            'color' => $request->input('color'),
-            'registered_owner' => $request->input('registered_owner'),
-            'owner_address' => $request->input('owner_address'),
-            'brand_make' => $request->input('brand_make'),
-            'general_condition' => $request->input('general_condition'),
-            'size' => $request->input('size'),
-            'condition' => $request->input('condition'),
-            'type' => $request->input('type'),
-            'no_studs' => $request->input('no_studs'),
-            'bumper_front' => $request->filled('bumper_front') ? "true" : "false",
-            'fog_light' => $request->filled('fog_light') ? "true" : "false",
-            'brand_marking_emblem' => $request->filled('brand_marking_emblem') ? "true" : "false",
-            'headlights_lr' => $request->filled('headlights_lr') ? "true" : "false",
-            'radiator_grill' => $request->filled('radiator_grill') ? "true" : "false",
-            'windshield_wiper' => $request->filled('windshield_wiper') ? "true" : "false",
-            'signal_lights_lr' => $request->filled('signal_lights_lr') ? "true" : "false",
-            'windshield_glass' => $request->filled('windshield_glass') ? "true" : "false",
-            'hazzard_lights_lr' => $request->filled('hazzard_lights_lr') ? "true" : "false",
-            'windshield_wiper_blade' => $request->filled('windshield_wiper_blade') ? "true" : "false",
-            'headlights_guard' => $request->filled('headlights_guard') ? "true" : "false",
-            'windshield_wiper_motor' => $request->filled('windshield_wiper_motor') ? "true" : "false",
-            'side_mirror_L' => $request->filled('side_mirror_L') ? "true" : "false",
-            'wind_tunnel_glass_L' => $request->filled('wind_tunnel_glass_L') ? "true" : "false",
-            'window_glass_front_seat_L' => $request->filled('window_glass_front_seat_L') ? "true" : "false",
-            'weather_window_strip_L' => $request->filled('weather_window_strip_L') ? "true" : "false",
-            'side_mirror_R' => $request->filled('side_mirror_R') ? "true" : "false",
-            'wind_tunnel_glass_R' => $request->filled('wind_tunnel_glass_R') ? "true" : "false",
-            'window_glass_front_seat_R' => $request->filled('window_glass_front_seat_R') ? "true" : "false",
-            'weather_window_strip_R' => $request->filled('weather_window_strip_R') ? "true" : "false",
-            'rear_bumper' => $request->filled('rear_bumper') ? "true" : "false",
-            'brand_emblem_marking' => $request->filled('brand_emblem_marking') ? "true" : "false",
-            'window_glass_front_seat' => $request->filled('window_glass_front_seat') ? "true" : "false",
-            'spare_tire_mounting' => $request->filled('spare_tire_mounting') ? "true" : "false",
-            'tools' => $request->filled('tools') ? "true" : "false",
-            'steering_wheel' => $request->filled('steering_wheel') ? "true" : "false",
-            'shifting_rod_with_knob' => $request->filled('shifting_rod_with_knob') ? "true" : "false",
-            'hand_break' => $request->filled('hand_break') ? "true" : "false",
-            'ammeter' => $request->filled('ammeter') ? "true" : "false",
-            'oil_pressure_gauge' => $request->filled('oil_pressure_gauge') ? "true" : "false",
-            'temperature_gauge' => $request->filled('temperature_gauge') ? "true" : "false",
-            'rpm_gauge' => $request->filled('rpm_gauge') ? "true" : "false",
-            'headlight_knob' => $request->filled('headlight_knob') ? "true" : "false",
-            'parking_hazard_knob' => $request->filled('parking_hazard_knob') ? "true" : "false",
-            'wiper_knob' => $request->filled('wiper_knob') ? "true" : "false",
-            'dimmer_switch' => $request->filled('dimmer_switch') ? "true" : "false",
-            'directional_level' => $request->filled('directional_level') ? "true" : "false",
-            'speedometer' => $request->filled('speedometer') ? "true" : "false",
-            'fuel_gauge' => $request->filled('fuel_gauge') ? "true" : "false",
-            'cars_seats_front' => $request->filled('cars_seats_front') ? "true" : "false",
-            'car_seat_back' => $request->filled('car_seat_back') ? "true" : "false",
-            'car_seat_cover' => $request->filled('car_seat_cover') ? "true" : "false",
-            'floor_carpet' => $request->filled('floor_carpet') ? "true" : "false",
-            'floor_matting' => $request->filled('floor_matting') ? "true" : "false",
-            'computer_box' => $request->filled('computer_box') ? "true" : "false",
-            'air_condition_unit' => $request->filled('air_condition_unit') ? "true" : "false",
-            'car_stereo' => $request->filled('car_stereo') ? "true" : "false",
-            'interceptor_cable' => $request->filled('interceptor_cable') ? "true" : "false",
-            'stereo_speaker' => $request->filled('stereo_speaker') ? "true" : "false",
-            'twitter' => $request->filled('twitter') ? "true" : "false",
-            'car_radio' => $request->filled('car_radio') ? "true" : "false",
-            'equalizer' => $request->filled('equalizer') ? "true" : "false",
-            'cd_charger' => $request->filled('cd_charger') ? "true" : "false",
-            'lighter' => $request->filled('lighter') ? "true" : "false",
-            'barometer' => $request->filled('barometer') ? "true" : "false",
-            'fire_extinguisher' => $request->filled('fire_extinguisher') ? "true" : "false",
-            'antennae' => $request->filled('antennae') ? "true" : "false",
-            'air_con_compressor' => $request->filled('air_con_compressor') ? "true" : "false",
-            'radiator' => $request->filled('radiator') ? "true" : "false",
-            'radiator_cover' => $request->filled('radiator_cover') ? "true" : "false",
-            'radiator_inlet_hose' => $request->filled('radiator_inlet_hose') ? "true" : "false",
-            'radiator_outlet_hose' => $request->filled('radiator_outlet_hose') ? "true" : "false",
-            'water_bypass_hose' => $request->filled('water_bypass_hose') ? "true" : "false",
-            'ignition_coil' => $request->filled('ignition_coil') ? "true" : "false",
-            'high_tension_wire' => $request->filled('high_tension_wire') ? "true" : "false",
-            'distibutor_Cap' => $request->filled('distibutor_Cap') ? "true" : "false",
-            'distributor_assembly' => $request->filled('distributor_assembly') ? "true" : "false",
-            'contact_point' => $request->filled('contact_point') ? "true" : "false",
-            'condenser' => $request->filled('condenser') ? "true" : "false",
-            'air_con_condenser' => $request->filled('air_con_condenser') ? "true" : "false",
-            'rotor' => $request->filled('rotor') ? "true" : "false",
-            'advancer' => $request->filled('advancer') ? "true" : "false",
-            'oil_dipstick' => $request->filled('oil_dipstick') ? "true" : "false",
-            'air_con_driver_belt' => $request->filled('air_con_driver_belt') ? "true" : "false",
-            'carburettor_assembly' => $request->filled('carburettor_assembly') ? "true" : "false",
-            'alternator' => $request->filled('alternator') ? "true" : "false",
-            'alternator_voltage_regulator' => $request->filled('alternator_voltage_regulator') ? "true" : "false",
-            'oil_filter' => $request->filled('oil_filter') ? "true" : "false",
-            'steering_gear_box' => $request->filled('steering_gear_box') ? "true" : "false",
-            'water_pump_assembly' => $request->filled('water_pump_assembly') ? "true" : "false",
-            'engine_fan' => $request->filled('engine_fan') ? "true" : "false",
-            'auxiliary_fan' => $request->filled('auxiliary_fan') ? "true" : "false",
-            'fan_belt' => $request->filled('fan_belt') ? "true" : "false",
-            'spark_plugs' => $request->filled('spark_plugs') ? "true" : "false",
-            'battery' => $request->filled('battery') ? "true" : "false",
-            'battery_cable' => $request->filled('battery_cable') ? "true" : "false",
-            'battery_terminal' => $request->filled('battery_terminal') ? "true" : "false",
-            'horn_assembly' => $request->filled('horn_assembly') ? "true" : "false",
-            'horn_relay' => $request->filled('horn_relay') ? "true" : "false",
-            'accelerator_cable' => $request->filled('accelerator_cable') ? "true" : "false",
-            'intake_manifold' => $request->filled('intake_manifold') ? "true" : "false",
-            'exhaust_manifold' => $request->filled('exhaust_manifold') ? "true" : "false",
-            'engine_mounting' => $request->filled('engine_mounting') ? "true" : "false",
-            'ignition_wiring' => $request->filled('ignition_wiring') ? "true" : "false",
-            'transmission' => $request->filled('transmission') ? "true" : "false",
-            'suspension_assembly' => $request->filled('suspension_assembly') ? "true" : "false",
-            'tie_rod_end' => $request->filled('tie_rod_end') ? "true" : "false",
-            'idler_arm' => $request->filled('idler_arm') ? "true" : "false",
-            'front_coil_spring' => $request->filled('front_coil_spring') ? "true" : "false",
-            'pitman_arm' => $request->filled('pitman_arm') ? "true" : "false",
-            'newly_painted' => $request->filled('newly_painted') ? "true" : "false",
-            'paint_discoloration' => $request->filled('paint_discoloration') ? "true" : "false",
-            'good_body_shape' => $request->filled('good_body_shape') ? "true" : "false",
-            'body_in_bad_shape' => $request->filled('body_in_bad_shape') ? "true" : "false",
-            'body_ongoing_repair' => $request->filled('body_ongoing_repair') ? "true" : "false",
-            'for_repainting' => $request->filled('for_repainting') ? "true" : "false",
-            'beyond_economical_repair' => $request->filled('beyond_economical_repair') ? "true" : "false",
-            'remark' => $request->input('remark'),
-            'recovering_personel' => $request->input('recovering_personel'),
-            'witness_owner_barangay_official' => $request->input('witness_owner_barangay_official'),
-            'noted_by' => $request->input('noted_by'),
-        ));
- 
-            return redirect('Investigator_vehiclesRecords')->with('message','Details updated successfully!');
-    }
     public function add_vehicle_evidence(Request $request)
     {
         $sample_data = DB::select('select * from evidence_vehicles');
@@ -237,6 +141,7 @@ class investigatorController extends Controller
       
             $data = new EvidenceVehicle();
                 $data->user_id = Auth::user()->id;
+                $data->municipality = Auth::user()->municipality;
                 $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("evidencevehicle".$count +1);
                 $data->uuid = "evidencevehicle".($count +1);
                 $data->make_type = $request->input('make_type');
@@ -503,6 +408,7 @@ class investigatorController extends Controller
             return redirect('Investigator_vehiclesRecords')->with('message','Data added Successfully!');
        
     }
+   
     public function updateMotorcycle_Evidence(Request $request, $id)
     {
         DB::table('motorcycles')
@@ -539,6 +445,140 @@ class investigatorController extends Controller
  
         return redirect('Investigator_PropertyGoodsRecords')->with('message','Details updated successfully!');
     }
+    public function updateEvidence_Vehicles(Request $request, $id)
+    {
+        DB::table('evidence_vehicles')
+        ->where('id', $id)
+        ->update(array(
+            'make_type' => $request->input('make_type'),
+            'plate_no' => $request->input('plate_no'),
+            'engine_no' => $request->input('engine_no'),
+            'fuel' => $request->input('fuel'),
+            'chasis_no' => $request->input('chasis_no'),
+            'color' => $request->input('color'),
+            'registered_owner' => $request->input('registered_owner'),
+            'owner_address' => $request->input('owner_address'),
+            'brand_make' => $request->input('brand_make'),
+            'general_condition' => $request->input('general_condition'),
+            'size' => $request->input('size'),
+            'condition' => $request->input('condition'),
+            'type' => $request->input('type'),
+            'no_studs' => $request->input('no_studs'),
+            'bumper_front' => $request->filled('bumper_front') ? "true" : "false",
+            'fog_light' => $request->filled('fog_light') ? "true" : "false",
+            'brand_marking_emblem' => $request->filled('brand_marking_emblem') ? "true" : "false",
+            'headlights_lr' => $request->filled('headlights_lr') ? "true" : "false",
+            'radiator_grill' => $request->filled('radiator_grill') ? "true" : "false",
+            'windshield_wiper' => $request->filled('windshield_wiper') ? "true" : "false",
+            'signal_lights_lr' => $request->filled('signal_lights_lr') ? "true" : "false",
+            'windshield_glass' => $request->filled('windshield_glass') ? "true" : "false",
+            'hazzard_lights_lr' => $request->filled('hazzard_lights_lr') ? "true" : "false",
+            'windshield_wiper_blade' => $request->filled('windshield_wiper_blade') ? "true" : "false",
+            'headlights_guard' => $request->filled('headlights_guard') ? "true" : "false",
+            'windshield_wiper_motor' => $request->filled('windshield_wiper_motor') ? "true" : "false",
+            'side_mirror_L' => $request->filled('side_mirror_L') ? "true" : "false",
+            'wind_tunnel_glass_L' => $request->filled('wind_tunnel_glass_L') ? "true" : "false",
+            'window_glass_front_seat_L' => $request->filled('window_glass_front_seat_L') ? "true" : "false",
+            'weather_window_strip_L' => $request->filled('weather_window_strip_L') ? "true" : "false",
+            'side_mirror_R' => $request->filled('side_mirror_R') ? "true" : "false",
+            'wind_tunnel_glass_R' => $request->filled('wind_tunnel_glass_R') ? "true" : "false",
+            'window_glass_front_seat_R' => $request->filled('window_glass_front_seat_R') ? "true" : "false",
+            'weather_window_strip_R' => $request->filled('weather_window_strip_R') ? "true" : "false",
+            'rear_bumper' => $request->filled('rear_bumper') ? "true" : "false",
+            'brand_emblem_marking' => $request->filled('brand_emblem_marking') ? "true" : "false",
+            'window_glass_front_seat' => $request->filled('window_glass_front_seat') ? "true" : "false",
+            'spare_tire_mounting' => $request->filled('spare_tire_mounting') ? "true" : "false",
+            'tools' => $request->filled('tools') ? "true" : "false",
+            'steering_wheel' => $request->filled('steering_wheel') ? "true" : "false",
+            'shifting_rod_with_knob' => $request->filled('shifting_rod_with_knob') ? "true" : "false",
+            'hand_break' => $request->filled('hand_break') ? "true" : "false",
+            'ammeter' => $request->filled('ammeter') ? "true" : "false",
+            'oil_pressure_gauge' => $request->filled('oil_pressure_gauge') ? "true" : "false",
+            'temperature_gauge' => $request->filled('temperature_gauge') ? "true" : "false",
+            'rpm_gauge' => $request->filled('rpm_gauge') ? "true" : "false",
+            'headlight_knob' => $request->filled('headlight_knob') ? "true" : "false",
+            'parking_hazard_knob' => $request->filled('parking_hazard_knob') ? "true" : "false",
+            'wiper_knob' => $request->filled('wiper_knob') ? "true" : "false",
+            'dimmer_switch' => $request->filled('dimmer_switch') ? "true" : "false",
+            'directional_level' => $request->filled('directional_level') ? "true" : "false",
+            'speedometer' => $request->filled('speedometer') ? "true" : "false",
+            'fuel_gauge' => $request->filled('fuel_gauge') ? "true" : "false",
+            'cars_seats_front' => $request->filled('cars_seats_front') ? "true" : "false",
+            'car_seat_back' => $request->filled('car_seat_back') ? "true" : "false",
+            'car_seat_cover' => $request->filled('car_seat_cover') ? "true" : "false",
+            'floor_carpet' => $request->filled('floor_carpet') ? "true" : "false",
+            'floor_matting' => $request->filled('floor_matting') ? "true" : "false",
+            'computer_box' => $request->filled('computer_box') ? "true" : "false",
+            'air_condition_unit' => $request->filled('air_condition_unit') ? "true" : "false",
+            'car_stereo' => $request->filled('car_stereo') ? "true" : "false",
+            'interceptor_cable' => $request->filled('interceptor_cable') ? "true" : "false",
+            'stereo_speaker' => $request->filled('stereo_speaker') ? "true" : "false",
+            'twitter' => $request->filled('twitter') ? "true" : "false",
+            'car_radio' => $request->filled('car_radio') ? "true" : "false",
+            'equalizer' => $request->filled('equalizer') ? "true" : "false",
+            'cd_charger' => $request->filled('cd_charger') ? "true" : "false",
+            'lighter' => $request->filled('lighter') ? "true" : "false",
+            'barometer' => $request->filled('barometer') ? "true" : "false",
+            'fire_extinguisher' => $request->filled('fire_extinguisher') ? "true" : "false",
+            'antennae' => $request->filled('antennae') ? "true" : "false",
+            'air_con_compressor' => $request->filled('air_con_compressor') ? "true" : "false",
+            'radiator' => $request->filled('radiator') ? "true" : "false",
+            'radiator_cover' => $request->filled('radiator_cover') ? "true" : "false",
+            'radiator_inlet_hose' => $request->filled('radiator_inlet_hose') ? "true" : "false",
+            'radiator_outlet_hose' => $request->filled('radiator_outlet_hose') ? "true" : "false",
+            'water_bypass_hose' => $request->filled('water_bypass_hose') ? "true" : "false",
+            'ignition_coil' => $request->filled('ignition_coil') ? "true" : "false",
+            'high_tension_wire' => $request->filled('high_tension_wire') ? "true" : "false",
+            'distibutor_Cap' => $request->filled('distibutor_Cap') ? "true" : "false",
+            'distributor_assembly' => $request->filled('distributor_assembly') ? "true" : "false",
+            'contact_point' => $request->filled('contact_point') ? "true" : "false",
+            'condenser' => $request->filled('condenser') ? "true" : "false",
+            'air_con_condenser' => $request->filled('air_con_condenser') ? "true" : "false",
+            'rotor' => $request->filled('rotor') ? "true" : "false",
+            'advancer' => $request->filled('advancer') ? "true" : "false",
+            'oil_dipstick' => $request->filled('oil_dipstick') ? "true" : "false",
+            'air_con_driver_belt' => $request->filled('air_con_driver_belt') ? "true" : "false",
+            'carburettor_assembly' => $request->filled('carburettor_assembly') ? "true" : "false",
+            'alternator' => $request->filled('alternator') ? "true" : "false",
+            'alternator_voltage_regulator' => $request->filled('alternator_voltage_regulator') ? "true" : "false",
+            'oil_filter' => $request->filled('oil_filter') ? "true" : "false",
+            'steering_gear_box' => $request->filled('steering_gear_box') ? "true" : "false",
+            'water_pump_assembly' => $request->filled('water_pump_assembly') ? "true" : "false",
+            'engine_fan' => $request->filled('engine_fan') ? "true" : "false",
+            'auxiliary_fan' => $request->filled('auxiliary_fan') ? "true" : "false",
+            'fan_belt' => $request->filled('fan_belt') ? "true" : "false",
+            'spark_plugs' => $request->filled('spark_plugs') ? "true" : "false",
+            'battery' => $request->filled('battery') ? "true" : "false",
+            'battery_cable' => $request->filled('battery_cable') ? "true" : "false",
+            'battery_terminal' => $request->filled('battery_terminal') ? "true" : "false",
+            'horn_assembly' => $request->filled('horn_assembly') ? "true" : "false",
+            'horn_relay' => $request->filled('horn_relay') ? "true" : "false",
+            'accelerator_cable' => $request->filled('accelerator_cable') ? "true" : "false",
+            'intake_manifold' => $request->filled('intake_manifold') ? "true" : "false",
+            'exhaust_manifold' => $request->filled('exhaust_manifold') ? "true" : "false",
+            'engine_mounting' => $request->filled('engine_mounting') ? "true" : "false",
+            'ignition_wiring' => $request->filled('ignition_wiring') ? "true" : "false",
+            'transmission' => $request->filled('transmission') ? "true" : "false",
+            'suspension_assembly' => $request->filled('suspension_assembly') ? "true" : "false",
+            'tie_rod_end' => $request->filled('tie_rod_end') ? "true" : "false",
+            'idler_arm' => $request->filled('idler_arm') ? "true" : "false",
+            'front_coil_spring' => $request->filled('front_coil_spring') ? "true" : "false",
+            'pitman_arm' => $request->filled('pitman_arm') ? "true" : "false",
+            'newly_painted' => $request->filled('newly_painted') ? "true" : "false",
+            'paint_discoloration' => $request->filled('paint_discoloration') ? "true" : "false",
+            'good_body_shape' => $request->filled('good_body_shape') ? "true" : "false",
+            'body_in_bad_shape' => $request->filled('body_in_bad_shape') ? "true" : "false",
+            'body_ongoing_repair' => $request->filled('body_ongoing_repair') ? "true" : "false",
+            'for_repainting' => $request->filled('for_repainting') ? "true" : "false",
+            'beyond_economical_repair' => $request->filled('beyond_economical_repair') ? "true" : "false",
+            'remark' => $request->input('remark'),
+            'recovering_personel' => $request->input('recovering_personel'),
+            'witness_owner_barangay_official' => $request->input('witness_owner_barangay_official'),
+            'noted_by' => $request->input('noted_by'),
+        ));
+ 
+            return redirect('Investigator_vehiclesRecords')->with('message','Details updated successfully!');
+    }
 
     public function transferVehicles_Evidence(Request $request, $id)
     {
@@ -546,6 +586,7 @@ class investigatorController extends Controller
         // $my_data = DB::select('select * from vehicle_histories where id = ?', [$id]);
             $data = new vehicle_history();
                 $data->user_id = Auth::user()->id;
+                $data->municipality = Auth::user()->municipality;
                 // $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("evidencevehicle".$count +1);
                 $data->uuid = $my_data[0]->uuid;
                 $data->make_type = $my_data[0]->make_type;
@@ -815,5 +856,158 @@ class investigatorController extends Controller
                 
             return redirect('Investigator_vehiclesRecords')->with('message','Evidence transfered successfully!');
     }
+    public function transferMotorCycle_Evidence(Request $request, $id)
+    {
+            $my_data = DB::table('motorcycles')->where('id', $id)->get();
+            $data = new motorcycle_history();
+                $data->user_id = Auth::user()->id;
+                $data->municipality = Auth::user()->municipality;
+                // $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("motorcycle".$count +1);
+                $data->uuid =  $my_data[0]->uuid;
+                $data->make_type =  $my_data[0]->make_type;
+                $data->chasis = $my_data[0]->chasis;
+                $data->motor_no =  $my_data[0]->motor_no;
+                $data->plate_no =  $my_data[0]->plate_no;
+                $data->color =   $my_data[0]->color;
+                $data->ORCR_no =   $my_data[0]->ORCR_no;
+                $data->LTO_File_no =  $my_data[0]->LTO_File_no;
+                $data->registered_owner =   $my_data[0]->registered_owner;
+                $data->address =   $my_data[0]->address;
+                $data->violations =  $my_data[0]->violations;
+                $data->date =  $my_data[0]->date;
+                $data->status =   $my_data[0]->status;
+            $data->save();
+
+            DB::table('motorcycles')
+            ->where('id', $id)
+            ->update(array(
+                'make_type' => $request->input('make_type'),
+                'chasis' => $request->input('chasis'),
+                'motor_no' => $request->input('motor_no'),
+                'plate_no' => $request->input('plate_no'),
+                'color' => $request->input('color'),
+                'ORCR_no' => $request->input('ORCR_no'),
+                'LTO_File_no' => $request->input('LTO_File_no'),
+                'registered_owner' => $request->input('registered_owner'),
+                'address' => $request->input('address'),
+                'violations' => $request->input('violations'),
+                'status' => $request->input('status'),
+            ));
+
+            return redirect('Investigator_MotorVehiclesRecords')->with('message','Evidence transfered successfully!');
+    }
+    public function transferProperty_Evidence(Request $request, $id)
+    {
+            $my_data = DB::table('properties')->where('id', $id)->get();
+            $data = new property_history();
+                $data->user_id = $my_data[0]->address;
+                $data->municipality = Auth::user()->municipality;
+                // $data->qr_code_image = QrCode::size(100)->backgroundColor(255, 255, 204)->generate("property".$count +1);
+                $data->uuid = $my_data[0]->uuid;
+                $data->establishment = $my_data[0]->establishment;
+                $data->address =  $my_data[0]->address;
+                $data->quantity =  $my_data[0]->quantity;
+                $data->description =   $my_data[0]->description;
+                $data->seizing_officer = $my_data[0]->seizing_officer;
+                $data->witness =   $my_data[0]->witness;
+                $data->date =  $my_data[0]->date;
+                $data->status =   $my_data[0]->status;
+            $data->save();
+
+            DB::table('properties')
+            ->where('id', $id)
+            ->update(array(
+                'establishment' => $request->input('establishment'),
+                'address' => $request->input('address'),
+                'quantity' => $request->input('quantity'),
+                'description' => $request->input('description'),
+                'seizing_officer' => $request->input('seizing_officer'),
+                'witness' => $request->input('witness'),
+                'status' => $request->input('status'),
+            ));
+
+            return redirect('Investigator_PropertyGoodsRecords')->with('message','Evidence transfered successfully!');
+    }
+
+
+    public function getVehicleRecordScanner(Request $request, $uuid)
+    {
+        try {
+            //  $uuid = $request->input('uuid');
+            // Fetch data from database using the UUID
+            //  $data = DB::select('select * from vehicle_histories where uuid = evidencevehicle1')->get();
+            
+            $data = vehicle_history::where('uuid', $uuid)->get();
+            $data1 = EvidenceVehicle::where('uuid', $uuid)->get();
+
+            if ($data) {
+                if ($data->isEmpty() && $data1->isEmpty()) {
+                    return response()->json(['error' => 'No data available'], 404);
+                } else {
+                    return response()->json([$data,$data1]);
+                }
+            } else {
+                return response()->json(['error' => 'No record found for the given UUID'], 404);
+            }
+        } catch (\Exception $e) {
+            // Log the exception
+            \Log::error($e);
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+    }
+    public function getPropertyRecordScanner(Request $request, $uuid)
+    {
+        try {
+            //  $uuid = $request->input('uuid');
+            // Fetch data from database using the UUID
+            //  $data = DB::select('select * from vehicle_histories where uuid = evidencevehicle1')->get();
+            
+            $data = property_history::where('uuid', $uuid)->get();
+            $data1 = property::where('uuid', $uuid)->get();
+
+            if ($data) {
+                if ($data->isEmpty() && $data1->isEmpty()) {
+                    return response()->json(['error' => 'No data available'], 404);
+                } else {
+                    return response()->json([$data,$data1]);
+                }
+            } else {
+                return response()->json(['error' => 'No record found for the given UUID'], 404);
+            }
+        } catch (\Exception $e) {
+            // Log the exception
+            \Log::error($e);
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+    }
+    public function getMotorcycleRecordScanner(Request $request, $uuid)
+    {
+        try {
+            //  $uuid = $request->input('uuid');
+            // Fetch data from database using the UUID
+            //  $data = DB::select('select * from vehicle_histories where uuid = evidencevehicle1')->get();
+            
+            $data = motorcycle_history::where('uuid', $uuid)->get();
+            $data1 = Motorcycle::where('uuid', $uuid)->get();
+
+            if ($data) {
+                if ($data->isEmpty() && $data1->isEmpty()) {
+                    return response()->json(['error' => 'No data available'], 404);
+                } else {
+                    return response()->json([$data,$data1]);
+                }
+            } else {
+                return response()->json(['error' => 'No record found for the given UUID'], 404);
+            }
+        } catch (\Exception $e) {
+            // Log the exception
+            \Log::error($e);
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+    }
+    // getMotorcycleRecordScanner
 
 }

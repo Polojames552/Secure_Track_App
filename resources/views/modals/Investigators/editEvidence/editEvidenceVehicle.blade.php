@@ -215,18 +215,6 @@
       <form action="{{ route ('editEvidence_Vehicles', $data->id) }}" method="POST">
       @csrf
       <div class="modal-body">
-	<!-- <center>
-    <div class="avatar-upload">
-        <div class="avatar-edit">
-            <input type='file' name="imageUpload" id="imageUpload" accept=".png, .jpg, .jpeg" />
-            <label for="imageUpload"></label>
-        </div>
-        <div class="avatar-preview">
-            <div id="imagePreview" style="background-image: url('images/PNP.png');">
-            </div>
-        </div>
-    </div>
-	</center>  -->
    
     <section style="padding-bottom:10px;">
               <h4 style="color:#79B650;"><b>Motor Vehicle Description:</b></h4>
@@ -269,24 +257,6 @@
                 <input type="text" class="form-control" name="owner_address" id="owner_address" placeholder="" value="{{$data->owner_address}}" required>
             </div>
         </div>
-
-        <!-- <div class="form-row" >
-            <div class="form-group col-md-3">
-                <label id="headlabel" for="inputEmail4"><b>Bumper Front</b></label>
-                <input type="checkbox" id="bumper_front" name="bumper_front" value="bumper_front">
-            </div>
-            <div class="form-group col-md-3">
-                <label id="headlabel" for="inputEmail4"><b>Fog Light</b></label>
-                <input type="checkbox" id="fog_light" name="fog_light" value="fog_light">
-            </div>
-            <div class="form-group col-md-3">
-                    <input type="radio" name="general_condition" id="general_condition" value="Running">
-                    <label for="option1_1">Running</label>
-                    <input type="radio" name="general_condition" id="general_condition" value="Deadline">
-                    <label for="option2_1">Deadline</label>
-            </div>
-        </div> -->
-
         <section style="padding-bottom:10px;">
               <h4 style="color:#79B650;"><b>Tires:</b></h4>
     </section>
@@ -302,7 +272,6 @@
               </thead>
               <tbody>
                 <tr>
-                 
                     @if($data->brand_make == "Running")
                     <td style="font-size:11px;">
                         <input type="radio" name="general_condition" id="general_condition" value="Running" checked >
@@ -328,10 +297,8 @@
               </tbody>
             </table>
             </div>
-
-
-            
         </div>
+
         <div class="form-row">
         <div class="form-group col-md-3">
                 <label id="headlabel" for="inputEmail4"><b>Size:</b></label>
@@ -349,15 +316,6 @@
                 <label id="headlabel" for="inputEmail4"><b>No. of Studs:</b></label>
                 <input type="number" class="form-control" name="no_studs" id="no_studs" placeholder="" value="{{$data->no_studs}}" required>
             </div>
-            <!-- <div class="form-group col-md-4">
-                <label id="headlabel" for="inputEmail4"><b>General Condition of MV(running):</b></label>
-                <input type="text" class="form-control" name="chasis_no" id="chasis_no" placeholder="" value="" >
-            </div>
-            <div class="form-group col-md-4">
-                <label id="headlabel" for="inputEmail4"><b>Color:</b></label>
-                <input type="text" class="form-control" name="color_tire" id="color_tire" placeholder="" value="" >
-            </div> -->
-         
         </div>
        
 
@@ -1351,6 +1309,28 @@
                 <input type="text" class="form-control" name="noted_by" id="noted_by" placeholder="" value="{{$data->noted_by}}" required>
             </div>
         </div>
+        <div class="form-row">
+                <div class="form-group col-md-9">
+                </div>
+                <div class="form-group col-md-3">
+                    <label id="status_label" for="inputEmail4"><b style="text-align:left;">Status:</b></label>
+                        <select id="status" name="status" class="form-control" required>
+                            @if($data->status == 'Active')
+                                <option value="Active" selected>Active</option>
+                                <option value="Disposed">Disposed</option>
+                                <option value="Released">Released</option>
+                            @elseif($data->status == 'Disposed')
+                                <option value="Active">Active</option>
+                                <option value="Disposed" selected>Disposed</option>
+                                <option value="Released">Released</option>
+                            @else		
+                                <option value="Active">Active</option>
+                                <option value="Disposed" >Disposed</option>
+                                <option value="Released" selected>Released</option>
+                            @endif
+                        </select>
+                </div>
+            </div>
       </div>
   
    

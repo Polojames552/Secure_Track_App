@@ -25,9 +25,10 @@ return new class extends Migration
             $table->string('LTO_File_no');
             $table->string('registered_owner');
             $table->string('address');
-            $table->string('violations');
+            $table->text('violations');
             $table->string('date');
             $table->string('status');
+            $table->string('municipality');
             $table->timestamps();
         });
     }

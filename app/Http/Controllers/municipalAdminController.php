@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\property;
+use App\Models\Motorcycle;
+use App\Models\EvidenceVehicle;
+use App\Models\property_history;
+use App\Models\motorcycle_history;
+use App\Models\vehicle_history;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -50,8 +56,43 @@ class municipalAdminController extends Controller
         $investigators = DB::select('select * from users where role = 3 and municipality = ?', [auth()->user()->municipality]);
         $num_investigators = count($investigators);
 
+      
+        $property = property::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $motorcycle = Motorcycle::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $car = EvidenceVehicle::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $active = ($property+$motorcycle+$car);
+
+        $property = property::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Disposed' || 'Released')
+        ->get()
+        ->count();
+        $motorcycle = Motorcycle::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Disposed' || 'Released')
+        ->get()
+        ->count();
+        $car = EvidenceVehicle::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Disposed' || 'Released')
+        ->get()
+        ->count();
+        $disposed = ($property+$motorcycle+$car);
+        $total_record = $disposed +$active;
         //GET TOTAL NUMBER OF RECORDS
-        return view('MunicipalAdminPages/municipalAdminDashboard',['investigators'=>$investigators,'num_investigators'=>$num_investigators]);
+        return view('MunicipalAdminPages/municipalAdminDashboard',[
+            'investigators'=>$investigators,
+            'num_investigators'=>$num_investigators,
+            'active'=>$active,
+            'disposed'=>$disposed,
+            'total_record'=>$total_record
+        ]);
     }
     public function InvestigatorsPanel()
     {
@@ -62,6 +103,28 @@ class municipalAdminController extends Controller
         //GET TOTAL NUMBER OF RECORDS
         return view('MunicipalAdminPages/manageInvestigatorsPanel',['data'=>$data,'num_investigators'=>$num_investigators]);
     }
+    public function viewProperty()
+    {
+        // $data = DB::table('users')->get();
+        $data = DB::select('select * from properties where municipality = ?', [auth()->user()->municipality]);
+
+        //GET TOTAL NUMBER OF RECORDS
+        return view('MunicipalAdminPages/Municipal_propertyGoodsRecords',['data'=>$data]);
+    }
+    public function viewMotorcycle()
+    {
+        // $data = DB::table('users')->get();
+        $data = DB::select('select * from motorcycles where municipality = ?', [auth()->user()->municipality]);
+
+        //GET TOTAL NUMBER OF RECORDS
+        return view('MunicipalAdminPages/Municipal_motorVehiclesRecords',['data'=>$data]);
+    }
+    public function viewVehicle() 
+    {
+        // $data = DB::table('users')->get();
+        $data = DB::select('select * from evidence_vehicles where municipality = ?', [auth()->user()->municipality]);
+        return view('MunicipalAdminPages/Municipal_vehiclesRecords',['data'=>$data]);
+    } 
     public function update_investigator(Request $request, $id)
     {
 
@@ -76,5 +139,26 @@ class municipalAdminController extends Controller
             'status' => $request->input('status'),
         ));
             return redirect('manageInvestigatorsPanel')->with('message','Details updated successfully!');
+    }
+    public function chartsData()
+    {
+        $property1 = property::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $motorcycle1 = Motorcycle::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        $car1 = EvidenceVehicle::where('municipality', auth()->user()->municipality)
+        ->where('status', 'Active')
+        ->get()
+        ->count();
+        
+        
+        return response()->json([
+            'property1' => $property1,
+            'motorcycle1' => $motorcycle1,
+            'car1' => $car1]);
     }
 }

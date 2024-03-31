@@ -138,12 +138,13 @@ return new class extends Migration
             $table->string('body_ongoing_repair');
             $table->string('for_repainting');
             $table->string('beyond_economical_repair');
-            $table->string('remark');
+            $table->text('remark');
             $table->string('recovering_personel');
             $table->string('witness_owner_barangay_official');
             $table->string('noted_by');
             $table->string('date');
             $table->string('status');
+            $table->string('municipality');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -590,24 +590,24 @@ td{
         @foreach($data as $data)
         <tr>
             <td style="text-align: center;">{!! $data->qr_code_image !!}</td>
-            <td style="text-align: center;">
-                <button  style="width: 50px;height: 35px; " type="button" class="btn btn-success" data-toggle="modal" data-target="#editMotorVehicleEvidence{{$data->id}}">
+            <td>
+                <button  style="width: 50px;height: 35px; text-align: center; " type="button" class="btn btn-success" data-toggle="modal" data-target="#editMotorVehicleEvidence{{$data->id}}">
                     <i class="mdi mdi-lead-pencil" style="font-size: 15px;"></i>
                 </button>
                 @if($count > 0)
                   @include('modals/Investigators.editEvidence.editMotorcycleEvidence')
                 @endif
             </td>
-            <td style="text-align: center;">
-                <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferMotorVehicleEvidence{{$data->id}}">
+            <td>
+                <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferMotorVehicleEvidence{{$data->id}}">
                   <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
                 </button>
                 @if($count > 0)
                   @include('modals/Investigators.transferEvidence.transferMotorcycleEvidence')
                 @endif
             </td>
-            <td style="text-align: center;">
-              <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
+            <td>
+              <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
               <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
             </td>
 

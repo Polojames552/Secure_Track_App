@@ -483,12 +483,12 @@ td{
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold"><i class="mdi mdi-car"></i> List of all Vehicle Records</h3>
+                  <h3 class="font-weight-bold"><i class="mdi mdi-car"></i> List of all Car Records</h3>
                 </div>
               </div>
             </div>
           </div>
-          <form action="" id="filter_search">
+          <!-- <form action="" id="filter_search">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -528,50 +528,87 @@ td{
         </div>
     </div>
   </div>
-</form>
+</form> -->
  
 <div class="button-container">
-    <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-items" onclick="clearSelect()"> <i class="mdi mdi-redo"></i> Clear</button>
-    </form>
+      <!-- <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-items" onclick="clearSelect()"> <i class="mdi mdi-redo"></i> Clear</button> -->
     <!-- <form action="#">
       <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
     </form> -->
-    <form action="#">
-      <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-    </form>
-    <form action="#" id="form-download">
+    <div style="margin: 5px;">
+        <button type="submit" data-toggle="modal" data-target="#scannerVehicle" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+        @include('modals/Investigators.scanners.scannerVehicle')
+    </div>
+    <!-- <form action="#" id="form-download">
       <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-    </form>
+    </form> -->
   </div>
               <div class="table-responsive">
-                    <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>Address</th>
-                            
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Zorita Serrano</td>
-                                <td>Software Engineer</td>
-                                <td>San Francisco</td>
-                                <td>56</td>
-                                <td>2012/06/01</td>
-                                <td>$115,000</td>
-                                <td>San Julian Irosin Sorsogon</td>
-                            </tr>
-                        </tbody>
-                    </table>
+              <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+              <th >QR Code</th>
+              <th>Download</th>
+              <th >Status</th>
+              <th >Make Type</th>
+              <th >Plate No</th>
+              <th >Engine No</th>
+              <th >Fuel</th>
+              <th >Chasis</th>
+              <th >Color</th>
+              <th >Registered Owner</th>
+              <th >Owner Address</th>
+              <th >Brand Make</th>
+              <th >Size</th>
+              <th >Condition</th>
+              <th >Type</th>
+              <th >No Studs</th>
+              <th >General Condition</th>
+              <th >Remark</th>
+              <th >Recovering Personel</th>
+              <th >Witness Owner Barangay Official</th>
+              <th >Noted By</th>
+              <th >Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($data as $data)
+            <tr>
+                <td style="text-align: center;">  
+                      {!! $data->qr_code_image !!}
+                </td>
+                <!-- <td>{{$data->id}}</td> -->
+                <td style="text-align: center;">
+                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#"><i class="mdi mdi-download"></i></button>
+                </td>
+                @if($data->status == 'Active')
+                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
+                @else
+                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
+                @endif
+                <td>{{$data->make_type}}</td>
+                <td>{{$data->plate_no}}</td>
+                <td>{{$data->engine_no}}</td>
+                <td>{{$data->fuel}}</td>
+                <td>{{$data->chasis_no}}</td>
+                <td>{{$data->color}}</td>
+                <td>{{$data->registered_owner}}</td>
+                <td>{{$data->owner_address}}</td>
+                <td>{{$data->brand_make}}</td>
+                <td>{{$data->size}}</td>
+                <td>{{$data->condition}}</td>
+                <td>{{$data->type}}</td>
+                <td>{{$data->no_studs}}</td>
+                <td>{{$data->general_condition}}</td>
+                <td>{{$data->remark}}</td>
+                <td>{{$data->recovering_personel}}</td>
+                <td>{{$data->witness_owner_barangay_official}}</td>
+                <td>{{$data->noted_by}}</td>
+                <td>{{$data->date}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
               </div>
         </div>
         </div>

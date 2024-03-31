@@ -427,7 +427,7 @@ td{
                   <div class="card-box">
                     <div class="inner">
                     <p class="mb-4">No. of Records</p>
-                      <p class="fs-30 mb-2">N/A</p>
+                      <p class="fs-30 mb-2">{{$total_record}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -442,7 +442,7 @@ td{
                   <div class="card-box">
                     <div class="inner">
                     <p class="mb-4">No. of Active Evidences</p>
-                      <p class="fs-30 mb-2">N/A</p>
+                      <p class="fs-30 mb-2">{{$active}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -458,7 +458,7 @@ td{
                   <div class="card-box">
                     <div class="inner">
                     <p class="mb-4">No. of Disposed Evidences</p>
-                      <p class="fs-30 mb-2">N/A</p>
+                      <p class="fs-30 mb-2">{{$disposed}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-trash" aria-hidden="true"></i>

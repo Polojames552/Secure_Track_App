@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\property;
+use App\Models\Motorcycle;
+use App\Models\EvidenceVehicle;
+use App\Models\property_history;
+use App\Models\motorcycle_history;
+use App\Models\vehicle_history;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +64,25 @@ class superAdminController extends Controller
         $data = DB::select('select * from users where role = 3');
         return view('SuperAdminPages/investigatorsPanel',['data'=>$data]);
     }
+
+    public function viewPropertyGoods() 
+    {
+        // $data = DB::table('users')->get();
+        $data = DB::select('select * from properties');
+        return view('SuperAdminPages/propertyGoodsRecords',['data'=>$data]);
+    }
+    public function viewMotorcycle() 
+    {
+        // $data = DB::table('users')->get();
+        $data = DB::select('select * from motorcycles');
+        return view('SuperAdminPages/motorVehicleRecords',['data'=>$data]);
+    } 
+    public function viewVehicle() 
+    {
+        // $data = DB::table('users')->get();
+        $data = DB::select('select * from evidence_vehicles');
+        return view('SuperAdminPages/vehiclesRecords',['data'=>$data]);
+    } 
     public function AdminDashboard()
     {
         // $data = DB::table('users')->get();
@@ -70,8 +95,52 @@ class superAdminController extends Controller
         $allusers = DB::select('select * from users where role = 2');
         $total_users = count($allusers);
 
+
+        $property = property::get()->count();
+        $motorcycle = Motorcycle::get()->count();
+        $car = EvidenceVehicle::get()->count();
+
+        // $property = DB::select('select * from properties')->count();
+        // $motorcycle = DB::select('select * from motorcycles')->count();
+        // $car = DB::select('select * from evidence_vehicles')->count();
+
+        $total_evidences = ($property + $motorcycle + $car);
+       
+
         //GET TOTAL NUMBER OF RECORDS
-        return view('SuperAdminPages/superAdminDashboard',['allusers'=>$allusers,'total_users'=>$total_users,'num_stations'=>$num_stations, 'num_investigators'=>$num_investigators]);
+        return view('SuperAdminPages/superAdminDashboard',['allusers'=>$allusers,
+        'total_users'=>$total_users,
+        'num_stations'=>$num_stations, 
+        'num_investigators'=>$num_investigators,
+        'total_evidences'=>$total_evidences,
+        'property'=>$property,
+        'motorcycle'=>$motorcycle,
+        'car'=>$car
+        ]);
+    }
+    public function chartsData()
+    {
+        $property = property::get()->count();
+        $motorcycle = Motorcycle::get()->count();
+        $car = EvidenceVehicle::get()->count();
+        
+        // $property1 = property::where('municipality', auth()->user()->municipality)
+        // ->where('status', 'Active')
+        // ->get()
+        // ->count();
+        // $motorcycle1 = Motorcycle::where('municipality', auth()->user()->municipality)
+        // ->where('status', 'Active')
+        // ->get()
+        // ->count();
+        // $car1 = EvidenceVehicle::where('municipality', auth()->user()->municipality)
+        // ->where('status', 'Active')
+        // ->get()
+        // ->count();
+
+        return response()->json([
+            'property' => $property,
+            'motorcycle' => $motorcycle,
+            'car' => $car]);
     }
 
     public function update_station(Request $request, $id)

@@ -20,5 +20,6 @@ class property_history extends Model
         'witness',
         'date',
         'status',
+        'municipality',
     ];
 }

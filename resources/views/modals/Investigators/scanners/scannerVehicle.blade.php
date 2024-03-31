@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>Show Password Example</title>
 </head>
 
@@ -155,6 +156,7 @@
         -moz-transform: scaleX(-1);
         -ms-transform: scaleX(-1);
     }
+    
 </style>
 
 <!-- Modal -->
@@ -169,14 +171,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Scan Car Records</h5>
+                <h4 class="modal-title" id="exampleModalLongTitle"><b>Scan Car Records</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- Add a button to trigger the scan process -->
 
-            <form id="scanForm" action="addInvestigators" method="POST">
+            <form id="scanForm" action="#" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-row">
@@ -188,13 +190,13 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
+                            <input style="display: none; text-align:center; font-weight:bold; color:3AB830;" type="text" id="uuid" name="uuid" class="form-control" placeholder="Scanned Value" value="" disabled>
                             <input style="display: none; text-align:center; font-weight:bold; color:3AB830;" type="text" id="scannedValue" name="scannedValue" class="form-control" placeholder="Scanned Value" value="" disabled>
-                         
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info">Proceed</button>
+                    <!-- <button type="submit" class="btn btn-info">Proceed</button> -->
                 </div>
             </form>
         </div>
@@ -205,30 +207,29 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="show-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div style="margin-top: -70px;" class="modal fade" id="show-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-car"></i> <b style="color:#79B650;">Evidence History</b> </h3> 
-            <!-- Add Property/Goods Evidences -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="#" method="POST">
+          <form action="#" method="POST" id="scanForm">
             @csrf
-            <div class="modal-body">
-    
+            <div class="modal-body" id="modal-body" style="max-height: 280px; overflow-y: auto; padding-bottom:20px;">
+                <!-- <p><strong>make-type:</strong> <span style="color:black;" id="make-type"></span></p> -->
             </div>
             <div class="modal-footer">
-              <div class="row">
+              <!-- <div class="row">
                   <div class="col-md-6">
                       <button type="submit" class="btn btn-primary btn-block">Save</button>
                   </div>
                   <div class="col-md-6" id="cancel-button">
                       <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
                   </div>
-              </div>
+              </div> -->
             </div>
           </form>
     </div>
@@ -254,7 +255,6 @@
             $('#scannedValue').val("");
             deactivateScanner();
         });
-
         function activateScanner() {
             // Access the camera and stream its feed to the video element
             navigator.mediaDevices.getUserMedia({ video: true })
@@ -291,18 +291,240 @@
                   inversionAttempts: "dontInvert",
               });
               if (code) {
-                // if($('#scannedValue').val() == ""){
+                  // if($('#scannedValue').val() == ""){
                   // QR code detected, display the scanned input
                   // $('#scannedValue').val(code.data);
-                  $('#scannedValue').val("Scanning Successful");
-                  // $('#scannerVideo').hide();
-                  // $('#scannerCanvas').hide();
-                  // $('#scannedValue').hide();
-                  // deactivateScanner();
-                  // $('#scannerVehicle').modal('hide');
+                  // $('#scannedValue').val("Scanning Successful");
+                  // $('#uuid').val(code.data);
+                  deactivateScanner();
+                  $('#scannerVehicle').modal('hide');
                   // $('#show-details').modal('show');
+                  var uuid = "{{ route('scanner_vehicle_record', '') }}/" + code.data;
+                  $.ajax({
+                    url: uuid,
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                  success: function(response) {
+                    $('#modal-body').empty();
+ //displaying present data
+                    if (response[1].length > 0) {
+                      response[1].forEach(function(data) {
+                // Create a new div to display each data item
+                var div = $('<div>');
+                // Create an unordered list to hold the data items
+                var ul = $('<ul>');
 
-                  console.log("QR code detected: " + $('#scannedValue').val());
+                // Iterate through the properties of the data object
+                Object.keys(data).forEach(function(key) {
+                    // Exclude specific fields
+                    if (key !== 'id' && key !== 'municipality' && key !== 'qr_code_image' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
+                        // Remove underscores from the key and make it bold
+                        var formattedKey = key.replace(/_/g, ' ');
+                        var boldKey = $('<strong>').text(formattedKey);
+                        // Create a list item for each property
+                        var li = $('<li>');
+                        // Check if the value is boolean
+                        if (data[key] === 'true') {
+                            // Change text and color based on boolean value
+                            var text = data[key] = 'present';
+                            var color = data[key] = 'green';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        }else  if (data[key] === 'false') {
+                            var text = data[key] = 'not present';
+                            var color = data[key] = 'red';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        } else {
+                            // For non-boolean values, just display the value
+                            li.append(boldKey).append(': ' + data[key]);
+                        }
+                        // Append the list item to the unordered list
+                        ul.append(li);
+                    }
+                });
+
+                // Assuming 'modalContent' is the content area of your modal
+                // Empty the modal content and append the unordered list
+                var date = $('<div>').css('color', '#E05D44').text(data.date);
+                var modalContent = $('<div>').append(date, ul);
+                var present = $('<h3>').css('color', '#009A00').text("Present data");
+                // Append the modal content to the modal body
+                $('#modal-body').append(present,modalContent);
+            });
+            // Show the modal
+            $('#show-details').modal('show');
+          }
+
+
+
+            //displaying history
+                    if (response[0].length > 0) {
+                      response[0].forEach(function(data) {
+                // Create a new div to display each data item
+                var div = $('<div>');
+
+                // Create an unordered list to hold the data items
+                var ul = $('<ul>');
+
+                // Iterate through the properties of the data object
+                Object.keys(data).forEach(function(key) {
+                    // Exclude specific fields
+                    if (key !== 'id' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
+                        // Remove underscores from the key and make it bold
+                        var formattedKey = key.replace(/_/g, ' ');
+                        var boldKey = $('<strong>').text(formattedKey);
+                        // Create a list item for each property
+                        var li = $('<li>');
+                        // Check if the value is boolean
+                        if (data[key] === 'true') {
+                            // Change text and color based on boolean value
+                            var text = data[key] = 'present';
+                            var color = data[key] = 'green';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        }else  if (data[key] === 'false') {
+                            var text = data[key] = 'not present';
+                            var color = data[key] = 'red';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        } else {
+                            // For non-boolean values, just display the value
+                            li.append(boldKey).append(': ' + data[key]);
+                        }
+                        // Append the list item to the unordered list
+                        ul.append(li);
+                    }
+                });
+
+                // Assuming 'modalContent' is the content area of your modal
+                // Empty the modal content and append the unordered list
+                var date = $('<div>').css('color', '#E05D44').text(data.date);
+                var modalContent = $('<div>').append(date, ul);
+                var history = $('<h3>').css('color', '#009A00').text("Evidence History");
+                var br =$('<br>');
+                // Append the modal content to the modal body
+                $('#modal-body').append(br,history,modalContent);
+            });
+
+
+
+            
+            // Show the modal
+            $('#show-details').modal('show');
+                //     response.forEach(function(data) {
+                //     var motorVehicleSection = $('<section>').css('padding-bottom', '10px');
+                //     var br = $('<br>');
+                //     var dateParagraph = $('<h3>').css('color', '#EC5E50').text("*"+data.date);
+                //     var motorVehicleTitle = $('<h5>').css('color', '#79B650').append($('<b>').text('Motor Vehicle Description:'));
+                //     motorVehicleSection.append(br,br,br,dateParagraph, motorVehicleTitle);
+                //     var formRow1 = $('<div>').addClass('form-row');
+                //     formRow1.append(
+                //         createFormGroup('Make/Type', 'make_type', 'make_type', data.make_type),
+                //         createFormGroup('Plate No', 'plate_no', 'plate_no', data.plate_no),
+                //         createFormGroup('Engine No', 'engine_no', 'engine_no', data.engine_no)
+                //     );
+                //     var formRow2 = $('<div>').addClass('form-row');
+                //     formRow2.append(
+                //         createFormGroup('Fuel', 'fuel', 'fuel', data.fuel),
+                //         createFormGroup('Chasis No', 'chasis_no', 'chasis_no', data.chasis_no),
+                //         createFormGroup('Color', 'color', 'color', data.color)
+                //     );
+                //     var formRow3 = $('<div>').addClass('form-row');
+                //     formRow3.append(
+                //         createFormGroup('Registered Owner', 'registered_owner', 'registered_owner', data.registered_owner),
+                //         createFormGroup("Owner's Address", 'owner_address', 'owner_address', data.owner_address)
+                //     );
+                //     var group1 = $('<div>');
+                //     group1.append(motorVehicleSection, formRow1, formRow2, formRow3);
+                //     var tiresSection = $('<section>').css('padding-bottom', '10px').append(
+                //         $('<h5>').css('color', '#79B650').append($('<b>').text('Tires:'))
+                //     );
+                //     var formRowTires = $('<div>').addClass('form-row').append(
+                //         createFormGroup('Brand/Make', 'brand_make', 'brand_make', data.brand_make),
+                //         $('<div>').addClass('form-group col-md-6').append(
+                //             $('<label>').attr({ id: 'headlabel', for: 'inputEmail4' }).append($('<b>').text('General Condition of the MV:')),
+                //             $('<table>').attr({ id: 'General-Condition-of-the-MV', name: 'modal-table' }).append(
+                //                 $('<tbody>').append(
+                //                     $('<tr>').append(
+                //                         $('<td>').css('font-size', '11px').append(
+                //                             $('<input>').attr({ type: 'radio', name: 'general_condition', id: 'general_condition_running', value: 'Running', checked: data.general_condition == "Running" }),
+                //                             $('<label>').attr('for', 'general_condition_running').text('Running')
+                //                         ),
+                //                         $('<td>').css('font-size', '11px').append(
+                //                             $('<input>').attr({ type: 'radio', name: 'general_condition', id: 'general_condition_deadline', value: 'Deadline', checked: data.general_condition == "Deadline" }),
+                //                             $('<label>').attr('for', 'general_condition_deadline').text('Deadline')
+                //                         )
+                //                     )
+                //                 )
+                //             )
+                //         )
+                //     );
+                //     var formRow4 = $('<div>').addClass('form-row').append(
+                //       createFormGroup2('Size', 'size', 'size', data.size),
+                //       createFormGroup2('Condition', 'condition', 'condition', data.condition),
+                //       createFormGroup2('Type', 'type', 'type', data.type),
+                //       createFormGroup2('No Studs', 'no_studs', 'no_studs', data.no_studs)
+                //     );
+                //     var group2 = $('<div>'); // create a container for form rows
+                //     group2.append(tiresSection, formRowTires,formRow4);
+
+                //     $('#modal-body').append(group1, group2);
+                // });
+
+                // function createFormGroup2(labelText, inputName, inputId, value) {
+                //     var input = $('<input>').attr({
+                //         type: 'text',
+                //         class: 'form-control',
+                //         name: inputName,
+                //         id: inputId,
+                //         placeholder: '',
+                //         value: value,
+                //         required: true,
+                //         disabled: true 
+                //     });
+
+                //     var label = $('<label>').attr({
+                //         id: 'headlabel',
+                //         for: 'inputEmail4'
+                //     }).append($('<b>').text(labelText + ':'));
+                //     var formGroup = $('<div>').addClass('form-group col-md-3').append(label, input);
+                //     return formGroup;
+                // }
+               
+                // function createFormGroup(labelText, inputName, inputId, value) {
+                //     var input = $('<input>').attr({
+                //         type: 'text',
+                //         class: 'form-control',
+                //         name: inputName,
+                //         id: inputId,
+                //         placeholder: '',
+                //         value: value,
+                //         required: true,
+                //         disabled: true 
+                //     });
+                //     var label = $('<label>').attr({
+                //         id: 'headlabel',
+                //         for: 'inputEmail4'
+                //     }).append($('<b>').text(labelText + ':'));
+                //     var formGroup = $('<div>').addClass('form-group col-md-4').append(label, input);
+                //     return formGroup;
+                // }
+                //     // Show the modal
+                //     $('#show-details').modal('show');
+                }
+                //  else {
+                //     // No records found
+                //     alert("No records found for the given UUID.");
+                // }
+               
+                      // console.log("response: " + response.length);
+                  },
+                  error: function(xhr, status, error) {
+                      alert(error);
+                      console.error(error);
+                      // Handle error
+                  }
+              });
+                  // console.log("QR code detected: " + code.data);
                 // }
                   // Optionally, you can submit the form or perform any other action here
               }
@@ -317,12 +539,19 @@
                  $('#scannerVideo').hide();
                  $('#scannerCanvas').hide();
                  $('#scannedValue').show();
+                //  $('#uuid').show();
                  deactivateScanner();
               }
           }, 500); // Adjust the interval as needed (here we're scanning every 0.5 seconds)
       }
     });
 </script>
-
+<style>
+  .dynamic-paragraph {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+</style>
 </body>
 </html>

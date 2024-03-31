@@ -567,7 +567,7 @@
         <section style="padding-top:30px;padding-bottom:10px;">
               <h4 style="color:#00A3BE;"><b>Remarks:</b></h4>
         </section>
-        <textarea class="form-control"  name="remark" id="remark" cols="10" rows="5"></textarea>
+        <textarea class="form-control"  name="remark" id="remark" cols="10" rows="5" ></textarea>
         <br>
         <div class="form-row" >
             <div class="form-group col-md-4">

@@ -154,6 +154,7 @@ class vehicle_history extends Model
         'date',
         // Checkbox
         'status',
+        'municipality',
         // 'qr_code_image',
         ];
 }

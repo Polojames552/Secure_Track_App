@@ -1,3 +1,9 @@
+var $property =0;
+var $motorcycle =0;
+var $car =0;
+var $property1 =0;
+var $motorcycle1 =0;
+var $car1 =0;
 $(function() {
   /* ChartJS
    * -------
@@ -78,51 +84,42 @@ $(function() {
     }
 
   };
+
+ 
   var doughnutPieData = {
     datasets: [{
-      data: [30, 40, 20, 10],
-      backgroundColor: [
-        'rgba(255, 206, 86, 0.5)', // Yellow
-        'rgba(54, 162, 235, 0.5)', // Blue
-        'rgba(255, 159, 64, 0.5)', // Orange
-        'rgba(255, 99, 132, 0.5)', // Red
-     
-      ],
-      borderColor: [
-        'rgba(255, 206, 86, 1)', // Yellow
-        'rgba(54, 162, 235, 1)', // Blue
-        'rgba(255, 159, 64, 1)', // Orange
-        'rgba(255, 99, 132, 1)', // Red
-        
-      ],
+        data: [], // Initialize with empty data
+        backgroundColor: [
+            'rgba(255, 206, 86, 0.5)', // Yellow
+            'rgba(54, 162, 235, 0.5)', // Blue
+            'rgba(255, 99, 132, 0.5)', // Red
+        ],
+        borderColor: [
+            'rgba(255, 206, 86, 1)', // Yellow
+            'rgba(54, 162, 235, 1)', // Blue
+            'rgba(255, 99, 132, 1)', // Red
+        ],
     }],
-  
-    // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
-      'Forensic',
-      'Weapons',
-      'Vehicle',
-      'Others'
-     
+        'Property/Goods',
+        'Motorcycle',
+        'Cars',
     ]
   };
-
-
 
   var doughnutPieData2 = {
     datasets: [{
-      data: [10, 20, 40, 30],
+      data: [],
       backgroundColor: [
         'rgba(255, 206, 86, 0.5)', // Yellow
         'rgba(54, 162, 235, 0.5)', // Blue
-        'rgba(255, 159, 64, 0.5)', // Orange
+        // 'rgba(255, 159, 64, 0.5)', // Orange
         'rgba(255, 99, 132, 0.5)', // Red
-     
       ],
       borderColor: [
         'rgba(255, 206, 86, 1)', // Yellow
         'rgba(54, 162, 235, 1)', // Blue
-        'rgba(255, 159, 64, 1)', // Orange
+        // 'rgba(255, 159, 64, 1)', // Orange
         'rgba(255, 99, 132, 1)', // Red
         
       ],
@@ -130,14 +127,71 @@ $(function() {
   
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
-      'Forensic',
-      'Weapons',
-      'Vehicle',
-      'Others'
-     
+      'Property/Goods',
+      'Motorcycle',
+      'Cars',
+      // 'Others'
     ]
   };
-  
+
+
+  var endpoint = "/fetch-data";
+  $.ajax({
+      url: endpoint,
+      method: "GET",
+      success: function(response) {
+          doughnutPieData.datasets[0].data = [response.property, response.motorcycle, response.car];
+          renderDoughnutChart(doughnutPieData);
+          // doughnutPieData2.datasets[0].data = [response.property1, response.motorcycle1, response.car1];
+          // renderPieChart(doughnutPieData2);
+      },
+      error: function(xhr, status, error) {
+          console.error("Error fetching data:", error);
+      }
+  });
+  function renderDoughnutChart(chartData) {
+    if ($("#doughnutChart").length) {
+        var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+        var doughnutChart = new Chart(doughnutChartCanvas, {
+            type: 'doughnut',
+            data: chartData,
+            options: doughnutPieOptions // Assuming doughnutPieOptions is defined elsewhere
+        });
+    }
+}
+  var endpoint1 = "/fetch-data-municipal";
+  $.ajax({
+      url: endpoint1,
+      method: "GET",
+      success: function(response) {
+          doughnutPieData2.datasets[0].data = [response.property1, response.motorcycle1, response.car1];
+          renderPieChart(doughnutPieData2);
+      },
+      error: function(xhr, status, error) {
+          console.error("Error fetching data:", error);
+      }
+  });
+  function renderPieChart(chartData1) {
+    if ($("#pieChart").length) {
+        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: chartData1,
+            options: doughnutPieOptions // Assuming doughnutPieOptions is defined elsewhere
+        });
+    }
+}
+// if ($("#pieChart").length) {
+//   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+//   var pieChart = new Chart(pieChartCanvas, {
+//     type: 'pie',
+//     data: doughnutPieData2,
+//     options: doughnutPieOptions
+//   });
+// }
+
+
+
   
   
   var doughnutPieOptions = {
@@ -339,23 +393,23 @@ $(function() {
     });
   }
 
-  if ($("#doughnutChart").length) {
-    var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
-    var doughnutChart = new Chart(doughnutChartCanvas, {
-      type: 'doughnut',
-      data: doughnutPieData,
-      options: doughnutPieOptions
-    });
-  }
+  // if ($("#doughnutChart").length) {
+  //   var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+  //   var doughnutChart = new Chart(doughnutChartCanvas, {
+  //     type: 'doughnut',
+  //     data: doughnutPieData,
+  //     options: doughnutPieOptions
+  //   });
+  // }
 
-  if ($("#pieChart").length) {
-    var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-    var pieChart = new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: doughnutPieData2,
-      options: doughnutPieOptions
-    });
-  }
+  // if ($("#pieChart").length) {
+  //   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+  //   var pieChart = new Chart(pieChartCanvas, {
+  //     type: 'pie',
+  //     data: doughnutPieData2,
+  //     options: doughnutPieOptions
+  //   });
+  // }
 
   if ($("#areaChart").length) {
     var areaChartCanvas = $("#areaChart").get(0).getContext("2d");

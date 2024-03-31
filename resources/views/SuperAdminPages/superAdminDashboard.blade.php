@@ -469,7 +469,7 @@ td{
                   <div class="card-box">
                     <div class="inner">
                     <p class="mb-4">No. Records</p>
-                      <p class="fs-30 mb-2">N/A</p>
+                      <p class="fs-30 mb-2">{{$total_evidences}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -497,7 +497,6 @@ td{
                 </div>
               </div>
             </div>
-
           </div>
        
         
@@ -542,6 +541,35 @@ td{
   </div>
   <!-- container-scroller -->
 <script>
+  // var doughnutPieData = {
+  //     datasets: [{
+  //       data: [2, 2, 2], // Sample data
+  //       backgroundColor: [
+  //         'rgba(255, 206, 86, 0.5)', // Yellow
+  //         'rgba(54, 162, 235, 0.5)', // Blue
+  //         'rgba(255, 99, 132, 0.5)', // Red
+  //       ],
+  //       borderColor: [
+  //         'rgba(255, 206, 86, 1)', // Yellow
+  //         'rgba(54, 162, 235, 1)', // Blue
+  //         'rgba(255, 99, 132, 1)', // Red
+  //       ],
+  //     }],
+  //     labels: [
+  //       'Property/Goods',
+  //       'Motorcycle',
+  //       'Cars',
+  //     ]
+  //   };
+
+  //   // Get the canvas element
+  //   var ctx = document.getElementById('doughnutChart').getContext('2d');
+
+  //   // Create the chart using Chart.js
+  //   var myDoughnutChart = new Chart(ctx, {
+  //     type: 'doughnut',
+  //     data: doughnutPieData,
+  //   });
 $(document).ready(function() {
     $('#ListTable').DataTable();
 } );

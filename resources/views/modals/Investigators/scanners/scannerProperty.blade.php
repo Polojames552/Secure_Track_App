@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>Show Password Example</title>
 </head>
 
@@ -168,15 +169,15 @@
 <div class="modal fade" id="scannerProperty" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Scan Property & Goods Records</h5>
+            <div class="modal-header" >
+                <h4 class="modal-title" id="exampleModalLongTitle"><b>Scan Property & Goods Records</b></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- Add a button to trigger the scan process -->
 
-            <form id="scanForm" action="addInvestigators" method="POST">
+            <form id="scanForm" action="#" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-row">
@@ -193,13 +194,44 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <!-- <button type="submit" class="btn btn-primary">Save</button> -->
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+
+
+<!-- Modal -->
+<div style="margin-top: -70px;" class="modal fade" id="show-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLongTitle"><i class="mdi mdi-car"></i> <b style="color:#79B650;">Evidence History</b> </h3> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="#" method="POST" id="scanForm">
+            @csrf
+            <div class="modal-body" id="modal-body" style="max-height: 280px; overflow-y: auto; padding-bottom:20px;">
+                <!-- <p><strong>make-type:</strong> <span style="color:black;" id="make-type"></span></p> -->
+            </div>
+            <div class="modal-footer">
+              <!-- <div class="row">
+                  <div class="col-md-6">
+                      <button type="submit" class="btn btn-primary btn-block">Save</button>
+                  </div>
+                  <div class="col-md-6" id="cancel-button">
+                      <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
+                  </div>
+              </div> -->
+            </div>
+          </form>
+    </div>
+  </div>
+</div>
 <!-- JavaScript code for automatic QR code scanning -->
 <script>
     $(document).ready(function() {
@@ -258,12 +290,97 @@
                   inversionAttempts: "dontInvert",
               });
               if (code) {
-                // if($('#scannedValue').val() == ""){
+                  // if($('#scannedValue').val() == ""){
                   // QR code detected, display the scanned input
-                  $('#scannedValue').val(code.data);
-                  console.log("QR code detected: " + $('#scannedValue').val());
-                // }
-                  // Optionally, you can submit the form or perform any other action here
+                  // $('#scannedValue').val(code.data);
+                  // $('#scannedValue').val("Scanning Successful");
+                  // $('#uuid').val(code.data);
+                  deactivateScanner();
+                  $('#scannerProperty').modal('hide');
+                  var uuid = "{{ route('scanner_property_record', '') }}/" + code.data;
+                  $.ajax({
+                    url: uuid,
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                  success: function(response) {
+                    $('#modal-body').empty();
+                    if (response[1].length > 0) {
+                      response[1].forEach(function(data) {
+                var div = $('<div>');
+                var ul = $('<ul>');
+                Object.keys(data).forEach(function(key) {
+                    if (key !== 'id' && key !== 'municipality' && key !== 'qr_code_image' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
+                        var formattedKey = key.replace(/_/g, ' ');
+                        var boldKey = $('<strong>').text(formattedKey);
+                        var li = $('<li>');
+                        if (data[key] === 'true') {
+                            var text = data[key] = 'present';
+                            var color = data[key] = 'green';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        }else  if (data[key] === 'false') {
+                            var text = data[key] = 'not present';
+                            var color = data[key] = 'red';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        } else {
+                            li.append(boldKey).append(': ' + data[key]);
+                        }
+                        ul.append(li);
+                    }
+                });
+                var date = $('<div>').css('color', '#E05D44').text(data.date);
+                var modalContent = $('<div>').append(date, ul);
+                var present = $('<h3>').css('color', '#009A00').text("Present data");
+                // Append the modal content to the modal body
+                $('#modal-body').append(present,modalContent);
+            });
+            // Show the modal
+            $('#show-details').modal('show');
+          }
+
+                if (response[0].length > 0) {
+                      response[0].forEach(function(data) {
+                var div = $('<div>');
+                var ul = $('<ul>');
+                Object.keys(data).forEach(function(key) {
+                    if (key !== 'id' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
+                        var formattedKey = key.replace(/_/g, ' ');
+                        var boldKey = $('<strong>').text(formattedKey);
+                        var li = $('<li>');
+                        if (data[key] === 'true') {
+                            var text = data[key] = 'present';
+                            var color = data[key] = 'green';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        }else  if (data[key] === 'false') {
+                            var text = data[key] = 'not present';
+                            var color = data[key] = 'red';
+                            li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
+                        } else {
+                            li.append(boldKey).append(': ' + data[key]);
+                        }
+                        ul.append(li);
+                    }
+                });
+                // Assuming 'modalContent' is the content area of your modal
+                // Empty the modal content and append the unordered list
+                var date = $('<div>').css('color', '#E05D44').text(data.date);
+                var modalContent = $('<div>').append(date, ul);
+                var history = $('<h3>').css('color', '#009A00').text("Evidence History");
+                var br =$('<br>');
+                // Append the modal content to the modal body
+                $('#modal-body').append(br,history,modalContent);
+            });
+            $('#show-details').modal('show');
+                }
+                  },
+                  error: function(xhr, status, error) {
+                      alert(error);
+                      console.error(error);
+                      // console.log(response);
+                      // Handle error
+                  }
+              });
               }
               else{
                   // No QR code detected, display an error message
@@ -276,6 +393,7 @@
                  $('#scannerVideo').hide();
                  $('#scannerCanvas').hide();
                  $('#scannedValue').show();
+                //  $('#uuid').show();
                  deactivateScanner();
               }
           }, 500); // Adjust the interval as needed (here we're scanning every 0.5 seconds)

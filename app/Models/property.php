@@ -21,5 +21,6 @@ class property extends Model
         'witness',
         'date',
         'status',
+        'municipality',
     ];
 }

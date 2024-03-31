@@ -468,7 +468,7 @@ td{
               </div>
             </div>
           </div>
-          <form action="" id="filter_search">
+          <!-- <form action="" id="filter_search">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -496,19 +496,13 @@ td{
           <option value="November">December</option>
         </select>
       </div>
-      <!-- <div class="col-md-3">
-        <label for="station">Station:</label>
-        <select class="input--style-5 form-control" id="station" name="station">
-          <option value="" selected="selected"></option>
-          <option value="Santa Magdalena">Santa Magdalena</option>
-        </select>
-      </div> -->
+     
         <div class="col-md-1" style="padding-top: 20px;">
           <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
         </div>
     </div>
   </div>
-</form>
+</form> -->
  
           <div class="container" style="margin-top:10px;">
             <!-- <div class="btn-group">
@@ -523,45 +517,64 @@ td{
             <!-- <div class="container">
                 <div class="row"> -->
                 <div class="button-container">
-    <form action="#">
-      <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
-    </form>
-    <form action="#">
-      <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
-    </form>
-    <form action="#">
-      <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
-    </form>
-    <form action="#" id="form-download">
-      <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
-    </form>
-  </div>
+                  <div style="margin: 5px;">
+                    <button type="submit" data-toggle="modal" data-target="#scannerProperty" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                    @include('modals/Investigators.scanners.scannerProperty')
+                  </div>
+                </div>
+                <!-- <div class="button-container">
+                  <form action="#">
+                    <button type="submit" class="add btn btn-danger todo-list-add-btn" id="clear-task"> <i class="mdi mdi-redo"></i> Clear</button>
+                  </form>
+                  <form action="#">
+                    <button type="submit" class="add btn btn-info todo-list-add-btn" id="add-task"> <i class="fa fa-plus"></i> Add Records</button>
+                  </form>
+                  <form action="#">
+                    <button type="submit" class="add btn btn-success todo-list-add-btn" id="scan-task"> <i class="fa fa-qrcode"></i> Scan Record</button>
+                  </form>
+                  <form action="#" id="form-download">
+                    <button type="submit" class="add btn btn-warning todo-list-add-btn" id="download-task"><i class="mdi mdi-download"></i> Download</button>
+                  </form>
+                </div> -->
     <div class="table-responsive">
-        <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
+    <table id="ListTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>QR Code</th>
+                <th>Download</th>
+                <th>Status</th>
+                <th>Establishment</th>
                 <th>Address</th>
-               
+                <th>Quantity</th>
+                <th>Description</th>
+                <th>Seizing Officer</th>
+                <th>Witness</th>
+                <th>Date</th>
+                <!-- <th tyle="padding-bottom: 50px;">Date</th> -->
             </tr>
         </thead>
         <tbody>
+          @foreach($data as $data)
             <tr>
-                <td>1</td>
-                <td>Zorita Serrano</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td>56</td>
-                <td>2012/06/01</td>
-                <td>$115,000</td>
-                <td>San Julian Irosin Sorsogon</td>
+                <td>{!! $data->qr_code_image !!}</td>
+                <td style="text-align: center;">
+                  <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
+                  <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
+                </td>
+                @if($data->status == 'Active')
+                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
+                @else
+                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
+                @endif
+                <td>{{$data->establishment}}</td>
+                <td>{{$data->address}}</td>
+                <td>{{$data->quantity}}</td>
+                <td>{{$data->description}}</td>
+                <td>{{$data->seizing_officer}}</td>
+                <td>{{$data->witness}}</td>
+                <td>{{$data->date}}</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

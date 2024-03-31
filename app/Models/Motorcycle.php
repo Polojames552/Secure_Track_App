@@ -24,5 +24,6 @@ class Motorcycle extends Model
         'violations',
         'date',
         'status',
+        'municipality',
     ];
 }

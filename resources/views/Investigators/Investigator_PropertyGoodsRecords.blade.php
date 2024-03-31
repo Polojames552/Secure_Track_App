@@ -582,22 +582,22 @@ td{
           @foreach($data as $data)
             <tr>
                 <td>{!! $data->qr_code_image !!}</td>
-                <td style="text-align: center;">
-                  <button style="width: 50px;height: 35px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#editPropertyGoodsEvidence{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
+                <td>
+                  <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-success" data-toggle="modal" data-target="#editPropertyGoodsEvidence{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
                   @if($count > 0)
                     @include('modals/Investigators.editEvidence.editPropertyEvidence')
                   @endif
                 </td>
-                <td style="text-align: center;">
-                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferPropertyGoodsEvidence{{$data->id}}">
+                <td>
+                    <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferPropertyGoodsEvidence{{$data->id}}">
                       <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
                     </button>
                     @if($count > 0)
                       @include('modals/Investigators.transferEvidence.transferPropertyEvidence')
                     @endif
                 </td>
-                <td style="text-align: center;">
-                  <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
+                <td>
+                  <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
                   <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
                 </td>
                 @if($data->status == 'Active')
