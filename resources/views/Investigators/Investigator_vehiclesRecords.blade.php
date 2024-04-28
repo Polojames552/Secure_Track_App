@@ -351,6 +351,12 @@ td{
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MakeTurnOverReceipt">
+              <i style="padding-right:10px;" class="mdi mdi-file-document-box"></i>
+              <span class="menu-title">Make Receipt</span>
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="municipalRecords">
               <i class="icon-bar-graph menu-icon"></i>
@@ -580,7 +586,7 @@ td{
             <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Edit</th>
             <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Transfer</th>
             <th style="border-top: 1px solid black; padding-bottom: 30px; text-align: center; font-size:11.5px;">Download</th>
-            <th style="padding-bottom: 50px;">Status</th>
+            <th style="padding-bottom: 50px; text-align: center;">Status</th>
             <th style="padding-bottom: 50px;">Make Type</th>
             <th style="padding-bottom: 50px;">Plate No</th>
             <th style="padding-bottom: 50px;">Engine No</th>
@@ -717,25 +723,28 @@ td{
                 </td>
                 <!-- <td>{{$data->id}}</td> -->
                 <td>
-                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
+                    @if($data->changes == 0)
+                      <button style="width: 50px;height: 35px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#editEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-lead-pencil"></i></button>
+                    @endif
                     @if($count > 0)
                       @include('modals/Investigators.editEvidence.editEvidenceVehicle')
                     @endif
                 </td>
                 <td>
-                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-file-send"></i></button>
                     @if($count > 0)
+                      <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-file-send"></i></button>
                       @include('modals/Investigators.transferEvidence.transferVehicleEvidence')
                     @endif
                 </td>
                 <td>
-                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#"><i class="mdi mdi-download"></i></button>
+                    @if($count > 0)
+                      <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#downloadCar{{$data->id}}"><i class="mdi mdi-download"></i></button>
+                      @include('modals/downloadCar')
+                    @endif
                 </td>
-                @if($data->status == 'Active')
-                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
-                @else
-                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
-                @endif
+                <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
+                    <b>{{$data->status}}</b>
+                </td>
                 <td>{{$data->make_type}}</td>
                 <td>{{$data->plate_no}}</td>
                 <td>{{$data->engine_no}}</td>
@@ -877,6 +886,7 @@ td{
             </tr>
             @endforeach
         </tbody>
+       
     </table>
   
 </div>

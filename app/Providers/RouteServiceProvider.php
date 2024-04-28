@@ -20,6 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME1 = '/superAdminDashboard';
     public const HOME2 = '/municipalAdminDashboard';
     public const HOME3 = '/myInvestigatorsProfile';
+    public const HOME4 = '/CrimeLabDashboard';
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */

@@ -194,7 +194,14 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
+#file-1-preview img {
+    width: 100%;
+    height: auto;
+    max-width: 100%; 
+    max-height: 100%; /* Ensure image does not exceed container height */
+    object-fit: contain; /* Maintain aspect ratio and fit within container */
+    border-radius: 0; /* Remove any border radius */
+  }
 </style>
 
 <!-- Modal -->
@@ -208,7 +215,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="transfer-form" action="{{ route ('transferMotorCycle_Evidence', $data->id) }}" method="POST">
+      <form id="transfer-form{{$data->id}}" action="{{ route ('transferMotorCycle_Evidence', $data->id) }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="modal-body">
     <!-- <section style="padding-bottom:10px;">
@@ -217,77 +224,125 @@
         <div class="form-row" >
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Make/Type:</b></label>
-                <input type="text" class="form-control" name="make_type" id="make_type" placeholder="" value="{{$data->make_type}}" required>
+                <input type="text" class="form-control" name="make_type1" id="make_type1" placeholder="" value="{{$data->make_type}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="make_type" id="make_type" placeholder="" value="{{$data->make_type}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Chassis No.:</b></label>
-                <input type="text" class="form-control" name="chasis" id="chasis" placeholder="" value="{{$data->chasis}}" required>
+                <input type="text" class="form-control" name="chasis1" id="chasis1" placeholder="" value="{{$data->chasis}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="chasis" id="chasis" placeholder="" value="{{$data->chasis}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Motor No.:</b></label>
-                <input type="text" class="form-control" name="motor_no" id="motor_no" placeholder="" value="{{$data->motor_no}}" required>
+                <input type="text" class="form-control" name="motor_no1" id="motor_no1" placeholder="" value="{{$data->motor_no}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="motor_no" id="motor_no" placeholder="" value="{{$data->motor_no}}" required>
             </div>
         </div>
        
         <div class="form-row">
           <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Plate No.:</b></label>
-                <input type="text" class="form-control" name="plate_no" id="plate_no" placeholder="" value="{{$data->plate_no}}" required>
+                <input type="text" class="form-control" name="plate_no1" id="plate_no1" placeholder="" value="{{$data->plate_no}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="plate_no" id="plate_no" placeholder="" value="{{$data->plate_no}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Color:</b></label>
-                <input type="text" class="form-control" name="color" id="color" placeholder="" value="{{$data->color}}" required>
+                <input type="text" class="form-control" name="color1" id="color1" placeholder="" value="{{$data->color}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="color" id="color" placeholder="" value="{{$data->color}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>CR/OR No.:</b></label>
-                <input type="text" class="form-control" name="ORCR_no" id="ORCR_no" placeholder="" value="{{$data->ORCR_no}}" required>
+                <input type="text" class="form-control" name="ORCR_no1" id="ORCR_no1" placeholder="" value="{{$data->ORCR_no}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="ORCR_no" id="ORCR_no" placeholder="" value="{{$data->ORCR_no}}" required>
             </div>
          
         </div>
         <div class="form-row">
           <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>LTO FileN:</b></label>
-                <input type="text" class="form-control" name="LTO_File_no" id="LTO_File_no" placeholder="" value="{{$data->LTO_File_no}}" required>
+                <input type="text" class="form-control" name="LTO_File_no1" id="LTO_File_no1" placeholder="" value="{{$data->LTO_File_no}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="LTO_File_no" id="LTO_File_no" placeholder="" value="{{$data->LTO_File_no}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Registered Owner.:</b></label>
-                <input type="text" class="form-control" name="registered_owner" id="registered_owner" placeholder="" value="{{$data->registered_owner}}" required>
+                <input type="text" class="form-control" name="registered_owner1" id="registered_owner1" placeholder="" value="{{$data->registered_owner}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="registered_owner" id="registered_owner" placeholder="" value="{{$data->registered_owner}}" required>
             </div>
             <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="" value="{{$data->address}}" required>
+                <input type="text" class="form-control" name="address1" id="address1" placeholder="" value="{{$data->address}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="address" id="address" placeholder="" value="{{$data->address}}" required>
             </div>
         </div>
+       
         <label id="headlabel" for="inputEmail4"><b>Violations:</b></label>
-            <textarea class="form-control"  name="violations" id="violations" cols="10" rows="5">{{$data->violations}}</textarea>
+            <textarea class="form-control"  name="violations1" id="violations1" cols="10" rows="5" disabled>{{$data->violations}}</textarea>
+            <textarea style="display: none;" class="form-control"  name="violations" id="violations" cols="10" rows="5">{{$data->violations}}</textarea>
             <br>
             <div class="form-row">
-                <div class="form-group col-md-9">
+              <div class="form-group col-md-4"></div>
+              <div class="form-group col-md-4"></div>
+                <div class="form-group col-md-4">
+                    <label id="headlabel" for="inputEmail4"><b>Received by:</b></label>
+                    <input type="text" class="form-control" name="received" id="received" placeholder="" value="" required>
                 </div>
-                <div class="form-group col-md-3">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                </div>
+                <div class="form-group col-md-4">
                     <label id="status_label" for="inputEmail4"><b>Status:</b></label>
                         <select id="status" name="status" class="form-control" required>
-                        @if($data->status == 'Active')
-                                <option value="Active" selected>Active</option>
+                            @if($data->status == 'MPS Custodian')
+                                <option value="MPS Custodian" selected>MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
                                 <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Crime Lab')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab" selected>Crime Lab</option>
                                 <option value="Released">Released</option>
-                            @elseif($data->status == 'Disposed')
-                                <option value="Active">Active</option>
-                                <option value="Disposed" selected>Disposed</option>
-                                <option value="Released">Released</option>
-                            @else		
-                                <option value="Active">Active</option>
-                                <option value="Disposed" >Disposed</option>
+                                <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Released')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
                                 <option value="Released" selected>Released</option>
+                                <option value="Disposed">Disposed</option>
+                            @else		
+                                <option value="MPS Custodian" >MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
+                                <option value="Disposed" selected>Disposed</option>
                             @endif
                         </select>
                 </div>
             </div>
+            <div class="form-row">
+            <div class="form-group col-md-4"></div>
+            <div class="form-group col-md-4">
+              <div class="form_item">
+                 <div class="form">
+                    <div class="grid">
+                      <div class="form-element">
+                          <input type="file" id="file-{{$data->id}}" accept="image/*" name="Picture" required>
+                          <label style="height: 100%; width:100%; max-width: 100%; max-height: 100%;" for="file-{{$data->id}}" id="file-{{$data->id}}-preview" >
+                              <img src="https://bit.ly/3ubuq5o" alt="" style="border-radius: 0;object-fit: contain;">
+                              <div>
+                                  <span style="font-size:13px;">Insert image receipt</span>
+                              </div>
+                          </label>
+                      </div>
+                    </div> 
+                 </div>
+               </div> 
+              </div>
+              <div class="form-group col-md-4"> </div>
+          </div> 
     <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">
         <div class="col-md-6">
-            <button style="height:35px; width:100px;" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmationModal">Transfer</button>
+            <button style="height:35px; width:100px;" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#confirmationModal{{$data->id}}">Transfer</button>
         </div>
         <div class="col-md-6" id="cancel-button">
             <button style="height:35px; width:100px;" type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
@@ -300,7 +355,7 @@
   </div>
 
    <!-- Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmationModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -318,18 +373,43 @@
      
       <div class="modal-footer">
         <button style="height:35px; width:80px;" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        <button style="height:35px; width:80px;" id="confirmSaveBtn" type="submit" class="btn btn-info">Save</button>
+        <button style="height:35px; width:80px;" id="confirmSaveBtn{{$data->id}}" type="submit" class="btn btn-info">Save</button>
       </div>
     </div>
   </div>
 </div>
-
 <script>
-    document.getElementById('confirmSaveBtn').addEventListener('click', function() {
-        // Perform form submission or other actions here
-        // Example: document.getElementById('yourFormId').submit();
-        document.getElementById('transfer-form').submit();
-    });
+function previewBeforeUpload(id) {
+  document.querySelector("#" + id).addEventListener("change", function (e) {
+    if (e.target.files.length == 0) {
+      return;
+    }
+    let file = e.target.files[0];
+    if (file.size > 2097152) { // 2 MB in bytes
+      alert("Error: Image size should be less than 2MB.");
+      return;
+    } else {
+      let url = URL.createObjectURL(file);
+      let previewId = id + "-preview";
+      document.querySelector("#" + previewId + " div").innerText = file.name;
+      document.querySelector("#" + previewId + " img").src = url;
+    }
+  });
+}
+document.querySelectorAll('[id^="file-"]').forEach(function(element) {
+  let fileId = element.id;
+  previewBeforeUpload(fileId);
+});
+</script>
+<script>
+   document.getElementById('confirmSaveBtn{{$data->id}}').addEventListener('click', function() {
+    // Get the ID of the form associated with the button
+    var formId = 'transfer-form{{$data->id}}';
+    // Set the enctype attribute to "multipart/form-data"
+    document.getElementById(formId).setAttribute('enctype', 'multipart/form-data');
+    // Submit the form
+    document.getElementById(formId).submit();
+});
 
     document.getElementById("showPasswordCheckbox").addEventListener("change", function() {
         if (this.checked) {

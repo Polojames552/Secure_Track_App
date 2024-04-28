@@ -48,5 +48,14 @@ class DatabaseSeeder extends Seeder
             'status' => 'Active',
             'role' => '3',
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Crime Lab',
+            'username' => 'PNP_CrimeLab',
+            'password' => Hash::make('CrimeLab123'),
+            'municipality' => 'admin',
+            'municipal_director' => 'admin',
+            'status' => 'Active',
+            'role' => '4',
+        ]);
     }
 }

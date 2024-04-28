@@ -1278,14 +1278,7 @@
                         <input type="checkbox" id="beyond_economical_repair" name="beyond_economical_repair"> Beyond Economical Repair and corrosion have set in, which requires a major body repair
                     @endif
                 </td>
-                <!-- <td style="font-size:11px;">
-                    @if($data->beyond_economical_repair == "true")
-                        <input type="checkbox" id="beyond_economical_repair" name="beyond_economical_repair" checked>
-                    @else
-                        <input type="checkbox" id="beyond_economical_repair" name="beyond_economical_repair">
-                    @endif
-                    Beyond Economical Repair and corrosion have set in, which requires a major body repair
-                </td> -->
+              
             </tr>
           </tbody>
         </table>
@@ -1315,18 +1308,26 @@
                 <div class="form-group col-md-3">
                     <label id="status_label" for="inputEmail4"><b style="text-align:left;">Status:</b></label>
                         <select id="status" name="status" class="form-control" required>
-                            @if($data->status == 'Active')
-                                <option value="Active" selected>Active</option>
+                        @if($data->status == 'MPS Custodian')
+                                <option value="MPS Custodian" selected>MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
                                 <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Crime Lab')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab" selected>Crime Lab</option>
                                 <option value="Released">Released</option>
-                            @elseif($data->status == 'Disposed')
-                                <option value="Active">Active</option>
-                                <option value="Disposed" selected>Disposed</option>
-                                <option value="Released">Released</option>
-                            @else		
-                                <option value="Active">Active</option>
-                                <option value="Disposed" >Disposed</option>
+                                <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Released')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
                                 <option value="Released" selected>Released</option>
+                                <option value="Disposed">Disposed</option>
+                            @else		
+                                <option value="MPS Custodian" >MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
+                                <option value="Disposed" selected>Disposed</option>
                             @endif
                         </select>
                 </div>
@@ -1335,7 +1336,6 @@
   
    
     <div class="modal-footer">
-    <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">
         <div class="col-md-6" >
             <button style="height:35px; width:100px;" type="submit" class="btn btn-primary btn-block">Save</button>

@@ -1,0 +1,29 @@
+/* Checkbox styling */
+.checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none; /* Hide default checkbox */
+}
+
+/* Custom checkbox appearance */
+.checkbox-label .custom-checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 20px;
+}
+
+.checkbox-label .custom-checkbox.checked::before {
+    content: "\f00c"; /* Unicode for Font Awesome checkmark icon */
+    font-family: 'Font Awesome'; /* Specify Font Awesome */
+}
+#headlabel{
+    font-size:2px;
+}

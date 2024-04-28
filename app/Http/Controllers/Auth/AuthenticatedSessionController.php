@@ -61,6 +61,20 @@ class AuthenticatedSessionController extends Controller
                     ]);
                 }
             }
+            elseif(Auth::user()->role =='4'){
+                if(Auth::user()->status =='Active'){
+                    $request->session()->regenerate();
+                    return redirect()->intended(RouteServiceProvider::HOME4);
+                }
+                else{
+                    Auth::guard('web')->logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+                    return back()->withErrors([
+                        'email' => __('auth.blocked'),
+                    ]);
+                }
+            }
             else{
                 Auth::guard('web')->logout();
                 $request->session()->invalidate();

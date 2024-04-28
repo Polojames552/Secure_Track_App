@@ -351,6 +351,12 @@ td{
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MakeTurnOverReceipt">
+              <i style="padding-right:10px;" class="mdi mdi-file-document-box"></i>
+              <span class="menu-title">Make Receipt</span>
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="municipalRecords">
               <i class="icon-bar-graph menu-icon"></i>
@@ -591,9 +597,11 @@ td{
         <tr>
             <td style="text-align: center;">{!! $data->qr_code_image !!}</td>
             <td>
+                @if($data->changes == 0)
                 <button  style="width: 50px;height: 35px; text-align: center; " type="button" class="btn btn-success" data-toggle="modal" data-target="#editMotorVehicleEvidence{{$data->id}}">
                     <i class="mdi mdi-lead-pencil" style="font-size: 15px;"></i>
                 </button>
+                @endif
                 @if($count > 0)
                   @include('modals/Investigators.editEvidence.editMotorcycleEvidence')
                 @endif
@@ -607,16 +615,19 @@ td{
                 @endif
             </td>
             <td>
-              <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
+              <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#downloadMotorcycle{{$data->id}}">
               <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
+              @if($count > 0)
+                  @include('modals/downloadMotorcycle')
+                @endif
             </td>
 
           
             <!-- Include your modal if needed -->
           
             <!-- Display status -->
-            <td style="color: {{$data->status == 'Active' ? '#13870d' : '#bc1515'}};">
-                <b>{{$data->status}}</b>
+            <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
+                    <b>{{$data->status}}</b>
             </td>
             <!-- Display other columns -->
             <td>{{$data->make_type}}</td>
@@ -647,6 +658,42 @@ td{
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
+<!-- 
+  <div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle"><b>Download Confirmation</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="scanForm" action="#" method="POST">
+                @csrf
+                <div class="modal-body">
+                  Are you sure you want to save?
+                  <br>
+                  <br>
+                  <i style="color:#E00000;">(this action is irreversible)</i>
+                </div>
+                <div class="modal-footer">
+              <div class="row">
+                  <div class="col-md-6">
+                      <button type="submit" class="btn btn-primary btn-block">Save</button>
+                  </div>
+                  <div class="col-md-6" id="cancel-button">
+                      <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+
 <script>
 $(document).ready(function() {
     $('#ListTable').DataTable();
@@ -678,4 +725,3 @@ $(document).ready(function() {
 </body>
 
 </html>
-

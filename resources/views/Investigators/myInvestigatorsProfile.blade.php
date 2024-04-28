@@ -337,6 +337,12 @@ td, th {
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="MakeTurnOverReceipt">
+              <i style="padding-right:10px;" class="mdi mdi-file-document-box"></i>
+              <span class="menu-title">Make Receipt</span>
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="myRecords">
               <i class="icon-bar-graph menu-icon"></i>
@@ -540,8 +546,6 @@ td, th {
                 </div>
                   </div>
                 </div>
-
-
                 <div class="col-md-6 stretch-card transparent" id="box-numbers-items">
                   <div class="card  card-light-danger">
                   <div class="card-box">
@@ -552,24 +556,11 @@ td, th {
                     <div class="icon">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </div>
-                   
                 </div>
                   </div>
-                  
                 </div>
               </div> 
-              
-              
             </div> 
-
-            <!-- <div class="col-md-6 grid-margin stretch-card">
-              <div class="card -bg">
-                   <img src="images/dashh.png" alt="people" style="height:400px">
-                </div>
-            </div> -->
-
-          
-
           </div>
 
             <!-- <div class="col-md-6 grid-margin stretch-card">

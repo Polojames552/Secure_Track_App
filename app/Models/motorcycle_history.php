@@ -11,6 +11,7 @@ class motorcycle_history extends Model
     protected $fillable = [
         // 'qr_code_image',
         'uuid',
+        
         'user_id',
         'make_type',
         'chasis',
@@ -24,5 +25,8 @@ class motorcycle_history extends Model
         'violations',
         'date',
         'status',
+        'municipality',
+        'received',
+        'receipt',
     ];
 }

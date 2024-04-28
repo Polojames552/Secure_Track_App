@@ -6,8 +6,7 @@
 <title>Show Password Example</title>
 </head>
 <body>
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/mod.js"></script>
 <style>
     td {
@@ -195,6 +194,42 @@
   background-position: center;
 }
 
+/* Picture */
+.form .grid {
+  margin-top:50px;
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.form .grid .form-element {
+  width:250px;
+  height:250px;
+  box-shadow:0px 0px 20px 5px rgba(100,100,100,0.1);
+}
+.form .grid .form-element input {
+  display:none;
+}
+.form .grid .form-element img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.form .grid .form-element div {
+  position:relative;
+  height:40px;
+  margin-top:-40px;
+  background:rgba(0,0,0,0.5);
+  text-align:center;
+  line-height:40px;
+  font-size:13px;
+  color:#f5f5f5;
+  font-weight:600;
+}
+.form .grid .form-element div span {
+  font-size:40px;
+}
+
 </style>
 
 <!-- Modal -->
@@ -209,23 +244,28 @@
         </button>
       </div>
       
-      <form action="addProperty_Evidence" method="POST">
+      <form action="addProperty_Evidence" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="modal-body">
    
     <!-- <section style="padding-bottom:10px;">
               <h4 style="color:#00A3BE;"><b>Motor Vehicle Description:</b></h4>
     </section> -->
+      <!-- <label style="display: flex; justify-content: center; align-items: center; margin-bottom: -40px;" id="headlabel" for="inputEmail4"><b>Insert Picture</b></label> -->
+    
+      <?php $num = $count +1; ?>
+
         <div class="form-row" >
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-5">
+                <label id="headlabel" for="inputEmail4"><b>Item:</b></label>
+                <input type="text" class="form-control" name="item" id="item" placeholder="" value="" required>
+            </div>
+            <div class="form-group col-md-5">
                 <label id="headlabel" for="inputEmail4"><b>Place/Establishment:</b></label>
                 <input type="text" class="form-control" name="establishment" id="establishment" placeholder="" value="" required>
             </div>
-            <div class="form-group col-md-4">
-                <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="" value="" required>
-            </div>
-            <div class="form-group col-md-4">
+          
+            <div class="form-group col-md-2">
                 <label id="headlabel" for="inputEmail4"><b>Quantity/Units:</b></label>
                 <input type="number" class="form-control" name="quantity" id="quantity" placeholder="" value="" required>
             </div>
@@ -235,17 +275,41 @@
             <textarea class="form-control"  name="description" id="description" cols="10" rows="5"></textarea>
             <br>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="" value="" required>
+            </div>
+            <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Seizing Officer:</b></label>
                 <input type="text" class="form-control" name="seizing_officer" id="seizing_officer" placeholder="" value="" required>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Witness:</b></label>
                 <input type="text" class="form-control" name="witness" id="witness" placeholder="" value="" required>
             </div>
           
         </div>
-   
+        <div class="form-row">
+            <div class="form-group col-md-4"></div>
+            <div class="form-group col-md-4">
+              <div class="form_item">
+                 <div class="form">
+                    <div class="grid">
+                      <div class="form-element" style="height: auto; max-height: 20%;">
+                        <input type="file" id="file-{{$num}}" accept="image/*" name="Picture" id="Picture" required>
+                        <label for="file-{{$num}}" id="file-{{$num}}-preview">
+                          <img src="https://bit.ly/3ubuq5o" alt="">
+                            <div>
+                              <span style="font-size:13px;">Insert image</span>
+                            </div>
+                        </label>
+                      </div>
+                    </div> 
+                 </div>
+               </div> 
+              </div>
+              <div class="form-group col-md-4"> </div>
+          </div> 
     <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
     <div class="row">
@@ -263,5 +327,27 @@
   </div>
 
 </div>
+<script>
+function previewBeforeUpload(id) {
+  document.querySelector("#" + id).addEventListener("change", function (e) {
+    if (e.target.files.length == 0) {
+      return;
+    }
+    let file = e.target.files[0];
+    if (file.size > 2097152) { // 2 MB in bytes
+      alert("Error: Image size should be less than 2MB.");
+      // Optionally, you can clear the input value or perform any other action here
+      return;
+    }else{
+    let url = URL.createObjectURL(file);
+    document.querySelector("#" + id + "-preview div").innerText = file.name;
+    document.querySelector("#" + id + "-preview img").src = url;
+    }
+  });
+}
+previewBeforeUpload("file-{{$num}}");
+// previewBeforeUpload("file-3");
+// previewBeforeUpload("file-3");
+</script>
 </body>
 </html>

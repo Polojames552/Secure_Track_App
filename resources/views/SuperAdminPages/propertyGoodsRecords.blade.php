@@ -550,6 +550,7 @@ td{
                 <th>QR Code</th>
                 <th>Download</th>
                 <th>Status</th>
+                <th>Item</th>
                 <th>Establishment</th>
                 <th>Address</th>
                 <th>Quantity</th>
@@ -568,11 +569,9 @@ td{
                   <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
                   <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
                 </td>
-                @if($data->status == 'Active')
-                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
-                @else
-                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
-                @endif
+                <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
+                    <b>{{$data->status}}</b>
+                </td>
                 <td>{{$data->establishment}}</td>
                 <td>{{$data->address}}</td>
                 <td>{{$data->quantity}}</td>

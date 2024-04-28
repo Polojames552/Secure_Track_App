@@ -19,12 +19,15 @@ return new class extends Migration
             $table->string('establishment');
             $table->string('address');
             $table->string('quantity');
+            $table->string('item');
             $table->text('description');
             $table->string('seizing_officer');
             $table->string('witness');
             $table->string('date');
             $table->string('status');
             $table->string('municipality');
+            $table->string('received');
+            $table->text('receipt');
             $table->timestamps();
         });
     }

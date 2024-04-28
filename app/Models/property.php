@@ -11,16 +11,20 @@ class property extends Model
     protected $fillable = [
 
         'qr_code_image',
+        'picture',
+        'changes',//for edit disabled
         'uuid',
         'user_id',
         'establishment',
         'address',
         'quantity',
+        'item',
         'description',
         'seizing_officer',
         'witness',
         'date',
         'status',
         'municipality',
+        'received',
     ];
 }

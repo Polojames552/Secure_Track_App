@@ -7,7 +7,7 @@ use App\Http\Controllers\addUser;
 use App\Http\Controllers\superAdminController; 
 use App\Http\Controllers\municipalAdminController; 
 use App\Http\Controllers\investigatorController;
-
+use App\Http\Controllers\CrimeLabController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +103,20 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     });
  });
 //***Municipal Admin Screens 
+// Route::get('/CrimeLabDashboard', function () {
+//     return view('CrimeLab/CrimeLabDashboard');
+// });
+Route::get('/CrimeTurnOverReceipt', function () {
+    return view('CrimeLab/CrimeTurnOverReceipt');
+});
+
+Route::middleware(['auth','isCrimeLab'])->group(function(){
+    Route::get('fetch-data',[superAdminController::class ,'chartsData']);
+    Route::get('CrimeLabDashboard',[CrimeLabController::class ,'crimeDashboard']);
+    Route::get('CrimeLabProperty',[CrimeLabController::class ,'crimeProperty']);
+    Route::get('CrimeLabCar',[CrimeLabController::class ,'crimeCar']);
+    Route::get('CrimeLabMotorVehicle',[CrimeLabController::class ,'crimeMotor']);
+});
 
 //***Investigators Screens
     Route::middleware(['auth','isInvestigator'])->group(function(){
@@ -146,7 +160,9 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
     Route::get('/Investigator_otherRecords', function () {
         return view('Investigators/Investigator_otherRecords');
     });
-
+   Route::get('/MakeTurnOverReceipt', function () {
+        return view('Investigators/MakeTurnOverReceipt');
+    });
 //    Route::get('/myInvestigatorsProfile', function () {
 //         return view('Investigators/myInvestigatorsProfile');
 //     });
@@ -154,9 +170,15 @@ Route::middleware(['auth','isMunicipalAdmin'])->group(function(){
 });
 //***Investigators Screens
  //Get data for Scanner   
+ Route::post('generate_receipt',[investigatorController::class ,'my_receipt']);
  Route::post('scanner_vehicle_record/{uuid}',[investigatorController::class ,'getVehicleRecordScanner'])->name('scanner_vehicle_record');
  Route::post('scanner_property_record/{uuid}',[investigatorController::class ,'getPropertyRecordScanner'])->name('scanner_property_record');
  Route::post('scanner_motorcycle_record/{uuid}',[investigatorController::class ,'getMotorcycleRecordScanner'])->name('scanner_motorcycle_record');
+
+//Download Data  
+Route::post('downloadMotorcycle/{id}',[investigatorController::class ,'downloadMotorcycle'])->name('downloadMotorcycle');
+Route::post('downloadProperty/{id}',[investigatorController::class ,'downloadProperty'])->name('downloadProperty');
+Route::post('downloadCar/{id}',[investigatorController::class ,'downloadCar'])->name('downloadCar');
 
 Route::get('/MyLogin', function () {
     return view('MyLogin');

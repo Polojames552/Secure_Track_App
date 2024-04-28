@@ -217,15 +217,15 @@
               <h4 style="color:#00A3BE;"><b>Motor Vehicle Description:</b></h4>
     </section> -->
         <div class="form-row" >
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-5">
+                <label id="headlabel" for="inputEmail4"><b>Item:</b></label>
+                <input type="text" class="form-control" name="item" id="item" placeholder="" value="{{$data->item}}" required>
+            </div>
+            <div class="form-group col-md-5">
                 <label id="headlabel" for="inputEmail4"><b>Place/Establishment:</b></label>
                 <input type="text" class="form-control" name="establishment" id="establishment" placeholder="" value="{{$data->establishment}}" required>
             </div>
-            <div class="form-group col-md-4">
-                <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="" value="{{$data->address}}" required>
-            </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label id="headlabel" for="inputEmail4"><b>Quantity/Units:</b></label>
                 <input type="number" class="form-control" name="quantity" id="quantity" placeholder="" value="{{$data->quantity}}" required>
             </div>
@@ -235,11 +235,15 @@
             <textarea class="form-control"  name="description" id="description" cols="10" rows="5">{{$data->description}}</textarea>
             <br>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <label id="headlabel" for="inputEmail4"><b>Address:</b></label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="" value="{{$data->address}}" required>
+            </div>
+            <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Seizing Officer:</b></label>
                 <input type="text" class="form-control" name="seizing_officer" id="seizing_officer" placeholder="" value="{{$data->seizing_officer}}" required>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label id="headlabel" for="inputEmail4"><b>Witness:</b></label>
                 <input type="text" class="form-control" name="witness" id="witness" placeholder="" value="{{$data->witness}}" required>
             </div>
@@ -251,11 +255,25 @@
                 <div class="form-group col-md-3">
                     <label id="status_label" for="inputEmail4"><b>Status:</b></label>
                         <select id="status" name="status" class="form-control" required>
-                            @if($data->status == 'Active')
-                                <option value="Active" selected>Active</option>
+                            @if($data->status == 'MPS Custodian')
+                                <option value="MPS Custodian" selected>MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
+                                <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Crime Lab')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab" selected>Crime Lab</option>
+                                <option value="Released">Released</option>
+                                <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Released')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released" selected>Released</option>
                                 <option value="Disposed">Disposed</option>
                             @else		
-                            <option value="Active">Active</option>
+                                <option value="MPS Custodian" >MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
                                 <option value="Disposed" selected>Disposed</option>
                             @endif
                         </select>

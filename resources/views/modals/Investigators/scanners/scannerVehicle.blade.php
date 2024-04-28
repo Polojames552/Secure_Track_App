@@ -319,7 +319,7 @@
                 // Iterate through the properties of the data object
                 Object.keys(data).forEach(function(key) {
                     // Exclude specific fields
-                    if (key !== 'id' && key !== 'municipality' && key !== 'qr_code_image' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
+                    if (key !== 'id'&& key !== 'changes' && key !== 'picture' && key !== 'municipality' && key !== 'qr_code_image' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
                         // Remove underscores from the key and make it bold
                         var formattedKey = key.replace(/_/g, ' ');
                         var boldKey = $('<strong>').text(formattedKey);
@@ -343,14 +343,20 @@
                         ul.append(li);
                     }
                 });
-
+                var pic = $('<img>').attr('src', "images/"+data.picture).css({
+                    'width': '50%', // Set width to 50%
+                    'height': 'auto', // Maintain aspect ratio
+                    'display': 'block', // Ensure the image is treated as a block element
+                    'margin': 'auto', // Center the image horizontally
+                    'margin-bottom': '15px'
+                });
                 // Assuming 'modalContent' is the content area of your modal
                 // Empty the modal content and append the unordered list
                 var date = $('<div>').css('color', '#E05D44').text(data.date);
                 var modalContent = $('<div>').append(date, ul);
                 var present = $('<h3>').css('color', '#009A00').text("Present data");
                 // Append the modal content to the modal body
-                $('#modal-body').append(present,modalContent);
+                $('#modal-body').append(pic,present,modalContent);
             });
             // Show the modal
             $('#show-details').modal('show');
@@ -370,7 +376,7 @@
                 // Iterate through the properties of the data object
                 Object.keys(data).forEach(function(key) {
                     // Exclude specific fields
-                    if (key !== 'id' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
+                    if (key !== 'id' && key !== 'municipality' && key !== 'uuid' && key !== 'user_id' && key !== 'remember_token' && key !== 'created_at' && key !== 'updated_at') {
                         // Remove underscores from the key and make it bold
                         var formattedKey = key.replace(/_/g, ' ');
                         var boldKey = $('<strong>').text(formattedKey);
@@ -386,7 +392,10 @@
                             var text = data[key] = 'not present';
                             var color = data[key] = 'red';
                             li.append(boldKey).append(': <span style="color:' + color + '">' + text + '</span>');
-                        } else {
+                        }else if (key === 'receipt') {
+                            // li.append(boldKey).append(': <a href="http://127.0.0.1:8000/images/' + data[key] + '" target="_blank">http://127.0.0.1:8000/images/' + data[key] + '</a>');
+                            li.append(boldKey).append(': <a href="http://127.0.0.1:8000/images/' + data[key] + '" target="_blank">View Receipt</a>');
+                          } else {
                             // For non-boolean values, just display the value
                             li.append(boldKey).append(': ' + data[key]);
                         }

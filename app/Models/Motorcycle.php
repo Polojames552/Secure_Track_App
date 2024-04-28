@@ -10,6 +10,8 @@ class Motorcycle extends Model
     use HasFactory;
     protected $fillable = [
         'qr_code_image',
+        'picture',
+        'changes',//for edit disabled
         'uuid',
         'user_id',
         'make_type',
@@ -25,5 +27,6 @@ class Motorcycle extends Model
         'date',
         'status',
         'municipality',
+        'received',
     ];
 }

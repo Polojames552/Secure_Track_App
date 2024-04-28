@@ -573,8 +573,8 @@ td{
             </td>
             <!-- Include your modal if needed -->
             <!-- Display status -->
-            <td style="color: {{$data->status == 'Active' ? '#13870d' : '#bc1515'}};">
-                <b>{{$data->status}}</b>
+            <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
+                    <b>{{$data->status}}</b>
             </td>
             <!-- Display other columns -->
             <td>{{$data->make_type}}</td>

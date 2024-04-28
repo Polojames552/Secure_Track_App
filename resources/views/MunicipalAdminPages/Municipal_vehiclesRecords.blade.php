@@ -571,11 +571,9 @@ td{
                 <td style="text-align: center;">
                     <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#"><i class="mdi mdi-download"></i></button>
                 </td>
-                @if($data->status == 'Active')
-                  <td style="color:#13870d;"><b>{{$data->status}}</b></td>
-                @else
-                  <td style="color:#bc1515;"><b>{{$data->status}}</b></td>
-                @endif
+                <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
+                    <b>{{$data->status}}</b>
+                </td>
                 <td>{{$data->make_type}}</td>
                 <td>{{$data->plate_no}}</td>
                 <td>{{$data->engine_no}}</td>

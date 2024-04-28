@@ -28,7 +28,8 @@ return new class extends Migration
             // $table->timestamps();
             $table->id();
             $table->text('qr_code_image');
-            $table->string('uuid');
+            $table->string('uuid');  
+            $table->text('changes'); //for edit disabled
             $table->string('user_id');
             $table->string('make_type');
             $table->string('plate_no');
@@ -159,6 +160,8 @@ return new class extends Migration
             $table->string('date');
             $table->string('status');
             $table->string('municipality');
+            $table->text('received');
+            $table->text('picture');
             $table->rememberToken();
             $table->timestamps();
         });

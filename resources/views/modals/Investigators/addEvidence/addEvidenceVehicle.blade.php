@@ -194,7 +194,41 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
+/* Picture */
+.form .grid {
+  margin-top:50px;
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.form .grid .form-element {
+  width:250px;
+  height:250px;
+  box-shadow:0px 0px 20px 5px rgba(100,100,100,0.1);
+}
+.form .grid .form-element input {
+  display:none;
+}
+.form .grid .form-element img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.form .grid .form-element div {
+  position:relative;
+  height:40px;
+  margin-top:-40px;
+  background:rgba(0,0,0,0.5);
+  text-align:center;
+  line-height:40px;
+  font-size:13px;
+  color:#f5f5f5;
+  font-weight:600;
+}
+.form .grid .form-element div span {
+  font-size:40px;
+}
 </style>
 
 <!-- Modal -->
@@ -208,7 +242,7 @@
         </button>
       </div>
       
-      <form action="addEvidence_Vehicles" method="POST">
+      <form action="addEvidence_Vehicles" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="modal-body">
 	<!-- <center>
@@ -584,7 +618,27 @@
             </div>
         </div>
       </div>
-  
+      <div class="form-row">
+            <div class="form-group col-md-4"></div>
+            <div class="form-group col-md-4">
+              <div class="form_item">
+                 <div class="form">
+                    <div class="grid">
+                      <div class="form-element" style="height: auto; max-height: 20%;">
+                        <input type="file" id="file-1" accept="image/*" name="Picture" id="Picture" required>
+                        <label for="file-1" id="file-1-preview">
+                          <img src="https://bit.ly/3ubuq5o" alt="">
+                            <div>
+                              <span style="font-size:13px;">Insert image</span>
+                            </div>
+                        </label>
+                      </div>
+                    </div> 
+                 </div>
+               </div> 
+              </div>
+              <div class="form-group col-md-4"> </div>
+          </div> 
    
     <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
@@ -602,6 +656,27 @@
     </div>
   </div>
   <script>
+function previewBeforeUpload(id) {
+    document.querySelector("#" + id).addEventListener("change", function (e) {
+      if (e.target.files.length == 0) {
+        return;
+      }
+      let file = e.target.files[0];
+      if (file.size > 2097152) { // 2 MB in bytes
+        alert("Error: Image size should be less than 2MB.");
+        // Optionally, you can clear the input value or perform any other action here
+        return;
+      }
+      let url = URL.createObjectURL(file);
+      document.querySelector("#" + id + "-preview div").innerText = file.name;
+      document.querySelector("#" + id + "-preview img").src = url;
+    });
+  }
+
+  previewBeforeUpload("file-1");
+  previewBeforeUpload("file-2");
+  previewBeforeUpload("file-3");
+    
     document.getElementById("showPasswordCheckbox").addEventListener("change", function() {
         if (this.checked) {
             document.getElementById("password").type = "text";
@@ -609,8 +684,8 @@
             document.getElementById("password").type = "password";
         }
     });
-</script>
 
+</script>
 </div>
 </body>
 </html>

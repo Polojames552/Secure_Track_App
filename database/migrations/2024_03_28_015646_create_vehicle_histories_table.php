@@ -145,6 +145,9 @@ return new class extends Migration
             $table->string('date');
             $table->string('status');
             $table->string('municipality');
+
+            $table->text('received');
+            $table->text('receipt');
             $table->rememberToken();
             $table->timestamps();
         });

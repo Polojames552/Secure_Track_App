@@ -15,11 +15,14 @@ class property_history extends Model
         'establishment',
         'address',
         'quantity',
+        'item',
         'description',
         'seizing_officer',
         'witness',
         'date',
         'status',
         'municipality',
+        'received',
+        'receipt',
     ];
 }

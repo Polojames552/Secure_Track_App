@@ -16,6 +16,7 @@ return new class extends Migration
             // $table->text('qr_code_image');
             $table->string('uuid');
             $table->string('user_id');
+            
             $table->string('make_type');
             $table->string('chasis');
             $table->string('motor_no');
@@ -29,6 +30,8 @@ return new class extends Migration
             $table->string('date');
             $table->string('status');
             $table->string('municipality');
+            $table->string('received');
+            $table->text('receipt');
             $table->timestamps();
         });
     }

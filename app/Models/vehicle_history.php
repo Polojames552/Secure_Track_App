@@ -155,6 +155,8 @@ class vehicle_history extends Model
         // Checkbox
         'status',
         'municipality',
+        'received',
+        'receipt',
         // 'qr_code_image',
         ];
 }

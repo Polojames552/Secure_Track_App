@@ -272,18 +272,26 @@
                 <div class="form-group col-md-3">
                     <label id="status_label" for="inputEmail4"><b style="text-align:left;">Status:</b></label>
                         <select id="status" name="status" class="form-control" required>
-                            @if($data->status == 'Active')
-                                <option value="Active" selected>Active</option>
+                            @if($data->status == 'MPS Custodian')
+                                <option value="MPS Custodian" selected>MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
                                 <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Crime Lab')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab" selected>Crime Lab</option>
                                 <option value="Released">Released</option>
-                            @elseif($data->status == 'Disposed')
-                                <option value="Active">Active</option>
-                                <option value="Disposed" selected>Disposed</option>
-                                <option value="Released">Released</option>
-                            @else		
-                                <option value="Active">Active</option>
-                                <option value="Disposed" >Disposed</option>
+                                <option value="Disposed">Disposed</option>
+                            @elseif($data->status == 'Released')
+                                <option value="MPS Custodian">MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
                                 <option value="Released" selected>Released</option>
+                                <option value="Disposed">Disposed</option>
+                            @else		
+                                <option value="MPS Custodian" >MPS Custodian</option>
+                                <option value="Crime Lab">Crime Lab</option>
+                                <option value="Released">Released</option>
+                                <option value="Disposed" selected>Disposed</option>
                             @endif
                         </select>
                 </div>
