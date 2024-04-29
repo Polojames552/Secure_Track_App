@@ -774,6 +774,8 @@ class investigatorController extends Controller
                 $data->received = $request->input('received');
             $data->save();
 
+        $currentDate = Carbon::now();
+        $mydate = $currentDate->format('F j, Y');
         DB::table('evidence_vehicles')
         ->where('id', $id)
         ->update(array(
@@ -902,6 +904,9 @@ class investigatorController extends Controller
             'recovering_personel' => $request->input('recovering_personel'),
             'witness_owner_barangay_official' => $request->input('witness_owner_barangay_official'),
             'noted_by' => $request->input('noted_by'),
+            // $data->date = $my_data[0]->date;
+            'date' => $mydate,
+            'status' => $request->input('status'),
             'changes' => "1",
         ));
                 
@@ -941,6 +946,8 @@ class investigatorController extends Controller
                  $data->received = $request->input('received');
             $data->save();
 
+            $currentDate = Carbon::now();
+            $mydate = $currentDate->format('F j, Y');
             DB::table('motorcycles')
             ->where('id', $id)
             ->update(array(
@@ -955,6 +962,7 @@ class investigatorController extends Controller
                 'address' => $request->input('address'),
                 'violations' => $request->input('violations'),
                 'status' => $request->input('status'),
+                'date' => $mydate,
                 'changes' => "1",
             ));
 
@@ -990,6 +998,8 @@ class investigatorController extends Controller
                 $data->received = $request->input('received');
             $data->save();
 
+            $currentDate = Carbon::now();
+            $mydate = $currentDate->format('F j, Y');
             DB::table('properties')
             ->where('id', $id)
             ->update(array(
@@ -1001,6 +1011,7 @@ class investigatorController extends Controller
                 'seizing_officer' => $request->input('seizing_officer'),
                 'witness' => $request->input('witness'),
                 'status' => $request->input('status'),
+                'date' => $mydate,
                 'changes' => "1",
             ));
 

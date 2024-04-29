@@ -194,7 +194,14 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
+.image-preview {
+    max-width: 50%; /* Adjust container width as needed */
+    max-height: 50%;
+}
+/* .preview-image {
+    width: 100%;
+    height: 100%;
+} */
 </style>
 
 <!-- Modal -->
@@ -1407,12 +1414,12 @@
             </div>
           </div> 
         
-          <center>
-            <label class="image-preview" style="">
-                <input type="file" class="image-input" name="Picture" accept="image/*" style="display: none;">
-                <img class="preview-image" src="https://bit.ly/3ubuq5o" alt="" style="border-radius: 0; object-fit: contain; max-width: 50%; max-height: 50%;width: auto;height: auto;">
-            </label>
-        </center>
+            <center>
+                <label class="image-preview" style="max-height:30%;max-width:30%;">
+                    <input type="file" class="image-input" name="Picture" accept="image/*" style="display: none;">
+                    <img class="preview-image" src="https://bit.ly/3ubuq5o" alt="" style="object-fit: contain; border-radius: 0; height:50%; width:50%;">
+                </label>
+            </center>
         <br><br>
       <div class="modal-footer">
     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
@@ -1483,10 +1490,6 @@
     // Trigger updateImagePreview function when file input changes
     imageInput.addEventListener('change', updateImagePreview);
 
-//    imagePreview.addEventListener('click', function(event) {
-//     event.preventDefault(); // Prevent default behavior
-//     imageInput.click();
-// });
 });
 document.getElementById('confirmSaveBtn{{$data->id}}').addEventListener('click', function() {
     // Get the ID of the form associated with the button

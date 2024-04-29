@@ -607,9 +607,11 @@ td{
                 @endif
             </td>
             <td>
-                <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferMotorVehicleEvidence{{$data->id}}">
-                  <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
-                </button>
+                @if($data->status == 'MPS Custodian')
+                  <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferMotorVehicleEvidence{{$data->id}}">
+                    <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
+                  </button>
+                @endif
                 @if($count > 0)
                   @include('modals/Investigators.transferEvidence.transferMotorcycleEvidence')
                 @endif

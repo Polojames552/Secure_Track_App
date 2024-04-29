@@ -730,9 +730,11 @@ td{
                       @include('modals/Investigators.editEvidence.editEvidenceVehicle')
                     @endif
                 </td>
-                <td>
+                <td> 
                     @if($count > 0)
-                      <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-file-send"></i></button>
+                        @if($data->status == 'MPS Custodian')
+                          <button style="width: 50px;height: 35px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferEvidenceVehicleModal{{$data->id}}"><i class="mdi mdi-file-send"></i></button>
+                        @endif
                       @include('modals/Investigators.transferEvidence.transferVehicleEvidence')
                     @endif
                 </td>

@@ -598,10 +598,12 @@ td{
                     @include('modals/Investigators.editEvidence.editPropertyEvidence')
                   @endif
                 </td>
-                <td>
-                    <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferPropertyGoodsEvidence{{$data->id}}">
-                      <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
-                    </button>
+                <td> 
+                    @if($data->status == 'MPS Custodian')
+                      <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferPropertyGoodsEvidence{{$data->id}}">
+                        <i class="mdi mdi-file-send" style="font-size: 15px;"></i>
+                      </button>
+                    @endif
                     @if($count > 0)
                       @include('modals/Investigators.transferEvidence.transferPropertyEvidence')
                     @endif

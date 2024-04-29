@@ -469,7 +469,7 @@ td{
             </div>
           </div>
  
-          <form action="generate_receipt" method="POST" enctype="multipart/form-data">
+          <form id="receiptForm" action="generate_receipt" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
               <div class="form-row" >
@@ -524,7 +524,7 @@ td{
                     <!-- <button type="submit" class="btn btn-primary">Save</button> -->
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary btn-block">Generate</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="generateReceipt()">Generate</button>
                         </div>
                     </div>
                 </div>
@@ -535,6 +535,19 @@ td{
     </div>   
   </div>
   <!-- container-scroller -->
+  <script>
+    function generateReceipt() {
+        // Clear all input fields
+          // Submit the form
+        document.getElementById('receiptForm').submit();
+        document.querySelectorAll('input').forEach(input => input.value = '');
+        document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+        
+        // Reset the image to the initial image
+        var initialImage = 'https://bit.ly/3ubuq5o';
+        document.getElementById('file-1-preview').innerHTML = '<img src="' + initialImage + '" alt=""><div><span style="font-size:13px;">Insert image</span></div>';
+    }
+</script>
   <script>
 function previewBeforeUpload(id) {
   document.querySelector("#" + id).addEventListener("change", function (e) {

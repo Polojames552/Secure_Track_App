@@ -136,7 +136,7 @@
 .form .grid .form-element div span {
   font-size:40px;
 }
-#file-1-preview img {
+#file-{{$data->id}}-preview img {
     width: 100%;
     height: auto;
     max-width: 100%; 

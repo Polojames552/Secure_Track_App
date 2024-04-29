@@ -27,12 +27,13 @@ Route::get('/', function () {
 //     return view('welcome1');
 // });
 //***Super Admin Screens
+
  Route::middleware(['auth','isSuperAdmin'])->group(function(){
     // Route::get('/superAdminDashboard', function () {
     //     return view('SuperAdminPages/superAdminDashboard');
     // });
       //DATA of CHART  chartsData
-    Route::get('fetch-data',[superAdminController::class ,'chartsData']);
+   
 
     Route::get('superAdminDashboard',[superAdminController::class ,'AdminDashboard']);
     Route::get('stationsPanel',[superAdminController::class ,'stationsList']);
@@ -111,7 +112,7 @@ Route::get('/CrimeTurnOverReceipt', function () {
 });
 
 Route::middleware(['auth','isCrimeLab'])->group(function(){
-    Route::get('fetch-data',[superAdminController::class ,'chartsData']);
+    // Route::get('fetch-data',[CrimeLabController::class ,'chartsData1']);
     Route::get('CrimeLabDashboard',[CrimeLabController::class ,'crimeDashboard']);
     Route::get('CrimeLabProperty',[CrimeLabController::class ,'crimeProperty']);
     Route::get('CrimeLabCar',[CrimeLabController::class ,'crimeCar']);
@@ -136,10 +137,7 @@ Route::middleware(['auth','isCrimeLab'])->group(function(){
     Route::post('editEvidence_Vehicles/{id}',[investigatorController::class ,'updateEvidence_Vehicles'])->name('editEvidence_Vehicles');
     Route::post('editMotorCycle_Evidence/{id}',[investigatorController::class ,'updateMotorcycle_Evidence'])->name('editMotorCycle_Evidence');
     Route::post('editProperty_Evidence/{id}',[investigatorController::class ,'updateProperty_Evidence'])->name('editProperty_Evidence');
-    //Transfer Evidence  
-    Route::post('transferEvidence_Vehicles/{id}',[investigatorController::class ,'transferVehicles_Evidence'])->name('transferEvidence_Vehicles');
-    Route::post('transferMotorCycle_Evidence/{id}',[investigatorController::class ,'transferMotorcycle_Evidence'])->name('transferMotorCycle_Evidence');
-    Route::post('transferProperty_Evidence/{id}',[investigatorController::class ,'transferProperty_Evidence'])->name('transferProperty_Evidence');
+   
     
     Route::get('/sample', function () {
         return view('Investigators/sample');
@@ -169,6 +167,9 @@ Route::middleware(['auth','isCrimeLab'])->group(function(){
     
 });
 //***Investigators Screens
+// Data on donut chart
+Route::get('fetch-data',[superAdminController::class ,'chartsData']);
+Route::get('fetch-data',[CrimeLabController::class ,'chartsData1']);
  //Get data for Scanner   
  Route::post('generate_receipt',[investigatorController::class ,'my_receipt']);
  Route::post('scanner_vehicle_record/{uuid}',[investigatorController::class ,'getVehicleRecordScanner'])->name('scanner_vehicle_record');
@@ -180,6 +181,10 @@ Route::post('downloadMotorcycle/{id}',[investigatorController::class ,'downloadM
 Route::post('downloadProperty/{id}',[investigatorController::class ,'downloadProperty'])->name('downloadProperty');
 Route::post('downloadCar/{id}',[investigatorController::class ,'downloadCar'])->name('downloadCar');
 
+ //Transfer Evidence  
+ Route::post('transferEvidence_Vehicles/{id}',[investigatorController::class ,'transferVehicles_Evidence'])->name('transferEvidence_Vehicles');
+ Route::post('transferMotorCycle_Evidence/{id}',[investigatorController::class ,'transferMotorcycle_Evidence'])->name('transferMotorCycle_Evidence');
+ Route::post('transferProperty_Evidence/{id}',[investigatorController::class ,'transferProperty_Evidence'])->name('transferProperty_Evidence');
 Route::get('/MyLogin', function () {
     return view('MyLogin');
 });

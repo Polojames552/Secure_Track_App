@@ -194,7 +194,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-#file-1-preview img {
+#file-{{$data->id}}-preview img {
     width: 100%;
     height: auto;
     max-width: 100%; 
