@@ -190,13 +190,15 @@
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label id="headlabel" for="inputEmail4"><b>Municipality:</b></label>
-                <input type="text" class="form-control" name="municipality" id="municipality" placeholder="" value="{{$data->municipality}}" required>
+                <input type="text" class="form-control" name="municipality1" id="municipality1" placeholder="" value="{{$data->municipality}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="municipality" id="municipality" placeholder="" value="{{$data->municipality}}" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label id="headlabel" for="inputEmail4"><b>Municipal Director:</b></label>
-                <input type="text" class="form-control" name="municipal_director" id="municipal_director" placeholder="" value="{{$data->municipal_director}}" required>
+                <input type="text" class="form-control" name="municipal_director1" id="municipal_director1" placeholder="" value="{{$data->municipal_director}}" required disabled>
+                <input style="display: none;" type="text" class="form-control" name="municipal_director" id="municipal_director" placeholder="" value="{{$data->municipal_director}}" required>
             </div>
         </div>
         <!-- <div class="form-row">

@@ -75,12 +75,12 @@
         </figure>
     </section>
     <section class="flex_content nav_content" id="nav_content">
-        <a href="#" class="active">Home</a>
+        <a href="#home" class="active">Home</a>
         <a href="#gallery">Gallery</a>
         <!-- <a href="#blogs">Blogs</a> -->
         <!-- <a href="javascript:void(0)" class="contact_btn">Contact us</a> -->
         <a href="#footer">Contact us</a>
-        <a href="#">About us</a>
+        <a href="#footer">About us</a>
     </section>
     <section class="flex_content">
         <a href="javascript:void(0)" class="ham"><i class="fa fa-bars"></i></a>
@@ -94,9 +94,9 @@
     <strong class="fixed_flex logo"><img src="{{ asset('images/PNP.png') }}" alt="PNP Logo" loading="lazy"  style="height:50px; width: 40px;"></strong>
     <br>
     <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#footer">Contact Us</a></li>
         <!-- <li><a href="#">Features</a></li>
         <li class="dropdown">
             <a href="javascript:void(0)">Mandatory Disclosure</a>
@@ -105,7 +105,7 @@
                 <a href="#">NOC</a>
             </aside>
         </li> -->
-        <li><a href="#">About us</a></li>
+        <li><a href="#footer">About us</a></li>
         <!-- <li class="fixed_flex"><a href="javascript:void(0)" class="btn btn_1 chat_popup">SignUp/LogIn</a> <a href="#" class="btn btn_2 chat_popup">Admission</a> </li> -->
         <!-- <li class="fixed_flex"><a href="{{ route('login') }}" class="btn btn_2 chat_popup">System Login</a> </li> -->
       
@@ -134,7 +134,7 @@
 
 
 <!--HEADER-->
-<header class="flex">
+<header class="flex" id="home">
     <article>
         <h1 class="title big">Welcome to <br><em>Secure Track</em> App</h1>
         <p>Secure Track App operates as a web-based computerized data collection and management platform, providing a reliable and tamper-evident environment for evidence management by leveranging digital identifiers and barcodes.</p>
@@ -289,7 +289,7 @@
     </div> -->
     
      <!--division_3-->
-     <div class="divisions division_3 padding_2x">
+     <div class="divisions division_3 padding_2x" id="gallery">
        <section class="title_header">
             <h1 class="title">Contribution Towards Society</h1>
             <p>Replenish man have thing gathering lights yielding shall you </p>
@@ -428,7 +428,7 @@
         </section>
         <section class="flex_content padding_2x">
             <h2 class="title medium">Principal Message</h2>
-            <p>"It is easier to build strong children than to repair broken men". A wise quote referring to the role that children could play in laying the foundation of a strong nation. I believe that the foundation of a strong nation depends on the way its children are cared for and nurtured. In order to build a strong nation, we must instill good values in our children providing them love and care, guiding them through thick and thin till they become confident and strong enough. This all can be done through “Quality education”.</p>
+            <p>"Introducing Secure Track, the cutting-edge web-based system meticulously crafted to safeguard the integrity of evidence chain of custody within the Philippine National Police. With robust security measures and advanced tracking functionalities, Secure Track ensures the irrefutable preservation and accountability of crucial evidence, empowering law enforcement with the trust and reliability they need to uphold justice with confidence."</p>
         </section>
     </div> 
   <div class="footer_body flex" id="footer_1">
@@ -442,7 +442,8 @@
         </figure>
         <a href="#">
             <i class="fa fa-map-marker"></i>
-            Plot No: 431 First floor, Kakrola Housing Complex, Opp Pillar No: 794, , Near Dwarka More Metro Station, Delhi 110078. 
+            National Headquarters Building Philippine National Police, Camp Bgen Rafael T Crame, Brgy Bagong Lipunan, Quezon City.
+            <!-- Plot No: 431 First floor, Kakrola Housing Complex, Opp Pillar No: 794, , Near Dwarka More Metro Station, Delhi 110078.  -->
         </a>
         <a href="emailto:info@schotest.com">
             <i class="fa fa-envelope-o"></i>
@@ -453,15 +454,15 @@
             9315514145
         </a>
     </section>
-    <section class="flex_content padding_1x">
+    <!-- <section class="flex_content padding_1x">
       <h3>Quick Links</h3>
       <a href="#">Admission</a>
       <a href="#">Prospectus</a>
       <a href="#">Student registration</a>
       <a href="#">Staff registration</a>
-    </section>
+    </section> -->
     <section class="flex_content padding_1x">
-      <h3>Other Links</h3>
+      <h3>Quick Links</h3>
       <a href="#">About us</a>
       <a href="#">contact us</a>
       <a href="#">Raise a ticket</a>

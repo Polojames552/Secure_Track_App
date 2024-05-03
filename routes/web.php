@@ -169,7 +169,7 @@ Route::middleware(['auth','isCrimeLab'])->group(function(){
 //***Investigators Screens
 // Data on donut chart
 Route::get('fetch-data',[superAdminController::class ,'chartsData']);
-Route::get('fetch-data',[CrimeLabController::class ,'chartsData1']);
+// Route::get('fetch-data',[CrimeLabController::class ,'chartsData1']);
  //Get data for Scanner   
  Route::post('generate_receipt',[investigatorController::class ,'my_receipt']);
  Route::post('scanner_vehicle_record/{uuid}',[investigatorController::class ,'getVehicleRecordScanner'])->name('scanner_vehicle_record');
