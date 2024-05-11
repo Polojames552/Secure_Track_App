@@ -545,10 +545,12 @@ td{
         @foreach($data as $data)
         <tr>
             <td style="text-align: center;">{!! $data->qr_code_image !!}</td>
-            <td style="text-align: center;">
+            <td>
               <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#downloadMotorcycle{{$data->id}}">
               <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
+                @if($data != null)
                   @include('modals/downloadMotorcycle')
+                @endif
             </td>
             <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
                     <b>{{$data->status}}</b>

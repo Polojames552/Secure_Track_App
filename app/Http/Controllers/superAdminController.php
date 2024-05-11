@@ -93,7 +93,8 @@ class superAdminController extends Controller
         $num_investigators = count($investigators);
 
         $allusers = DB::select('select * from users where role = 2');
-        $total_users = count($allusers);
+        $allusers1 = DB::select('select * from users where role = 3');
+        $total_users = count($allusers)+count($allusers1);
 
 
         $property = property::get()->count();

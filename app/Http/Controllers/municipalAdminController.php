@@ -58,15 +58,18 @@ class municipalAdminController extends Controller
 
       
         $property = property::where('municipality', auth()->user()->municipality)
-        ->where('status', 'Active')
+        ->where('status', 'Crime Lab')
+        ->orWhere('status', 'MPS Custodian')
         ->get()
         ->count();
         $motorcycle = Motorcycle::where('municipality', auth()->user()->municipality)
-        ->where('status', 'Active')
+        ->where('status', 'Crime Lab')
+        ->orWhere('status', 'MPS Custodian')
         ->get()
         ->count();
         $car = EvidenceVehicle::where('municipality', auth()->user()->municipality)
-        ->where('status', 'Active')
+        ->where('status', 'Crime Lab')
+        ->orWhere('status', 'MPS Custodian')
         ->get()
         ->count();
         $active = ($property+$motorcycle+$car);
@@ -84,7 +87,7 @@ class municipalAdminController extends Controller
         ->get()
         ->count();
         $disposed = ($property+$motorcycle+$car);
-        $total_record = $disposed +$active;
+        $total_record = $disposed+$active;
         //GET TOTAL NUMBER OF RECORDS
         return view('MunicipalAdminPages/municipalAdminDashboard',[
             'investigators'=>$investigators,
@@ -143,15 +146,12 @@ class municipalAdminController extends Controller
     public function chartsData()
     {
         $property1 = property::where('municipality', auth()->user()->municipality)
-        ->where('status', 'Active')
         ->get()
         ->count();
         $motorcycle1 = Motorcycle::where('municipality', auth()->user()->municipality)
-        ->where('status', 'Active')
         ->get()
         ->count();
         $car1 = EvidenceVehicle::where('municipality', auth()->user()->municipality)
-        ->where('status', 'Active')
         ->get()
         ->count();
         

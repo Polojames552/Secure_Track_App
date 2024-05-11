@@ -511,7 +511,7 @@ td{
                 <th>Municipality Director</th>
                 <th>Address</th>
                 <th>User Name</th>
-                <th></th>
+                <!-- <th></th> -->
                 <!-- <th>Salary</th>
                 <th>Address</th> -->
             </tr>
@@ -524,7 +524,7 @@ td{
                 <td>{{$allusers->municipal_director}}</td>
                 <td>{{$allusers->address}}</td>
                 <td>{{$allusers->username}}</td>
-               <td><button type="button" class="btn btn-success"><i class="mdi mdi-lead-pencil"></i></button></td>
+               <!-- <td><button type="button" class="btn btn-success"><i class="mdi mdi-lead-pencil"></i></button></td> -->
             </tr>
           @endforeach
         </tbody>

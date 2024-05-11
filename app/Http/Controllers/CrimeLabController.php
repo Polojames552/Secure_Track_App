@@ -22,32 +22,26 @@ class CrimeLabController extends Controller
 {
     public function crimeDashboard()
     {
-        $property = property::where('user_id', auth()->user()->id)
-        ->where('status', 'Crime Lab')
+        $property = property::where('status', 'Crime Lab')
         ->orWhere('status', 'MPS Custodian')
         ->get()
         ->count();
-        $motorcycle = Motorcycle::where('user_id', auth()->user()->id)
-        ->where('status', 'Crime Lab')
+        $motorcycle = Motorcycle::where('status', 'Crime Lab')
         ->orWhere('status', 'MPS Custodian')
         ->get()
         ->count();
-        $car = EvidenceVehicle::where('user_id', auth()->user()->id)
-        ->where('status', 'Crime Lab')
+        $car = EvidenceVehicle::where('status', 'Crime Lab')
         ->orWhere('status', 'MPS Custodian')
         ->get()
         ->count();
         $active = ($property+$motorcycle+$car);
-        $property1 = property::where('user_id', auth()->user()->id)
-        ->where('status', 'Disposed' || 'Released')
+        $property1 = property::where('status', 'Disposed' || 'Released')
         ->get()
         ->count();
-        $motorcycle1 = Motorcycle::where('user_id', auth()->user()->id)
-        ->where('status', 'Disposed' || 'Released')
+        $motorcycle1 = Motorcycle::where('status', 'Disposed' || 'Released')
         ->get()
         ->count();
-        $car1 = EvidenceVehicle::where('user_id', auth()->user()->id)
-        ->where('status', 'Disposed' || 'Released')
+        $car1 = EvidenceVehicle::where('status', 'Disposed' || 'Released')
         ->get()
         ->count();
         $disposed = ($property1+$motorcycle1+$car1);

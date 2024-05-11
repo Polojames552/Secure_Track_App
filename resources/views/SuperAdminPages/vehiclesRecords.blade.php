@@ -579,7 +579,10 @@ td{
                 </td>
                 <!-- <td>{{$data->id}}</td> -->
                 <td style="text-align: center;">
-                    <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#"><i class="mdi mdi-download"></i></button>
+                    @if($data != null)
+                      <button style="width: 50px;height: 35px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#downloadCar{{$data->id}}"><i class="mdi mdi-download"></i></button>
+                      @include('modals/downloadCar')
+                    @endif
                 </td>
                 <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
                     <b>{{$data->status}}</b>

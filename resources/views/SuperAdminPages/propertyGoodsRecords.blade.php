@@ -565,13 +565,17 @@ td{
           @foreach($data as $data)
             <tr>
                 <td>{!! $data->qr_code_image !!}</td>
-                <td style="text-align: center;">
-                  <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#">
+                <td>
+                  <button style="width: 50px;height: 35px; text-align: center;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#downloadProperty{{$data->id}}">
                   <i class="mdi mdi-download" style="font-size: 15px;"></i></button>
+                  @if($data != null)
+                    @include('modals/downloadProperty')
+                  @endif
                 </td>
                 <td style="color: {{$data->status == 'MPS Custodian' || $data->status == 'Crime Lab' ? '#13870d' : '#bc1515'}};">
                     <b>{{$data->status}}</b>
                 </td>
+                <td>{{$data->item}}</td>
                 <td>{{$data->establishment}}</td>
                 <td>{{$data->address}}</td>
                 <td>{{$data->quantity}}</td>
